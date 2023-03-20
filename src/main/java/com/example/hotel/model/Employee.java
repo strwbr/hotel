@@ -37,8 +37,8 @@ public class Employee {
     private long docNumber;
     private long phoneNumber;
     private String email;
-    private Date hireDate;
-    private Date dismissalDate;
+    private Date hireDate; // Дата найма
+    private Date dismissalDate; // Дата увольнения
     @ManyToOne
     @JoinColumn(name = "employee_status_id")
     private EmployeeStatus employeeStatus;
