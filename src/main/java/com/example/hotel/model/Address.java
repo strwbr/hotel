@@ -27,7 +27,11 @@ public class Address {
     @JoinColumn(name = "street_id")
     private Street street;
     @OneToMany(mappedBy = "residenceAddress")
-    List<Employee> employeesByResidentialAddressList;
+    private List<Employee> employeesByResidentialAddressList;
     @OneToMany(mappedBy = "registeredAddress")
-    List<Employee> employeesByRegistrationAddressList;
+    private List<Employee> employeesByRegistrationAddressList;
+    @OneToMany(mappedBy = "residenceAddress")
+    private List<Client> clientsByResidentialAddressList;
+    @OneToMany(mappedBy = "registeredAddress")
+    private List<Client> clientsByRegistrationAddressList;
 }
