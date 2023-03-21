@@ -5,23 +5,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
-@Table(name = "booking_cancellation")
+@Table(name = "room_price")
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookingCancellation {
+public class RoomPrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
     @ManyToOne
-    @JoinColumn(name = "booking_id")
-    private Booking booking;
-
+    @JoinColumn(name = "room_type_id")
+    private RoomType roomType;
+    private Date startDate;
+    private Date endDate;
+    private double price;
     @ManyToOne
-    @JoinColumn(name = "reason_id")
-    private BookingCancellationReason reason;
-
+    @JoinColumn(name = "status_id")
+    private RoomPriceStatus status;
 }

@@ -6,22 +6,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "booking_cancellation")
+@Table(name = "payment_cheque_paid_service")
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookingCancellation {
+public class PaymentChequePaidService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
+    private double amount;
     @ManyToOne
-    @JoinColumn(name = "booking_id")
-    private Booking booking;
-
+    @JoinColumn(name = "paid_service_id")
+    private PaidService paidService;
     @ManyToOne
-    @JoinColumn(name = "reason_id")
-    private BookingCancellationReason reason;
+    @JoinColumn(name = "payment_cheque_id")
+    private PaymentCheque paymentCheque;
 
 }

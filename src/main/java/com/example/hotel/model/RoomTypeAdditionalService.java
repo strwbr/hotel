@@ -6,22 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "occupied_number")
+@Table(name = "room_type_additional_service")
 @Getter
 @Setter
 @NoArgsConstructor
-public class OccupiedNumber {
+public class RoomTypeAdditionalService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
-
+    @JoinColumn(name = "additional_service_id")
+    private AdditionalService additionalService;
     @ManyToOne
-    @JoinColumn(name = "booking_id")
-    private Booking booking;
-
+    @JoinColumn(name = "room_type_id")
+    private RoomType roomType;
 }

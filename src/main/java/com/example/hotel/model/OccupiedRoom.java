@@ -5,25 +5,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 @Entity
-@Table(name = "booking_extension")
+@Table(name = "occupied_room")
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookingExtension {
+public class OccupiedRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+    @ManyToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
-    @OneToOne
-    @JoinColumn(name = "prepayment_id")
-    private Prepayment prepayment;
-    private Date newCheckOutDate;
-    private LocalDateTime bookingExtensionTime; // Дата оформления продления
+    @OneToOne(mappedBy = "occupiedRoom")
+    private Arrival arrival;
+    @OneToOne(mappedBy = "occupiedRoom")
+    private Departure departure;
 }

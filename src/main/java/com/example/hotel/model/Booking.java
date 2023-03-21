@@ -22,7 +22,15 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
-
+    @OneToOne
+    @JoinColumn(name = "prepayment_id")
+    private Prepayment prepayment;
+    @ManyToOne
+    @JoinColumn(name = "booking_status_id")
+    private BookingStatus bookingStatus;
+    @ManyToOne
+    @JoinColumn(name = "room_type_id")
+    private RoomType roomType;
     private byte roomsAmount; // Кол-во номеров
     private LocalDateTime bookingTime; // Дата и время оформления бронирования TODO
     private Date checkInDate; // Дата заезда
@@ -33,7 +41,11 @@ public class Booking {
     @OneToMany(mappedBy = "booking")
     private List<BookingCancellation> bookingCancellationList;
     @OneToMany(mappedBy = "booking")
-    private List<OccupiedNumber> occupiedNumberList;
+    private List<OccupiedRoom> occupiedRoomList;
     @OneToMany(mappedBy = "booking")
     private List<BookingExtension> bookingExtensionList;
+
+
+
+
 }

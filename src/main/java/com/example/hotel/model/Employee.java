@@ -43,7 +43,7 @@ public class Employee {
     @JoinColumn(name = "employee_status_id")
     private EmployeeStatus employeeStatus;
     @OneToOne(mappedBy = "employee")
-    User user;
-
-
+    private User user;
+    @OneToMany(mappedBy = "employee")
+    private List<PaymentCheque> paymentChequeList;
 }

@@ -6,22 +6,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "booking_cancellation")
+@Table(name = "prepayment")
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookingCancellation {
+public class Prepayment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "booking_id")
+    @JoinColumn(name = "status_id")
+    private PrepaymentStatus status;
+
+    @OneToOne(mappedBy = "prepayment")
+    private BookingExtension bookingExtension;
+    @OneToOne(mappedBy = "prepayment")
     private Booking booking;
 
-    @ManyToOne
-    @JoinColumn(name = "reason_id")
-    private BookingCancellationReason reason;
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 
 }

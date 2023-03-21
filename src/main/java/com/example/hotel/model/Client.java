@@ -40,5 +40,5 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private List<Booking> bookingList;
     @OneToMany(mappedBy = "client")
-    private List<OccupiedNumber> occupiedNumberList;
+    private List<OccupiedRoom> occupiedRoomList;
 }
