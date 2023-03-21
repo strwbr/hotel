@@ -1,6 +1,7 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +14,8 @@ import lombok.Setter;
 public class RoomTypeAdditionalService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
+    @NotNull
     private Long id;
     @ManyToOne
     @JoinColumn(name = "additional_service_id")
