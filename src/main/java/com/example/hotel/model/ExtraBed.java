@@ -1,6 +1,7 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class ExtraBed {
     @Column(name = "id")
     @NotNull
     private Long id;
+    @Min(value = 0, message = "Число должно быть больше 0")
     private double price;
     @OneToMany(mappedBy = "extraBed")
     private List<RoomTypeExtraBed> roomTypeExtraBedList;

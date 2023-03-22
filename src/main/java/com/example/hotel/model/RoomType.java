@@ -1,6 +1,8 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +21,12 @@ public class RoomType {
     @Column(name = "id")
     @NotNull
     private Long id;
+    @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
     private String description;
     private byte baseCapacity; // Базовая вместимость
     private byte maxCapacity; // Максимальная вместимость (с учетом доп.кровати/ей)
+    @Min(value = 0, message = "Число должно быть больше 0")
     private double price; // Цена за сутки проживания
     @OneToMany(mappedBy = "roomType")
     private List<Booking> bookingList;

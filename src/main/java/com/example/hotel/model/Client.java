@@ -1,6 +1,9 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +23,9 @@ public class Client {
     @Column(name = "id")
     @NotNull
     private Long id;
+    @NotBlank(message = "Строка должна быть не пустая!")
     private String surname;
+    @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
     private String patronymic;
     private Date birthday;
@@ -33,8 +38,11 @@ public class Client {
     @ManyToOne
     @JoinColumn(name = "document_type_id")
     private DocumentType documentType;
-    private long docNumber;
+    @NotBlank(message = "Строка должна быть не пустая!")
+    private String docNumber;
+    @Min(value = 0, message = "Число должно быть больше 0")
     private long phoneNumber;
+    @Email
     private String email;
     @ManyToOne
     @JoinColumn(name = "client_status_id")

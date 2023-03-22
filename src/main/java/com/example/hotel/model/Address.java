@@ -1,6 +1,7 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,10 @@ public class Address {
     @Column(name = "id")
     @NotNull
     private Long id;
+    @Min(value = 0, message = "Число должно быть больше 0")
     private int house; // номер дома
-    private int building; // строение
+    private String building; // строение
+    @Min(value = 0, message = "Число должно быть больше 0")
     private int apartment; // квартира
     @ManyToOne
     @JoinColumn(name = "street_type_id")

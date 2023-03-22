@@ -1,6 +1,8 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,8 +38,11 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "registered_address_id")
     private Address registeredAddress;
+    @Min(value = 0, message = "Число должно быть больше 0")
     private long docNumber;
+    @Min(value = 0, message = "Число должно быть больше 0")
     private long phoneNumber;
+    @Email
     private String email;
     private Date hireDate; // Дата найма
     private Date dismissalDate; // Дата увольнения

@@ -19,6 +19,7 @@ public class JobPosition {
     @Column(name = "id")
     @NotNull
     private Long id;
+    private String name;
     @OneToMany(mappedBy = "jobPosition")
     private List<Employee> employeeList;
 }

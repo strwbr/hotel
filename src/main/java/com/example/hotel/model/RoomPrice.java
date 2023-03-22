@@ -1,6 +1,7 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class RoomPrice {
     private RoomType roomType;
     private Date startDate;
     private Date endDate;
+    @Min(value = 0, message = "Число должно быть больше 0")
     private double price;
     @ManyToOne
     @JoinColumn(name = "status_id")

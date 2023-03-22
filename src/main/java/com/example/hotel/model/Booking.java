@@ -1,6 +1,7 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,11 +34,14 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
+    @Min(value = 0, message = "Число должно быть больше 0")
     private byte roomsAmount; // Кол-во номеров
     private LocalDateTime bookingTime; // Дата и время оформления бронирования TODO
     private Date checkInDate; // Дата заезда
     private Date checkOutDate; // Дата выезда
+    @Min(value = 0, message = "Число должно быть больше 0")
     private byte adultsAmount; // Кол-во взрослых
+    @Min(value = 0, message = "Число должно быть больше 0")
     private byte childrenAmount; // Кол-во детей
     private double totalCost; // Общая стоимость
     @OneToMany(mappedBy = "booking")

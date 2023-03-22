@@ -1,6 +1,7 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Room {
     @Column(name = "id")
     @NotNull
     private Long id;
+    @NotBlank(message = "Строка должна быть не пустая!")
     private String number; // Числовое обозначение номера (мб в int)
     @OneToMany(mappedBy = "room")
     private List<OccupiedRoom> occupiedRoomList;
