@@ -38,7 +38,7 @@
       </div>
 
       <div>
-        <a class="btn btn-success" href="">+ Добавить</a>
+        <a class="btn btn-success" href="/additional_service/add">Добавить</a>
       </div>
 
       <div class="table-responsive">
@@ -54,18 +54,18 @@
           </thead>
           <tbody>
             <tr th:each="additionalService : ${listAdditionalService}">
-              <td th:text=""></td>
+              <td th:text="${additionalService.id}"></td>
               <td th:text="${additionalService.name}"></td>
               <td>
-                <ul class="list-group list-group-flush" th:each="roomType : ${additionalService.roomTypeList}">
+                <ul class="list-group list-group-flush" th:each="roomType : ${additionalService.roomTypeAdditionalServiceList}">
                   <li class="list-group-item" th:text="${roomType.name}"></li>
                 </ul>
               </td>
               <td th:text="${additionalService.availabilityStatus}"></td>
               <td>
-                <a class="btn btn-primary" th:href="#">Подробнее</a>
-                <a class="btn btn-secondary" th:href="#">Редактировать</a>
-                <a class="btn btn-danger" th:href="#">Удалить</a>
+                <a class="btn btn-primary" th:href="@{/additional_service/info/{id}(id=${additionalService.id}}">Подробнее</a>
+                <a class="btn btn-secondary" th:href="@{/additional_service/update/{id}(id=${additionalService.id}}">Редактировать</a>
+                <a class="btn btn-danger" th:href="@{/additional_service/delete/{id}(id=${additionalService.id}}">Удалить</a>
               </td>
             </tr>
           </tbody>

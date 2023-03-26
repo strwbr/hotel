@@ -19,8 +19,8 @@ import java.util.List;
 public class AdditionalService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNullу мен
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
@@ -30,4 +30,11 @@ public class AdditionalService {
     private AvailabilityStatus availabilityStatus;
     @OneToMany(mappedBy = "additionalService")
     private List<RoomTypeAdditionalService> roomTypeAdditionalServiceList;
+
+    public AdditionalService(String name, String description, AvailabilityStatus availabilityStatus, List<RoomTypeAdditionalService> roomTypeAdditionalServiceList) {
+        this.name = name;
+        this.description = description;
+        this.availabilityStatus = availabilityStatus;
+        this.roomTypeAdditionalServiceList = roomTypeAdditionalServiceList;
+    }
 }
