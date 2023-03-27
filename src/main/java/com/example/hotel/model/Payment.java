@@ -16,8 +16,8 @@ import lombok.Setter;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     private double amount; // Сумма к оплате
     @ManyToOne

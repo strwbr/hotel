@@ -19,8 +19,8 @@ import java.util.List;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;

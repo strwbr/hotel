@@ -19,8 +19,8 @@ import java.util.Date;
 public class RoomPrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     @ManyToOne
     @JoinColumn(name = "room_type_id")

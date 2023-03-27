@@ -21,8 +21,8 @@ import java.util.List;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     private String surname;
     private String name;

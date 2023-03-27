@@ -16,8 +16,8 @@ import lombok.Setter;
 public class RoomTypeAdditionalService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     @ManyToOne
     @JoinColumn(name = "additional_service_id")

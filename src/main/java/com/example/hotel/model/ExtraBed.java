@@ -19,8 +19,8 @@ import java.util.List;
 public class ExtraBed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price;

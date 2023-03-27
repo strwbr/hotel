@@ -19,8 +19,8 @@ import java.time.LocalTime;
 public class Arrival {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     private LocalDate realArrivalDate; // Фактическая дата заезда
     private LocalTime realArrivalTime; // Фактическое время заезда

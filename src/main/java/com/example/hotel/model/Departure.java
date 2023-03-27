@@ -19,8 +19,8 @@ import java.time.LocalTime;
 public class Departure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "occupied_rom_id")

@@ -16,8 +16,8 @@ import lombok.Setter;
 public class RoomTypeRoomEquipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     private int amount;
     @ManyToOne

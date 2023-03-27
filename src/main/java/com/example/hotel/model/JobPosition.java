@@ -18,8 +18,8 @@ import java.util.List;
 public class JobPosition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @NotNull
+    @Column(name = "id", nullable = false)
+//    @NotNull
     private Long id;
     private String name;
     @OneToMany(mappedBy = "jobPosition")
