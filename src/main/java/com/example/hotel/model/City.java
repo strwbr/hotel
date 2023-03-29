@@ -27,6 +27,8 @@ public class City {
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
+//    @OneToMany(mappedBy = "city")
+//    private List<District> districtList;
     @OneToMany(mappedBy = "city")
-    private List<District> districtList;
+    private List<Street> streetList;
 }

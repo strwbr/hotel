@@ -24,9 +24,14 @@ public class Street {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name = "district_id")
-    private District district;
+    private District district;*/
     @OneToMany(mappedBy = "street")
     private List<Address> addressList;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
 }

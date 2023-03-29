@@ -19,26 +19,27 @@
     <div class="container">
       <h1>Добавление новой дополнительной услуги</h1>
 
-      <form action="/additional_service/add" method="post">
+      <form action="#" th:action="@{/additional_service/add}" th:object="${additionalService}"
+            method="post">
         <div>
           <label class="form-label" >Наименование</label>
-          <input type="text" name = "name"/>
+          <input type="text" name = "name" th:field="*{name}"/>
         </div>
         <div>
           <label class="form-label" >Описание</label>
-          <textarea style="height: 50px" placeholder="Описание" name = "description"></textarea>
+          <textarea style="height: 50px" placeholder="Описание" name = "description" th:field="*{description}"></textarea>
         </div>
         <div>
           <!-- checkboxes -->
           <label class="form-label" >Типы номеров</label>
           <input
             type="checkbox"
+            name = "roomTypes"
             th:each="roomType : ${allRoomTypes}"
             th:text="${roomType.name}"
-            name = "roomTypes"/>
-<!--            th:value="${roomType.id}"-->
-<!--            th:field="*{roomTypeAdditionalServiceList}"-->
-
+            th:value="${roomType.id}"
+            th:field="*{roomTypeAdditionalServiceList}"
+          />
         </div>
         <div class="form-check form-switch">
           <label class="form-check-label" >Статус</label>

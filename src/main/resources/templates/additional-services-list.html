@@ -38,7 +38,7 @@
       </div>
 
       <div>
-        <a class="btn btn-success" href="/additional_service/add">Добавить</a>
+        <a class="btn btn-success" th:href="@{/additional_service/add}">Добавить</a>
       </div>
 
       <div class="table-responsive">
@@ -57,7 +57,8 @@
               <td th:text="${additionalService.id}"></td>
               <td th:text="${additionalService.name}"></td>
               <td>
-                <ul class="list-group list-group-flush" th:each="roomType : ${additionalService.roomTypeAdditionalServiceList}">
+<!--                roomTypeList - некая новая переменная (атрибут)-->
+                <ul class="list-group list-group-flush" th:each="roomType : ${roomTypeList}">
                   <li class="list-group-item" th:text="${roomType.name}"></li>
                 </ul>
               </td>

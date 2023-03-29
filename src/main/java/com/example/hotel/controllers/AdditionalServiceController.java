@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,10 +25,19 @@ public class AdditionalServiceController {
 
     @GetMapping("/additional_service/add")
     private String showNewAdditionalServiceForm(Model model) {
+        // след две строчки нужны для th:object, без него сразу return
+        AdditionalService additionalService = new AdditionalService();
+        model.addAttribute("additionalService", additionalService);
         return "additional-services-add";
     }
 
     @PostMapping("/additional_service/add")
+    private String addAdditionalService(@ModelAttribute("additionalService") AdditionalService additionalService) {
+
+        additionalServiceService.saveAdditionalService(additionalService);
+        return "redirect:/additional_service";
+    }
+/*    @PostMapping("/additional_service/add")
     private String addAdditionalService(
             @RequestParam String name, @RequestParam String description, Model model
     ) {
@@ -38,5 +48,5 @@ public class AdditionalServiceController {
         additionalService.setAvailabilityStatus(null);
         additionalServiceService.saveAdditionalService(additionalService);
         return "redirect:/additional_service";
-    }
+    }*/
 }
