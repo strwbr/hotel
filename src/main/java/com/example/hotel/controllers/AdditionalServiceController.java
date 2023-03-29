@@ -1,7 +1,6 @@
 package com.example.hotel.controllers;
 
 import com.example.hotel.model.AdditionalService;
-import com.example.hotel.model.AvailabilityStatus;
 import com.example.hotel.services.impl.AdditionalServiceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdditionalServiceController {
@@ -19,7 +17,7 @@ public class AdditionalServiceController {
     @GetMapping("/additional_service")
     private String viewList(Model model) {
         model.addAttribute("listAdditionalService",
-                additionalServiceService.getAllAdditionalService());
+                additionalServiceService.getAllAdditionalServices());
         return "additional-services-list";
     }
 
