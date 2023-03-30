@@ -1,10 +1,12 @@
 package com.example.hotel.services;
 
+import com.example.hotel.model.Region;
+
 import java.util.List;
 
 public interface RegionService {
-    List<> getAll();
-    void save();
-    getById(long id);
-    void deleteById(long id);
+    List<Region> getAllRegions();
+    void saveRegion(Region region);
+    Region getRegionById(long id);
+    void deleteRegionById(long id);
 }

@@ -1,10 +1,12 @@
 package com.example.hotel.services;
 
+import com.example.hotel.model.RoomEquipment;
+
 import java.util.List;
 
 public interface RoomEquipmentService {
-    List<> getAll();
-    void save();
-    getById(long id);
-    void deleteById(long id);
+    List<RoomEquipment> getAllRoomEquipments();
+    void saveRoomEquipment(RoomEquipment roomEquipment);
+    RoomEquipment getRoomEquipmentById(long id);
+    void deleteRoomEquipmentById(long id);
 }

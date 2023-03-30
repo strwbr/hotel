@@ -1,10 +1,12 @@
 package com.example.hotel.services;
 
+import com.example.hotel.model.PrepaymentStatus;
+
 import java.util.List;
 
 public interface PrepaymentStatusService {
-    List<> getAll();
-    void save();
-    getById(long id);
-    void deleteById(long id);
+    List<PrepaymentStatus> getAllPrepaymentStatuses();
+    void savePrepaymentStatus(PrepaymentStatus prepaymentStatus);
+    PrepaymentStatus getPrepaymentStatusById(long id);
+    void deletePrepaymentStatusById(long id);
 }

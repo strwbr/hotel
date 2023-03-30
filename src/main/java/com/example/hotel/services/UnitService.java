@@ -1,10 +1,12 @@
 package com.example.hotel.services;
 
+import com.example.hotel.model.Unit;
+
 import java.util.List;
 
 public interface UnitService {
-    List<> getAll();
-    void save();
-    getById(long id);
-    void deleteById(long id);
+    List<Unit> getAllUnits();
+    void saveUnit(Unit unit);
+    Unit getUnitById(long id);
+    void deleteUnitById(long id);
 }

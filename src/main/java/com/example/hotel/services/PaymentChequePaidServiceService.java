@@ -1,10 +1,12 @@
 package com.example.hotel.services;
 
+import com.example.hotel.model.PaymentChequePaidService;
+
 import java.util.List;
 
 public interface PaymentChequePaidServiceService {
-    List<> getAll();
-    void save();
-    getById(long id);
-    void deleteById(long id);
+    List<PaymentChequePaidService> getAllPaymentChequePaidServices();
+    void savePaymentChequePaidService(PaymentChequePaidService paymentChequePaidService);
+    PaymentChequePaidService getPaymentChequePaidServiceById(long id);
+    void deletePaymentChequePaidServiceById(long id);
 }
