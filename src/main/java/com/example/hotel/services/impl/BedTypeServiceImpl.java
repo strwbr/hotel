@@ -4,10 +4,12 @@ import com.example.hotel.model.BedType;
 import com.example.hotel.repos.BedTypeRepository;
 import com.example.hotel.services.BedTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BedTypeServiceImpl implements BedTypeService {
 
     @Autowired

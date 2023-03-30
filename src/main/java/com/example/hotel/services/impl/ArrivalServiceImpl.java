@@ -4,10 +4,12 @@ import com.example.hotel.model.Arrival;
 import com.example.hotel.repos.ArrivalRepository;
 import com.example.hotel.services.ArrivalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ArrivalServiceImpl implements ArrivalService {
 
     @Autowired

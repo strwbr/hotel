@@ -5,10 +5,12 @@ import com.example.hotel.model.BookingCancellationReason;
 import com.example.hotel.repos.BookingCancellationReasonRepository;
 import com.example.hotel.services.BookingCancellationReasonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BookingCancellationReasonServiceImpl implements BookingCancellationReasonService {
 
     @Autowired
