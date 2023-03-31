@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.Department;
 import com.example.hotel.model.DepartmentStatus;
 import com.example.hotel.repos.DepartmentStatusRepository;
 import com.example.hotel.services.DepartmentStatusService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DepartmentStatusServiceImpl implements DepartmentStatusService {
@@ -26,7 +28,12 @@ public class DepartmentStatusServiceImpl implements DepartmentStatusService {
 
     @Override
     public DepartmentStatus getDepartmentStatusById(long id) {
-        return null;
+        Optional<DepartmentStatus> optional = repository.findById(id);
+        DepartmentStatus departmentStatus = null;
+        if (optional.isPresent())
+            departmentStatus = optional.get();
+        else throw new RuntimeException("DepartmentStatus NOT found for id : \" + id");
+        return departmentStatus;
     }
 
     @Override

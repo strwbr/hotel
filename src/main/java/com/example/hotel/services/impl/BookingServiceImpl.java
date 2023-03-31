@@ -30,7 +30,7 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = null;
         if (optional.isPresent())
             booking = optional.get();
-        else throw new RuntimeException(" NOT found for id : \" + id");
+        else throw new RuntimeException("Booking NOT found for id : \" + id");
         return booking;
     }
 

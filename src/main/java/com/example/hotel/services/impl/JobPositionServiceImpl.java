@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.ExtraBed;
 import com.example.hotel.model.JobPosition;
 import com.example.hotel.repos.JobPositionRepository;
 import com.example.hotel.services.JobPositionService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobPositionServiceImpl implements JobPositionService {
@@ -26,7 +28,12 @@ public class JobPositionServiceImpl implements JobPositionService {
 
     @Override
     public JobPosition getJobPositionById(long id) {
-        return null;
+        Optional<JobPosition> optional = repository.findById(id);
+        JobPosition jobPosition = null;
+        if (optional.isPresent())
+            jobPosition = optional.get();
+        else throw new RuntimeException("JobPosition NOT found for id : \" + id");
+        return jobPosition;
     }
 
     @Override

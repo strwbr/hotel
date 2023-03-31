@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.DocumentType;
 import com.example.hotel.model.Employee;
 import com.example.hotel.repos.EmployeeRepository;
 import com.example.hotel.services.EmployeeService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -26,7 +28,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(long id) {
-        return null;
+        Optional<Employee> optional = repository.findById(id);
+        Employee employee = null;
+        if (optional.isPresent())
+            employee = optional.get();
+        else throw new RuntimeException("Employee NOT found for id : \" + id");
+        return employee;
     }
 
     @Override

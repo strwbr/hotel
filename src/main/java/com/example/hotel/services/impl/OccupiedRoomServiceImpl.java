@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.ExtraBed;
 import com.example.hotel.model.OccupiedRoom;
 import com.example.hotel.repos.OccupiedRoomRepository;
 import com.example.hotel.services.OccupiedRoomService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OccupiedRoomServiceImpl implements OccupiedRoomService {
@@ -26,7 +28,12 @@ public class OccupiedRoomServiceImpl implements OccupiedRoomService {
 
     @Override
     public OccupiedRoom getOccupiedRoomById(long id) {
-        return null;
+        Optional<OccupiedRoom> optional = repository.findById(id);
+        OccupiedRoom occupiedRoom = null;
+        if (optional.isPresent())
+            occupiedRoom = optional.get();
+        else throw new RuntimeException("OccupiedRoom NOT found for id : \" + id");
+        return occupiedRoom;
     }
 
     @Override

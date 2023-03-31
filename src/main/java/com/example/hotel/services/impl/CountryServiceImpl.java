@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.CleaningStatus;
 import com.example.hotel.model.Country;
 import com.example.hotel.repos.CountryRepository;
 import com.example.hotel.services.CountryService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -26,7 +28,12 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country getCountryById(long id) {
-        return null;
+        Optional<Country> optional = repository.findById(id);
+        Country country = null;
+        if (optional.isPresent())
+            country = optional.get();
+        else throw new RuntimeException("Country NOT found for id : \" + id");
+        return country;
     }
 
     @Override

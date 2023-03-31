@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.RoomStatus;
 import com.example.hotel.model.Street;
 import com.example.hotel.repos.StreetRepository;
 import com.example.hotel.services.StreetService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StreetServiceImpl implements StreetService {
@@ -26,7 +28,12 @@ public class StreetServiceImpl implements StreetService {
 
     @Override
     public Street getStreetById(long id) {
-        return null;
+        Optional<Street> optional = repository.findById(id);
+        Street street = null;
+        if (optional.isPresent())
+            street = optional.get();
+        else throw new RuntimeException("Street NOT found for id : \" + id");
+        return street;
     }
 
     @Override

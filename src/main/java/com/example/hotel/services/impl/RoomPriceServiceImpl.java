@@ -1,11 +1,13 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.RoomEquipment;
 import com.example.hotel.model.RoomPrice;
 import com.example.hotel.repos.RoomPriceRepository;
 import com.example.hotel.services.RoomPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RoomPriceServiceImpl implements RoomPriceService {
 
@@ -24,7 +26,12 @@ public class RoomPriceServiceImpl implements RoomPriceService {
 
     @Override
     public RoomPrice getRoomPriceById(long id) {
-        return null;
+        Optional<RoomPrice> optional = repository.findById(id);
+        RoomPrice roomPrice = null;
+        if (optional.isPresent())
+            roomPrice = optional.get();
+        else throw new RuntimeException("RoomPrice NOT found for id : \" + id");
+        return roomPrice;
     }
 
     @Override

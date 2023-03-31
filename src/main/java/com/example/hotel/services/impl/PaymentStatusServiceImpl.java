@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.Payment;
 import com.example.hotel.model.PaymentStatus;
 import com.example.hotel.repos.PaymentStatusRepository;
 import com.example.hotel.services.PaymentStatusService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PaymentStatusServiceImpl implements PaymentStatusService {
@@ -26,7 +28,12 @@ public class PaymentStatusServiceImpl implements PaymentStatusService {
 
     @Override
     public PaymentStatus getPaymentStatusById(long id) {
-        return null;
+        Optional<PaymentStatus> optional = repository.findById(id);
+        PaymentStatus paymentStatus = null;
+        if (optional.isPresent())
+            paymentStatus = optional.get();
+        else throw new RuntimeException("PaymentStatus NOT found for id : \" + id");
+        return paymentStatus;
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CleaningStatusServiceImpl implements CleaningStatusService {
@@ -26,7 +27,12 @@ public class CleaningStatusServiceImpl implements CleaningStatusService {
 
     @Override
     public CleaningStatus getCleaningStatusById(long id) {
-        return null;
+        Optional<CleaningStatus> optional = repository.findById(id);
+        CleaningStatus cleaningStatus = null;
+        if (optional.isPresent())
+            cleaningStatus = optional.get();
+        else throw new RuntimeException("CleaningStatus NOT found for id : \" + id");
+        return cleaningStatus;
     }
 
     @Override

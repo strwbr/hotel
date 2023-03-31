@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.Departure;
 import com.example.hotel.model.DocumentType;
 import com.example.hotel.repos.DocumentTypeRepository;
 import com.example.hotel.services.DocumentTypeService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DocumentTypeServiceImpl implements DocumentTypeService {
@@ -26,7 +28,12 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
 
     @Override
     public DocumentType getDocumentTypeById(long id) {
-        return null;
+        Optional<DocumentType> optional = repository.findById(id);
+        DocumentType documentType = null;
+        if (optional.isPresent())
+            documentType = optional.get();
+        else throw new RuntimeException("DocumentType NOT found for id : \" + id");
+        return documentType;
     }
 
     @Override
