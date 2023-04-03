@@ -2,6 +2,7 @@ package com.example.hotel.services;
 
 import com.example.hotel.model.BedType;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface BedTypeService {
@@ -9,4 +10,6 @@ public interface BedTypeService {
     void saveBedType(BedType bedType);
     BedType getBedTypeById(long id);
     void deleteBedTypeById(long id);
+
+    Collection<String> getAllBedTypesName();
 }
