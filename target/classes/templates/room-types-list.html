@@ -58,7 +58,7 @@
             <tr th:each="type : ${roomTypesList}">
               <td th:text="${type.id}"></td>
               <td th:text="${type.name}"></td>
-              <td th:text="${type.baseCapacity}"></td>
+              <td th:text="${type.baseCapacity} + ' | ' + ${type.maxCapacity}"></td>
               <td th:text="${type.price}"></td>
               <td th:text="---"></td>
               <td th:text="${count}"></td>

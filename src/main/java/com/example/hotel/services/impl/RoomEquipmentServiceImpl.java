@@ -7,6 +7,7 @@ import com.example.hotel.services.RoomEquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,5 +40,10 @@ public class RoomEquipmentServiceImpl implements RoomEquipmentService {
     @Override
     public void deleteRoomEquipmentById(long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    public Collection<String> getAllRoomEquipmentsNames() {
+        return this.repository.findAllNames();
     }
 }

@@ -11,5 +11,5 @@ public interface BedTypeService {
     BedType getBedTypeById(long id);
     void deleteBedTypeById(long id);
 
-    Collection<String> getAllBedTypesName();
+    Collection<String> getAllBedTypesNames();
 }

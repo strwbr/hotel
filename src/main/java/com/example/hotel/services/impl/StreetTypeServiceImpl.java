@@ -32,7 +32,7 @@ public class StreetTypeServiceImpl implements StreetTypeService {
         StreetType streetType = null;
         if (optional.isPresent())
             streetType = optional.get();
-        else throw new RuntimeException("StreetType NOT found for id : \" + id");
+        else throw new RuntimeException("StreetType NOT found for id : " + id);
         return streetType;
     }
 

@@ -6,6 +6,7 @@ import com.example.hotel.services.AdditionalServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,22 +14,22 @@ import java.util.Optional;
 public class AdditionalServiceServiceImpl implements AdditionalServiceService {
 
     @Autowired
-    private AdditionalServiceRepository additionalServiceRepository;
+    private AdditionalServiceRepository repository;
 
     @Override
     public List<AdditionalService> getAllAdditionalServices() {
-        return additionalServiceRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public void saveAdditionalService(AdditionalService additionalService) {
-        this.additionalServiceRepository.save(additionalService);
+        this.repository.save(additionalService);
     }
 
     @Override
     public AdditionalService getAdditionalServiceById(long id) {
         Optional<AdditionalService> optionalAdditionalService
-                = additionalServiceRepository.findById(id);
+                = repository.findById(id);
         AdditionalService additionalService = null;
         if(optionalAdditionalService.isPresent()) {
             additionalService = optionalAdditionalService.get();
@@ -40,6 +41,11 @@ public class AdditionalServiceServiceImpl implements AdditionalServiceService {
 
     @Override
     public void deleteAdditionalServiceById(long id) {
-        this.additionalServiceRepository.deleteById(id);
+        this.repository.deleteById(id);
+    }
+
+    @Override
+    public Collection<String> getAllAdditionalServiceNames() {
+        return this.repository.findAllNames();
     }
 }

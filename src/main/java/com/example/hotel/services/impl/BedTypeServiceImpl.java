@@ -42,7 +42,7 @@ public class BedTypeServiceImpl implements BedTypeService {
     }
 
     @Override
-    public Collection<String> getAllBedTypesName() {
+    public Collection<String> getAllBedTypesNames() {
         return this.repository.findAllNames();
     }
 }
