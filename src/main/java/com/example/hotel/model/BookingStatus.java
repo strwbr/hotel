@@ -24,6 +24,6 @@ public class BookingStatus {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "bookingStatus")
+    @OneToMany(mappedBy = "bookingStatus", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Booking> bookingList;
 }

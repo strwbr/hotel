@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
 
 import java.util.List;
 
@@ -25,10 +26,10 @@ public class AdditionalService {
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
     private String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "availability_status_id")
     private AvailabilityStatus availabilityStatus;
-    @OneToMany(mappedBy = "additionalService")
+    @OneToMany(mappedBy = "additionalService", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RoomTypeAdditionalService> roomTypeAdditionalServiceList;
 
     public AdditionalService(String name, String description, AvailabilityStatus availabilityStatus, List<RoomTypeAdditionalService> roomTypeAdditionalServiceList) {

@@ -24,11 +24,11 @@ public class City {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
 //    @OneToMany(mappedBy = "city")
 //    private List<District> districtList;
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Street> streetList;
 }

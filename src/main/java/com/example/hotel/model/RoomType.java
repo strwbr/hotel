@@ -30,18 +30,25 @@ public class RoomType {
     private byte maxCapacity; // Максимальная вместимость (с учетом доп.кровати/ей)
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price; // Цена за сутки проживания
-    @OneToMany(mappedBy = "roomType")
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Booking> bookingList;
-    @OneToMany(mappedBy = "roomType")
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Room> roomList;
-    @OneToMany(mappedBy = "roomType")
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RoomPrice> roomPriceList;
-    @OneToMany(mappedBy = "roomType")
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RoomTypeAdditionalService> roomTypeAdditionalServiceList;
-    @OneToMany(mappedBy = "roomType")
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RoomTypeRoomEquipment> roomTypeRoomEquipmentList;
-    @OneToMany(mappedBy = "roomType")
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RoomTypeBedType> roomTypeBedTypeList;
-    @OneToMany(mappedBy = "roomType")
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RoomTypeExtraBed> roomTypeExtraBedList;
 }

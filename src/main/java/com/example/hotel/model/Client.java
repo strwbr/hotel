@@ -31,26 +31,33 @@ public class Client {
     private String name;
     private String patronymic;
     private Date birthday;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "residence_address_id")
     private Address residenceAddress;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_address_id")
     private Address registeredAddress;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_type_id")
     private DocumentType documentType;
+
     @NotBlank(message = "Строка должна быть не пустая!")
     private String docNumber;
     @Min(value = 0, message = "Число должно быть больше 0")
     private long phoneNumber;
     @Email
     private String email;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_status_id")
     private ClientStatus clientStatus;
-    @OneToMany(mappedBy = "client")
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Booking> bookingList;
-    @OneToMany(mappedBy = "client")
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OccupiedRoom> occupiedRoomList;
 }

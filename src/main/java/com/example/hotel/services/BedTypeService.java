@@ -12,4 +12,5 @@ public interface BedTypeService {
     void deleteBedTypeById(long id);
 
     Collection<String> getAllBedTypesNames();
+    BedType getBedTypeByName(String name);
 }

@@ -61,12 +61,10 @@
         </div>
         <div>
             <label for="">Тип кровати</label>
-            <select>
-                <option selected disabled>Выберите...</option>
-                <option th:each="i : ${bedTypeNames}"
-                        th:value="${i}" th:text="${i}"></option>
-                <!-- option'ы для каждого элемента выпадающего списка -->
-            </select>
+            <input type="checkbox" name="selectedBedTypes"
+                   th:each="i : ${bedTypeNames}"
+                   th:text="${i.name}"
+                   th:value="${i.id}"/>
         </div>
         <div>
             <label class="form-check-label" for="extraBedToggle"
@@ -85,9 +83,9 @@
                 </div>
                 <div>
                     <label for="">Тип</label>
-                    <select>
+                    <select name="selectedExtraBedType">
                         <option selected disabled>Выберите...</option>
-                        <option th:each="i : ${bedTypeNames}" th:value="${i}" th:text="${i}"></option>
+                        <option th:each="i : ${bedTypeNames}" th:value="${i.id}" th:text="${i.name}"></option>
                     </select>
                 </div>
             </div>
@@ -95,23 +93,24 @@
         <div>
             <!-- checkboxes -->
             <label class="form-label" for="">Дополнительные услуги</label>
-            <input type="checkbox"
+            <input type="checkbox" name="selectedAdditionalServices"
                    th:each="i : ${additionalServiceNames}"
-                   th:text="${i}"
-                   th:value="${i}"/>
+                   th:text="${i.name}"
+                   th:value="${i.id}"/>
         </div>
         <div>
             <!-- checkboxes -->
             <label class="form-label" for="">Оснащение</label>
-            <input type="checkbox"
+            <input type="checkbox" name="selectedRoomEquipments"
                    th:each="i : ${roomEquipmentNames}"
-                   th:text="${i}"
-                   th:value="${i}"/>
+                   th:text="${i.name}"
+                   th:value="${i.id}"/>
         </div>
-        <button type="submit" class="btn btn-primary">Подтвердить</button>
+
 
         <div>
-            <a class="btn btn-outline-primary" href="">Отмена</a>
+            <button type="submit" class="btn btn-primary">Подтвердить</button>
+            <button class="btn btn-outline-primary" href="">Отмена</button>
         </div>
     </form>
 

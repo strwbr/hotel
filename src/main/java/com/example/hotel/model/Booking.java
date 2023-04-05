@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -24,16 +26,16 @@ public class Booking {
     @Column(name = "id", nullable = false)
 //    @NotNull
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
     @OneToOne
     @JoinColumn(name = "prepayment_id")
     private Prepayment prepayment;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_status_id")
     private BookingStatus bookingStatus;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
     @Min(value = 0, message = "Число должно быть больше 0")
@@ -46,11 +48,11 @@ public class Booking {
     @Min(value = 0, message = "Число должно быть больше 0")
     private byte childrenAmount; // Кол-во детей
     private double totalCost; // Общая стоимость
-    @OneToMany(mappedBy = "booking")
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BookingCancellation> bookingCancellationList;
-    @OneToMany(mappedBy = "booking")
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OccupiedRoom> occupiedRoomList;
-    @OneToMany(mappedBy = "booking")
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BookingExtension> bookingExtensionList;
 
 

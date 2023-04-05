@@ -27,18 +27,18 @@ public class Address {
     private String building; // строение
     @Min(value = 0, message = "Число должно быть больше 0")
     private int apartment; // квартира
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "street_type_id")
     private StreetType streetType;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "street_id")
     private Street street;
-    @OneToMany(mappedBy = "residenceAddress")
+    @OneToMany(mappedBy = "residenceAddress", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Employee> employeesByResidentialAddressList;
-    @OneToMany(mappedBy = "registeredAddress")
+    @OneToMany(mappedBy = "registeredAddress", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Employee> employeesByRegistrationAddressList;
-    @OneToMany(mappedBy = "residenceAddress")
+    @OneToMany(mappedBy = "residenceAddress", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Client> clientsByResidentialAddressList;
-    @OneToMany(mappedBy = "registeredAddress")
+    @OneToMany(mappedBy = "registeredAddress", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Client> clientsByRegistrationAddressList;
 }

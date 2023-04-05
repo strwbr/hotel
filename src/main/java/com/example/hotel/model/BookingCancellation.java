@@ -20,11 +20,11 @@ public class BookingCancellation {
 //    @NotNull
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reason_id")
     private BookingCancellationReason reason;
 

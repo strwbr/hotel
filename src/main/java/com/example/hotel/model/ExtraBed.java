@@ -24,8 +24,10 @@ public class ExtraBed {
     private Long id;
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price;
+
     @OneToMany(mappedBy = "extraBed")
     private List<RoomTypeExtraBed> roomTypeExtraBedList;
+
     @ManyToOne
     @JoinColumn(name = "bed_type_id")
     private BedType bedType;
