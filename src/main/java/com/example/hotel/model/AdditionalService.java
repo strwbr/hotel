@@ -26,10 +26,12 @@ public class AdditionalService {
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
     private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "availability_status_id")
     private AvailabilityStatus availabilityStatus;
-    @OneToMany(mappedBy = "additionalService", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "additionalService", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<RoomTypeAdditionalService> roomTypeAdditionalServiceList;
 
     public AdditionalService(String name, String description, AvailabilityStatus availabilityStatus, List<RoomTypeAdditionalService> roomTypeAdditionalServiceList) {

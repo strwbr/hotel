@@ -24,6 +24,7 @@ public class DocumentType {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "documentType")
+
+    @OneToMany(mappedBy = "documentType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Client> clientList;
 }

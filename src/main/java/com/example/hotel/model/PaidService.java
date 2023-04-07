@@ -26,14 +26,17 @@ public class PaidService {
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
     private String description;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "availability_status_id")
     private AvailabilityStatus availabilityStatus;
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_id")
     private Unit unit;
-    @OneToMany(mappedBy = "paidService")
+
+    @OneToMany(mappedBy = "paidService", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<PaymentChequePaidService> paymentChequePaidServiceList;
 }

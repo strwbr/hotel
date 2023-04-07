@@ -24,9 +24,11 @@ public class Region {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
-    @OneToMany(mappedBy = "region")
+
+    @OneToMany(mappedBy = "region", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<City> cityList;
 }

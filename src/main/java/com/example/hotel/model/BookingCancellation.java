@@ -27,5 +27,4 @@ public class BookingCancellation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reason_id")
     private BookingCancellationReason reason;
-
 }

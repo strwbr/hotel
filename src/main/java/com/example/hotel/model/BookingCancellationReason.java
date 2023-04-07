@@ -24,6 +24,7 @@ public class BookingCancellationReason {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "reason", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "reason", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<BookingCancellation> bookingCancellationList;
 }

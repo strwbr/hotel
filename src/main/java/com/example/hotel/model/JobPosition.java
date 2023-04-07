@@ -22,6 +22,7 @@ public class JobPosition {
 //    @NotNull
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "jobPosition")
+
+    @OneToMany(mappedBy = "jobPosition", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Employee> employeeList;
 }

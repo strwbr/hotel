@@ -20,16 +20,17 @@ public class Prepayment {
 //    @NotNull
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")
     private PrepaymentStatus status;
 
-    @OneToOne(mappedBy = "prepayment")
+    @OneToOne(mappedBy = "prepayment", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private BookingExtension bookingExtension;
-    @OneToOne(mappedBy = "prepayment")
+
+    @OneToOne(mappedBy = "prepayment", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Booking booking;
 
-    @OneToOne(orphanRemoval = true)
+    @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
 

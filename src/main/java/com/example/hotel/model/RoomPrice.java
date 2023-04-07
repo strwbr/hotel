@@ -22,14 +22,17 @@ public class RoomPrice {
     @Column(name = "id", nullable = false)
 //    @NotNull
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
+
     private Date startDate;
     private Date endDate;
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")
     private RoomPriceStatus status;
 }

@@ -24,6 +24,7 @@ public class Country {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "country")
+
+    @OneToMany(mappedBy = "country", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Region> regionList;
 }

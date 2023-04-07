@@ -55,9 +55,9 @@ public class Client {
     @JoinColumn(name = "client_status_id")
     private ClientStatus clientStatus;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Booking> bookingList;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<OccupiedRoom> occupiedRoomList;
 }

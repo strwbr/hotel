@@ -24,6 +24,7 @@ public class Role {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "role")
+
+    @OneToMany(mappedBy = "role", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<UserRole> userRoleList;
 }

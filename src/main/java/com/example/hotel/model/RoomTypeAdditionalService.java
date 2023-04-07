@@ -19,10 +19,12 @@ public class RoomTypeAdditionalService {
     @Column(name = "id", nullable = false)
 //    @NotNull
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "additional_service_id")
     private AdditionalService additionalService;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 }

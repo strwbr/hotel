@@ -24,18 +24,19 @@ public class Room {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String number; // Числовое обозначение номера (мб в int)
-    @OneToMany(mappedBy = "room")
+
+    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<OccupiedRoom> occupiedRoomList;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_status_id")
     private RoomStatus roomStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cleaning_status_id")
     private CleaningStatus cleaningStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 

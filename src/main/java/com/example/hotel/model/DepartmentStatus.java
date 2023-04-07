@@ -24,6 +24,7 @@ public class DepartmentStatus {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "departmentStatus")
+
+    @OneToMany(mappedBy = "departmentStatus", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Department> departmentList;
 }

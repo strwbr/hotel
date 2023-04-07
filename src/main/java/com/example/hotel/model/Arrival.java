@@ -24,8 +24,8 @@ public class Arrival {
     private Long id;
     private LocalDate realArrivalDate; // Фактическая дата заезда
     private LocalTime realArrivalTime; // Фактическое время заезда
-    @OneToOne(orphanRemoval = true)
+
+    @OneToOne
     @JoinColumn(name = "occupied_rom_id")
     private OccupiedRoom occupiedRoom;
-
 }

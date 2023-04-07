@@ -24,6 +24,7 @@ public class PaymentStatus {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "paymentStatus")
+
+    @OneToMany(mappedBy = "paymentStatus", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Payment> paymentList;
 }

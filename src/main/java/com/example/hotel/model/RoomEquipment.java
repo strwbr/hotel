@@ -24,6 +24,7 @@ public class RoomEquipment {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "roomEquipment")
+
+    @OneToMany(mappedBy = "roomEquipment", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<RoomTypeRoomEquipment> roomTypeRoomEquipmentList;
 }

@@ -24,8 +24,10 @@ public class AvailabilityStatus {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "availabilityStatus", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "availabilityStatus", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<PaidService> paidServiceList;
-    @OneToMany(mappedBy = "availabilityStatus", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "availabilityStatus", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<AdditionalService> additionalServiceList;
 }

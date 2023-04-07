@@ -24,6 +24,7 @@ public class StreetType {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "streetType")
+
+    @OneToMany(mappedBy = "streetType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Address> addressList;
 }

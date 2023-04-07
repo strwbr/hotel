@@ -25,10 +25,10 @@ public class ExtraBed {
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price;
 
-    @OneToMany(mappedBy = "extraBed")
+    @OneToMany(mappedBy = "extraBed", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<RoomTypeExtraBed> roomTypeExtraBedList;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bed_type_id")
     private BedType bedType;
 }

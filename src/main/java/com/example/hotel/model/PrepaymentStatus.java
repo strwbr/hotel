@@ -24,6 +24,7 @@ public class PrepaymentStatus {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "status")
+
+    @OneToMany(mappedBy = "status", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Prepayment> prepaymentList;
 }

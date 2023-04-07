@@ -19,17 +19,22 @@ public class OccupiedRoom {
     @Column(name = "id", nullable = false)
 //    @NotNull
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     private Booking booking;
-    @OneToOne(mappedBy = "occupiedRoom")
+
+    @OneToOne(mappedBy = "occupiedRoom", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Arrival arrival;
-    @OneToOne(mappedBy = "occupiedRoom")
+
+    @OneToOne(mappedBy = "occupiedRoom", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Departure departure;
 }

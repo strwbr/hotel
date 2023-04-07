@@ -20,10 +20,12 @@ public class PaymentChequePaidService {
 //    @NotNull
     private Long id;
     private double amount;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paid_service_id")
     private PaidService paidService;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_cheque_id")
     private PaymentCheque paymentCheque;
 

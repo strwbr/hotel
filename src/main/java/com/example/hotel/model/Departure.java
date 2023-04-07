@@ -22,7 +22,8 @@ public class Departure {
     @Column(name = "id", nullable = false)
 //    @NotNull
     private Long id;
-    @OneToOne(orphanRemoval = true)
+
+    @OneToOne
     @JoinColumn(name = "occupied_rom_id")
     private OccupiedRoom occupiedRoom;
     private LocalDate realDepartureDate; // Фактическая дата выезда

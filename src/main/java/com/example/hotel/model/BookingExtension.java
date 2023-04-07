@@ -22,9 +22,11 @@ public class BookingExtension {
     @Column(name = "id", nullable = false)
 //    @NotNull
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     private Booking booking;
+
     @OneToOne
     @JoinColumn(name = "prepayment_id")
     private Prepayment prepayment;

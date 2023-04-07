@@ -27,10 +27,11 @@ public class Street {
 /*    @ManyToOne
     @JoinColumn(name = "district_id")
     private District district;*/
-    @OneToMany(mappedBy = "street")
+
+    @OneToMany(mappedBy = "street", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Address> addressList;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
 

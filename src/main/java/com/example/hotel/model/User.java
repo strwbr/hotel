@@ -26,7 +26,7 @@ public class User {
     private String login;
     // password
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<UserRole> userRoleList;
 
     @OneToOne

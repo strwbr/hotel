@@ -28,18 +28,23 @@ public class Employee {
     private String name;
     private String patronymic;
     private Date birthday;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_position_id")
     private JobPosition jobPosition;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "residence_address_id")
     private Address residenceAddress;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_address_id")
     private Address registeredAddress;
+
     @Min(value = 0, message = "Число должно быть больше 0")
     private long docNumber;
     @Min(value = 0, message = "Число должно быть больше 0")
@@ -48,11 +53,14 @@ public class Employee {
     private String email;
     private Date hireDate; // Дата найма
     private Date dismissalDate; // Дата увольнения
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_status_id")
     private EmployeeStatus employeeStatus;
-    @OneToOne(mappedBy = "employee")
+
+    @OneToOne(mappedBy = "employee", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private User user;
-    @OneToMany(mappedBy = "employee")
+
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<PaymentCheque> paymentChequeList;
 }

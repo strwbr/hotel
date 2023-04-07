@@ -21,12 +21,15 @@ public class PaymentCheque {
     @Column(name = "id", nullable = false)
 //    @NotNull
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
-    @OneToOne(orphanRemoval = true)
+
+    @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
-    @OneToMany(mappedBy = "paymentCheque")
+
+    @OneToMany(mappedBy = "paymentCheque", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<PaymentChequePaidService> paymentChequePaidServiceList;
 }

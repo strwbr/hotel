@@ -20,10 +20,12 @@ public class RoomTypeBedType {
 //    @NotNull
     private Long id;
     private byte bedAmount; // Кол-во спальных мест
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bed_type_id")
     private BedType bedType;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 }

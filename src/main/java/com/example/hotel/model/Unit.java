@@ -24,6 +24,7 @@ public class Unit {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "unit")
+
+    @OneToMany(mappedBy = "unit", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<PaidService> paidServiceList;
 }

@@ -20,10 +20,12 @@ public class RoomTypeExtraBed {
 //    @NotNull
     private Long id;
     private byte amount;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "extra_bed_id")
     private ExtraBed extraBed;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 }

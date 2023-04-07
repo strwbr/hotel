@@ -23,9 +23,11 @@ public class Department {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_status_id")
     private DepartmentStatus departmentStatus;
-    @OneToMany(mappedBy = "department")
+
+    @OneToMany(mappedBy = "department", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Employee> employeeList;
 }

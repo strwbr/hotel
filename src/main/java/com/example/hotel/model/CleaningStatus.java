@@ -24,6 +24,7 @@ public class CleaningStatus {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "cleaningStatus", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "cleaningStatus",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Room> roomList;
 }

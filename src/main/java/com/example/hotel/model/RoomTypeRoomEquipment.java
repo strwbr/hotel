@@ -20,10 +20,12 @@ public class RoomTypeRoomEquipment {
 //    @NotNull
     private Long id;
     private int amount;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_equipment_id")
     private RoomEquipment roomEquipment;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 }

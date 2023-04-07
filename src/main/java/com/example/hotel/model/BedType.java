@@ -24,8 +24,10 @@ public class BedType {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
-    @OneToMany(mappedBy = "bedType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "bedType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<RoomTypeBedType> roomTypeBedTypeList;
-    @OneToMany(mappedBy = "bedType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "bedType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<ExtraBed> extraBedList;
 }
