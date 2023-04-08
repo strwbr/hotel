@@ -82,20 +82,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="booking, i : ${bookings}">
+            <tr th:each="b, i : ${bookings}">
               <td th:text="${i.count}"></td>
-              <td th:text="${booking.id}"></td>
-              <td th:text="${booking.client != null} ? ${booking.client.name} : ''"></td>
-              <td th:text="${booking.checkInDate}"></td>
-              <td th:text="${booking.checkOutDate}"></td>
-              <td th:text="${booking.bookingTime}"></td>
-              <td th:text="${booking.roomType != null} ? ${booking.roomType.name} : '' "></td>
-              <td th:text="0"></td>
-              <td th:text="0"></td>
+              <td th:text="${b.id}"></td>
+              <td th:text="${b.client != null} ? ${b.client.name} : '-'"></td>
+              <td th:text="${b.checkInDate}"></td>
+              <td th:text="${b.checkOutDate}"></td>
+              <td th:text="${b.bookingTime}"></td>
+              <td th:text="${b.roomType != null} ? ${b.roomType.name} : '-'"></td>
+              <td th:text="${b.prepayment != null and b.prepayment.status !=null} ? ${b.prepayment.status.name} : '-'"></td>
+              <td th:text="${b.bookingStatus != null} ? ${b.bookingStatus.name} : '-'"></td>
               <td>
-                <a class="btn btn-primary" th:href="@{/booking}">Подробнее</a>
-                <a class="btn btn-secondary" th:href="@{/booking}">Редактировать</a>
-                <a class="btn btn-danger" th:href="@{/booking}">Удалить</a>
+                <a class="btn btn-primary" th:href="@{/booking/info/{id}(id=${b.id})}">Подробнее</a>
+                <a class="btn btn-secondary" th:href="@{/booking/edit/{id}(id=${b.id})}">Редактировать</a>
+                <a class="btn btn-danger" th:href="@{/booking/delete/{id}(id=${b.id})}">Удалить</a>
               </td>
             </tr>
           </tbody>
