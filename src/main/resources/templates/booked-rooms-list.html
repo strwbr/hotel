@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- Подключение thymeleaf и thymeleaf для Spring Security -->
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Подключение Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <title>HMS: Booked Room List</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Список занятых номеров</h1>
+      <p>Фильтры</p>
+      <div>
+        <select>
+          <option selected disabled>-- Тип номера --</option>
+          <!-- option'ы для каждого элемента выпадающего списка -->
+        </select>
+      </div>
+
+      <div>
+        <label for="">Поиск</label>
+        <input type="search" placeholder="-- Номер --" />
+      </div>
+
+      <div>
+        <a class="btn btn-success" href="">Заселение</a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>№ п/п</th>
+              <th>Номер</th>
+              <th>Тип номера</th>
+              <th>Постояльцы</th>
+              <th>Дата заезда</th>
+              <th>Дата выезда</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="r, i : ${occupiedRooms}">
+              <td th:text="${i.count}"></td>
+              <td th:text="${r.room} ? ${r.room.number} : '-'"></td>
+              <td th:text="${r.room.roomType} ? ${r.room.roomType.name} : '-'"></td>
+              <td>
+                <ul class="list-group list-group-flush" th:each="c : ${r.occupiedRoomClientList}">
+                  <li class="list-group-item" th:text="${c.client} ? ${c.client.surname} : '-'"></li>
+                </ul>
+              </td>
+              <td th:text="${r.booking} ? ${r.booking.checkInDate} : '-'"></td>
+              <td th:text="${r.booking} ? ${r.booking.checkOutDate} : '-'"></td>
+              <td>
+                <!-- <a class="btn btn-primary" th:href="#">Подробнее</a> -->
+                <a class="btn btn-secondary" th:href="@{/booked-room/extension/{id}(id=${r.id})}">Продлить</a>
+                <a class="btn btn-primary" th:href="@{/booked-room/checkout/{id}(id=${r.id})}">Выселение</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -59,5 +59,5 @@ public class Client {
     private List<Booking> bookingList;
 
     @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<OccupiedRoom> occupiedRoomList;
+    private List<OccupiedRoomClient> occupiedRoomClientList;
 }

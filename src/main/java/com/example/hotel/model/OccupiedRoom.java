@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "occupied_room")
 @Getter
@@ -20,9 +22,9 @@ public class OccupiedRoom {
 //    @NotNull
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+/*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
-    private Client client;
+    private Client client;*/
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
@@ -37,4 +39,7 @@ public class OccupiedRoom {
 
     @OneToOne(mappedBy = "occupiedRoom", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Departure departure;
+
+    @OneToMany(mappedBy = "occupiedRoom", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<OccupiedRoomClient> occupiedRoomClientList;
 }
