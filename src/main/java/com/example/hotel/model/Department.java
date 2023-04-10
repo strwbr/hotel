@@ -23,6 +23,7 @@ public class Department {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_status_id")

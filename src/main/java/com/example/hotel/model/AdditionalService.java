@@ -21,7 +21,7 @@ public class AdditionalService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-//    @NotNullу мен
+//    @NotNull
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;

@@ -8,20 +8,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/additional_service")
 public class AdditionalServiceController {
     @Autowired
     private AdditionalServiceServiceImpl additionalServiceService;
 
-    @GetMapping("/additional_service")
+    @GetMapping
     private String viewList(Model model) {
-        model.addAttribute("listAdditionalService",
-                additionalServiceService.getAllAdditionalServices());
+        Iterable<AdditionalService> additionalServices = additionalServiceService.getAllAdditionalServices();
+        model.addAttribute("additionalServices", additionalServices);
         return "additional-services-list";
     }
 
-    @GetMapping("/additional_service/add")
+   /* @GetMapping("/additional_service/add")
     private String showNewAdditionalServiceForm(Model model) {
         // след две строчки нужны для th:object, без него сразу return
         AdditionalService additionalService = new AdditionalService();
@@ -34,7 +36,7 @@ public class AdditionalServiceController {
 
         additionalServiceService.saveAdditionalService(additionalService);
         return "redirect:/additional_service";
-    }
+    }*/
 /*    @PostMapping("/additional_service/add")
     private String addAdditionalService(
             @RequestParam String name, @RequestParam String description, Model model

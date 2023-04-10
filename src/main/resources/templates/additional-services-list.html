@@ -53,20 +53,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="additionalService : ${listAdditionalService}">
-              <td th:text="${additionalService.id}"></td>
-              <td th:text="${additionalService.name}"></td>
+            <tr th:each="a, i : ${additionalServices}">
+              <td th:text="${i.count}"></td>
+              <td th:text="${a.name}"></td>
               <td>
-<!--                roomTypeList - некая новая переменная (атрибут)-->
-                <ul class="list-group list-group-flush" th:each="roomType : ${roomTypeList}">
-                  <li class="list-group-item" th:text="${roomType.name}"></li>
+                <ul class="list-group list-group-flush" th:each="r : ${a.roomTypeAdditionalServiceList}">
+                  <li class="list-group-item" th:text="${r.roomType} ? ${r.roomType.name} : '-'"></li>
                 </ul>
               </td>
-              <td th:text="${additionalService.availabilityStatus}"></td>
+              <td th:text="${a.availabilityStatus.name}"></td>
               <td>
-                <a class="btn btn-primary" th:href="@{/additional_service/info/{id}(id=${additionalService.id})}">Подробнее</a>
-                <a class="btn btn-secondary" th:href="@{/additional_service/update/{id}(id=${additionalService.id})}">Редактировать</a>
-                <a class="btn btn-danger" th:href="@{/additional_service/delete/{id}(id=${additionalService.id})}">Удалить</a>
+                <a class="btn btn-primary" th:href="@{/additional_service/info/{id}(id=${a.id})}">Подробнее</a>
+                <a class="btn btn-secondary" th:href="@{/additional_service/update/{id}(id=${a.id})}">Редактировать</a>
+                <a class="btn btn-danger" th:href="@{/additional_service/delete/{id}(id=${a.id})}">Удалить</a>
               </td>
             </tr>
           </tbody>
