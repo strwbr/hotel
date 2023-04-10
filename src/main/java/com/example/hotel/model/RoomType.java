@@ -48,7 +48,4 @@ public class RoomType {
 
     @OneToMany(mappedBy = "roomType")
     private List<RoomTypeBedType> roomTypeBedTypeList;
-
-    @OneToMany(mappedBy = "roomType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<RoomTypeExtraBed> roomTypeExtraBedList;
 }

@@ -62,4 +62,7 @@ public class Booking {
 
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<BookingExtension> bookingExtensionList;
+
+    @OneToOne(mappedBy = "booking", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private ExtraBed extraBed;
 }

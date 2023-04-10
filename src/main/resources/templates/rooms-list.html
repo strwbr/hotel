@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- Подключение thymeleaf и thymeleaf для Spring Security -->
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Подключение Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <title>HMS: Rooms List</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Список номеров</h1>
+      <p>Фильтры</p>
+
+      <div>
+        <select>
+          <option selected disabled>-- Тип номера --</option>
+          <!-- option'ы для каждого элемента выпадающего списка -->
+        </select>
+      </div>
+
+      <div>
+        <label for="">Поиск</label>
+        <input type="search" placeholder="-- Номер --" />
+      </div>
+
+      <div>
+        <a class="btn btn-success" th:href="@{/room/add}">Добавить</a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Номер</th>
+              <th>Тип номера</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="r : ${rooms}">
+              <td th:text="${r.number}"></td>
+              <td th:text="${r.roomType} ? ${r.roomType.name} : '-'"></td>
+              <td>
+                <!-- <a class="btn btn-primary" th:href="#">Подробнее</a> -->
+                <a class="btn btn-secondary" th:href="@{/room/edit/{id}(id=${r.id})}">Редактировать</a>
+                <a class="btn btn-danger" th:href="@{/room/delete/{id}(id=${r.id})}">Удалить</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

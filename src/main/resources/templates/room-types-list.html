@@ -49,19 +49,17 @@
               <th>Наименование</th>
               <th>Вместимость</th>
               <th>Цена</th>
-              <th>Доп. кровать</th>
               <th>Количество</th>
               <th>Действия</th>
             </tr>
           </thead>
           <tbody>
-            <tr th:each="type : ${roomTypesList}">
-              <td th:text="${type.id}"></td>
+            <tr th:each="type, i : ${roomTypesList}">
+              <td th:text="${i.count}"></td>
               <td th:text="${type.name}"></td>
               <td th:text="${type.baseCapacity} + ' | ' + ${type.maxCapacity}"></td>
               <td th:text="${type.price}"></td>
-              <td th:text="---"></td>
-              <td th:text="${count}"></td>
+              <td th:text="${type.roomList} ? ${#lists.size(type.roomList)} : '-'"></td>
               <td>
                 <a class="btn btn-primary" th:href="@{/room_type/info/{id}(id=${type.id})}">Подробнее</a>
                 <a class="btn btn-secondary" th:href="@{/room_type/update/{id}(id=${type.id})}">Редактировать</a>

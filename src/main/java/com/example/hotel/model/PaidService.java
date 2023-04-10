@@ -30,6 +30,7 @@ public class PaidService {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "availability_status_id")
     private AvailabilityStatus availabilityStatus;
+
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price;
 
