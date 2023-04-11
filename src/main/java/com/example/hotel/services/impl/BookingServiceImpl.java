@@ -6,6 +6,7 @@ import com.example.hotel.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,5 +38,13 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void deleteBookingById(long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    public List<Booking> getCompletedOrCancelledBookings() {
+        List<String> statuses = new ArrayList<>();
+        statuses.add("Отменено");
+        statuses.add("Завершено");
+        return this.repository.findBookingsByStatuses(statuses);
     }
 }

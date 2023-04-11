@@ -9,4 +9,6 @@ public interface BookingService {
     void saveBooking(Booking booking);
     Booking getBookingById(long id);
     void deleteBookingById(long id);
+
+    List<Booking> getCompletedOrCancelledBookings();
 }
