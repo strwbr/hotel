@@ -2,13 +2,10 @@ package com.example.hotel.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -30,10 +27,6 @@ public class Booking {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
-
-    @OneToOne
-    @JoinColumn(name = "prepayment_id")
-    private Prepayment prepayment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_status_id")
@@ -65,4 +58,10 @@ public class Booking {
 
     @OneToOne(mappedBy = "booking", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private ExtraBed extraBed;
+
+    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Payment> paymentList;
+
+    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<BookingPaidService> bookingPaidServiceList;
 }

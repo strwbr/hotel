@@ -62,6 +62,7 @@
               <td th:text="${r.booking} ? ${r.booking.checkOutDate} : '-'"></td>
               <td>
                 <!-- <a class="btn btn-primary" th:href="#">Подробнее</a> -->
+                <a class="btn btn-secondary" th:href="@{/booked-room/add-paid-services/{id}(id=${r.id})}">+ Платные услуги</a>
                 <a class="btn btn-secondary" th:href="@{/booked-room/extension/{id}(id=${r.id})}">Продлить</a>
                 <a class="btn btn-primary" th:href="@{/booked-room/checkout/{id}(id=${r.id})}">Выселение</a>
               </td>

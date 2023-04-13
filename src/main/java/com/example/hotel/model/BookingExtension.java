@@ -27,9 +27,6 @@ public class BookingExtension {
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
-    @OneToOne
-    @JoinColumn(name = "prepayment_id")
-    private Prepayment prepayment;
     private Date newCheckOutDate;
     private LocalDateTime bookingExtensionTime; // Дата оформления продления
 }

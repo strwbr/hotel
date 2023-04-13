@@ -22,20 +22,18 @@ public class Payment {
     private double amount; // Сумма к оплате
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_type_id")
     private PaymentType paymentType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_status_id")
     private PaymentStatus paymentStatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "currency_id")
-    private Currency currency;
-
-    @OneToOne(mappedBy = "payment", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private PaymentCheque paymentCheque;
-
-    @OneToOne(mappedBy = "payment", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Prepayment prepayment;
 }

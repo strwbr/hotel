@@ -1,6 +1,5 @@
 package com.example.hotel.services.impl;
 
-import com.example.hotel.model.PrepaymentStatus;
 import com.example.hotel.model.Region;
 import com.example.hotel.repos.RegionRepository;
 import com.example.hotel.services.RegionService;

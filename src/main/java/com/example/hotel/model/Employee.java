@@ -62,5 +62,5 @@ public class Employee {
     private User user;
 
     @OneToMany(mappedBy = "employee", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<PaymentCheque> paymentChequeList;
+    private List<Payment> paymentList;
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,5 +22,12 @@ public class BookingController {
         Iterable<Booking> bookings = bookingService.getNewBookings();
         model.addAttribute("bookings", bookings);
         return "bookings-list";
+    }
+
+    @GetMapping("/info/{id}")
+    private String bookingInfo(@PathVariable(value = "id") long id, Model model) {
+        Booking booking = bookingService.getBookingById(id);
+        model.addAttribute("booking", booking);
+        return "booking-info";
     }
 }

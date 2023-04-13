@@ -3,7 +3,6 @@ package com.example.hotel.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,5 +38,5 @@ public class PaidService {
     private Unit unit;
 
     @OneToMany(mappedBy = "paidService", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<PaymentChequePaidService> paymentChequePaidServiceList;
+    private List<BookingPaidService> bookingPaidServiceList;
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- Подключение thymeleaf и thymeleaf для Spring Security -->
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Подключение Bootstrap -->
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <title>HMS: Booking Info</title>
+</head>
+<body>
+<div class="container">
+    <h1>Информация о бронировании</h1>
+
+    <div>
+        <label class="form-label" for="">№ бронирования</label>
+        <input type="number" th:value="${booking.id}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Фамилия</label>
+        <input type="text" th:value="${booking.client.surname}" readonly/>
+    </div>
+    <div>
+        <label class="form-label">Имя</label>
+        <input type="text" th:value="${booking.client.name}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Отчество</label>
+        <input type="text" th:value="${booking.client.patronymic}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Телефон</label>
+        <input type="tel" pattern="" th:value="${booking.client.phoneNumber}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">email</label>
+        <input type="email" pattern="" th:value="${booking.client.email}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Дата заезда</label>
+        <input type="date" th:value="${booking.checkInDate}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Дата выезда</label>
+        <input type="date" th:value="${booking.checkOutDate}" readonly/>
+    </div>
+    <!--      <div>-->
+    <!--        <label class="form-label" for="">Количество дней</label>-->
+    <!--        <input type="number" readonly />-->
+    <!--      </div>-->
+    <!--      <div>-->
+    <!--        <label class="form-label" for="">Количество ночей</label>-->
+    <!--        <input type="number" readonly />-->
+    <!--      </div>-->
+    <div>
+        <label class="form-label" for="">Тип номера</label>
+        <input type="text" th:value="${booking.roomType.name} + ' | ' + ${booking.roomsAmount}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Количество взрослых</label>
+        <input type="number" th:value="${booking.adultsAmount}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Количество детей</label>
+        <input type="number" th:value="${booking.childrenAmount}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Платные услуги</label>
+      <p th:text="${booking.bookingPaidServiceList == null} ? 'Отсутствуют'"></p>
+        
+      <div th:if="${booking.bookingPaidServiceList}">
+          <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
+              <li class="list-group-item" th:text="${i.paidService.name} + ' | ' + ${i.amount}"></li>
+          </ul>
+        </div>
+    </div>
+    <div>
+        <label class="form-label" for="">Дата оформления бронирования</label>
+        <input type="datetime-local" th:value="${booking.bookingTime}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Стоимость за время проживания</label>
+        <input type="text" th:value="${booking.totalCost}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Статус бронирования</label>
+        <input type="text" th:value="${booking.bookingStatus.name}" readonly/>
+    </div>
+</div>
+
+<!-- Подключение скриптов -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

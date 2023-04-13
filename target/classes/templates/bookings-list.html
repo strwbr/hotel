@@ -62,7 +62,7 @@
       </div>
 
       <div>
-        <a class="btn btn-success" href="booking-add.html">+ Добавить</a>
+        <a class="btn btn-success" th:href="@{/booking/add}">+Добавить</a>
       </div>
 
       <div class="table-responsive">
@@ -76,7 +76,7 @@
               <th>Дата выезда</th>
               <th>Дата оформления</th>
               <th>Тип номера</th>
-              <th>Статус предоплаты</th>
+              <th>Доп. место</th>
               <th>Статус бронирования</th>
               <th>Действия</th>
             </tr>
@@ -85,13 +85,13 @@
             <tr th:each="b, i : ${bookings}">
               <td th:text="${i.count}"></td>
               <td th:text="${b.id}"></td>
-              <td th:text="${b.client != null} ? ${b.client.name} : '-'"></td>
+              <td th:text="${b.client.name}"></td>
               <td th:text="${b.checkInDate}"></td>
               <td th:text="${b.checkOutDate}"></td>
               <td th:text="${b.bookingTime}"></td>
-              <td th:text="${b.roomType != null} ? ${b.roomType.name} : '-'"></td>
-              <td th:text="${b.prepayment != null and b.prepayment.status !=null} ? ${b.prepayment.status.name} : '-'"></td>
-              <td th:text="${b.bookingStatus != null} ? ${b.bookingStatus.name} : '-'"></td>
+              <td th:text="${b.roomType.name}"></td>
+              <td th:text="${b.extraBed} ? ${b.extraBed.name} : '-'"></td>
+              <td th:text="${b.bookingStatus.name}"></td>
               <td>
                 <a class="btn btn-primary" th:href="@{/booking/info/{id}(id=${b.id})}">Подробнее</a>
                 <a class="btn btn-secondary" th:href="@{/booking/edit/{id}(id=${b.id})}">Редактировать</a>

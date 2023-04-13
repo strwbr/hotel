@@ -1,7 +1,6 @@
 package com.example.hotel.services.impl;
 
 import com.example.hotel.model.Payment;
-import com.example.hotel.model.PaymentCheque;
 import com.example.hotel.repos.PaymentRepository;
 import com.example.hotel.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;

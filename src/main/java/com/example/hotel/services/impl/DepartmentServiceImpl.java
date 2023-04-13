@@ -1,6 +1,5 @@
 package com.example.hotel.services.impl;
 
-import com.example.hotel.model.Currency;
 import com.example.hotel.model.Department;
 import com.example.hotel.repos.DepartmentRepository;
 import com.example.hotel.services.DepartmentService;
