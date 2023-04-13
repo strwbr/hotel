@@ -45,6 +45,19 @@ public class BookingServiceImpl implements BookingService {
         List<String> statuses = new ArrayList<>();
         statuses.add("Отменено");
         statuses.add("Завершено");
-        return this.repository.findBookingsByStatuses(statuses);
+        return this.repository.findBookingsByStatusesOrderByBookingTimeDesc(statuses);
+    }
+
+    @Override
+    public List<Booking> getNewBookings() {
+        List<String> statuses = new ArrayList<>();
+        statuses.add("Подтверждено");
+        statuses.add("Требуется предоплата");
+        return this.repository.findBookingsByStatusesOrderByBookingTimeDesc(statuses);
+    }
+
+    @Override
+    public List<Booking> getAllBookingOrderByBookingTimeDesc() {
+        return this.repository.findAllOrderByBookingTimeDesc();
     }
 }

@@ -10,5 +10,10 @@ public interface BookingService {
     Booking getBookingById(long id);
     void deleteBookingById(long id);
 
+    // Получение завершенных или отмененных бронирований
     List<Booking> getCompletedOrCancelledBookings();
+    // Получение новых бронирований (со статусами: "Подтверждено", "Требуется предоплата")
+    List<Booking> getNewBookings();
+    // Получение всех бронирований, отсортированных по убыванию даты оформления
+    List<Booking> getAllBookingOrderByBookingTimeDesc();
 }

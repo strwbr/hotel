@@ -18,7 +18,7 @@ public class BookingController {
 
     @GetMapping
     private String viewList(Model model) {
-        Iterable<Booking> bookings = bookingService.getAllBookings();
+        Iterable<Booking> bookings = bookingService.getNewBookings();
         model.addAttribute("bookings", bookings);
         return "bookings-list";
     }
