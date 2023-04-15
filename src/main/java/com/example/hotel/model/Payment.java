@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "payment")
@@ -20,6 +24,7 @@ public class Payment {
 //    @NotNull
     private Long id;
     private double amount; // Сумма к оплате
+    private Date paymentDate; // Время оплаты
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")

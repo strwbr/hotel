@@ -9,4 +9,7 @@ public interface OccupiedRoomService {
     void saveOccupiedRoom(OccupiedRoom occupiedRoom);
     OccupiedRoom getOccupiedRoomById(long id);
     void deleteOccupiedRoomById(long id);
+
+    List<OccupiedRoom> getAllOccupiedRoomsByClientId(long id);
+
 }

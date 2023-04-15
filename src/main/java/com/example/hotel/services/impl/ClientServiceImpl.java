@@ -2,6 +2,7 @@ package com.example.hotel.services.impl;
 
 import com.example.hotel.model.CleaningStatus;
 import com.example.hotel.model.Client;
+import com.example.hotel.model.OccupiedRoom;
 import com.example.hotel.repos.ClientRepository;
 import com.example.hotel.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deleteClientById(long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    public boolean isVIPClient(Client client) {
+        return client.getClientStatus().getName().equals("VIP");
     }
 }

@@ -40,4 +40,9 @@ public class OccupiedRoomServiceImpl implements OccupiedRoomService {
     public void deleteOccupiedRoomById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public List<OccupiedRoom> getAllOccupiedRoomsByClientId(long id) {
+        return this.repository.findAllOccupiedRoomsByClientId(id);
+    }
 }

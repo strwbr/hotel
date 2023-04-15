@@ -13,4 +13,6 @@ public interface BedTypeService {
 
     Collection<String> getAllBedTypesNames();
     BedType getBedTypeByName(String name);
+
+    List<BedType> getAllBedTypesByRoomTypeId(long id);
 }

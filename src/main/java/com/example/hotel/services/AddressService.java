@@ -9,4 +9,6 @@ public interface AddressService {
     void saveAddress(Address address);
     Address getAddressById(long id);
     void deleteAddressById(long id);
+
+    String getFullAddressString(long id);
 }

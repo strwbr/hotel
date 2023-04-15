@@ -50,4 +50,9 @@ public class BedTypeServiceImpl implements BedTypeService {
     public BedType getBedTypeByName(String name) {
         return this.repository.findByName(name);
     }
+
+    @Override
+    public List<BedType> getAllBedTypesByRoomTypeId(long id) {
+        return this.repository.findAllByRoomTypeId(id);
+    }
 }

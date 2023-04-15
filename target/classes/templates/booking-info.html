@@ -45,11 +45,11 @@
     </div>
     <div>
         <label class="form-label" for="">Дата заезда</label>
-        <input type="date" th:value="${booking.checkInDate}" readonly/>
+        <input type="text" th:value="${booking.checkInDate}" readonly/>
     </div>
     <div>
         <label class="form-label" for="">Дата выезда</label>
-        <input type="date" th:value="${booking.checkOutDate}" readonly/>
+        <input type="text" th:value="${booking.checkOutDate}" readonly/>
     </div>
     <!--      <div>-->
     <!--        <label class="form-label" for="">Количество дней</label>-->
@@ -72,10 +72,16 @@
         <input type="number" th:value="${booking.childrenAmount}" readonly/>
     </div>
     <div>
+        <label class="form-label" for="">Доп. спальное место</label>
+        <div th:if="${booking.extraBed != null}">
+            <input type="text" th:value="${booking.extraBed.bedType.name} + ' | ' + ${booking.extraBed.price}">
+        </div>
+        <span th:unless="${booking.extraBed != null}">Отсутствуют</span>
+    </div>
+    <div>
         <label class="form-label" for="">Платные услуги</label>
-      <p th:text="${booking.bookingPaidServiceList == null} ? 'Отсутствуют'"></p>
-        
-      <div th:if="${booking.bookingPaidServiceList}">
+        <span th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}">Отсутствуют</span>
+        <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}">
           <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
               <li class="list-group-item" th:text="${i.paidService.name} + ' | ' + ${i.amount}"></li>
           </ul>
@@ -92,6 +98,15 @@
     <div>
         <label class="form-label" for="">Статус бронирования</label>
         <input type="text" th:value="${booking.bookingStatus.name}" readonly/>
+    </div>
+    <div>
+        <label class="form-label" for="">Оплаты</label>
+        <span th:if="${#lists.isEmpty(booking.paymentList)}">Отсутствуют</span>
+        <div th:unless="${#lists.isEmpty(booking.paymentList)}">
+            <ul class="list-group" th:each="i : ${booking.paymentList}">
+                <li class="list-group-item" th:text="${i.paymentDate} + ' | ' + ${i.amount}"></li>
+            </ul>
+        </div>
     </div>
 </div>
 
