@@ -5,10 +5,7 @@ import com.example.hotel.services.impl.AdditionalServiceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/additional_service")
@@ -21,6 +18,13 @@ public class AdditionalServiceController {
         Iterable<AdditionalService> additionalServices = additionalServiceService.getAllAdditionalServices();
         model.addAttribute("additionalServices", additionalServices);
         return "additional-services-list";
+    }
+
+    @GetMapping("/info/{id}")
+    private String additionalServiceInfo(@PathVariable(value = "id") long id, Model model) {
+        AdditionalService additionalService = additionalServiceService.getAdditionalServiceById(id);
+        model.addAttribute("additionalService", additionalService);
+        return "additional-services-info";
     }
 
    /* @GetMapping("/additional_service/add")

@@ -48,9 +48,9 @@
               <td th:text="${p.unit.name}"></td>
               <td th:text="${p.availabilityStatus} ? ${p.availabilityStatus.name} : '-'"></td>
               <td>
-                <a class="btn btn-primary" th:href="@{/paid_service/info/{id}(id=${p.id})}">Подробнее</a>
-                <a class="btn btn-secondary" th:href="@{/paid_service/edit/{id}(id=${p.id})}">Редактировать</a>
-                <a class="btn btn-danger" th:href="@{/paid_service/delete/{id}(id=${p.id})}">Удалить</a>
+                <a class="btn btn-primary" th:href="@{/paid-service/info/{id}(id=${p.id})}">Подробнее</a>
+                <a class="btn btn-secondary" th:href="@{/paid-service/edit/{id}(id=${p.id})}">Редактировать</a>
+                <a class="btn btn-danger" th:href="@{/paid-service/delete/{id}(id=${p.id})}">Удалить</a>
               </td>
             </tr>
           </tbody>

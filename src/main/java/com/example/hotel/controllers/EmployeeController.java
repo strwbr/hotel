@@ -1,11 +1,14 @@
 package com.example.hotel.controllers;
 
+import com.example.hotel.model.Address;
 import com.example.hotel.model.Employee;
+import com.example.hotel.services.AddressService;
 import com.example.hotel.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,10 +18,26 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private AddressService addressService;
+
     @GetMapping
     private String viewList(Model model) {
         Iterable<Employee> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
         return "employees-list";
+    }
+
+    @GetMapping("/info/{id}")
+    private String employeeInfo(@PathVariable(value = "id") long id, Model model) {
+        Employee employee = employeeService.getEmployeeById(id);
+
+        model.addAttribute("employee", employee);
+        model.addAttribute("residenceAddress",
+                addressService.getFullAddressString(employee.getResidenceAddress().getId()));
+        model.addAttribute("registeredAddress",
+                addressService.getFullAddressString(employee.getRegisteredAddress().getId()));
+
+        return "employees-info";
     }
 }
