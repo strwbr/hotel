@@ -1,107 +1,108 @@
 <!DOCTYPE html>
 <!-- Подключение thymeleaf и thymeleaf для Spring Security -->
 <html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Подключение Bootstrap -->
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
     />
     <title>HMS: Guest Information</title>
-  </head>
-  <body>
-    <div class="container">
-      <div>
+</head>
+<body>
+<header th:insert="blocks/navbar :: navbar"></header>
+<div class="container">
+    <div>
         <h1>Информация о клиенте</h1>
         <h2>Персональная информация</h2>
         <div>
-          <label for="">Фамилия</label>
-          <input type="text" th:value="${guest.surname}" readonly />
+            <label for="">Фамилия</label>
+            <input type="text" th:value="${guest.surname}" readonly/>
         </div>
         <div>
-          <label for="">Имя</label>
-          <input type="text" th:value="${guest.name}" readonly />
+            <label for="">Имя</label>
+            <input type="text" th:value="${guest.name}" readonly/>
         </div>
         <div>
-          <label for="">Отчество</label>
-          <input type="text" th:value="${guest.patronymic}" readonly />
+            <label for="">Отчество</label>
+            <input type="text" th:value="${guest.patronymic}" readonly/>
         </div>
         <div>
-          <label for="">Дата рождения</label>
-          <input type="text" th:value="${guest.birthday}" readonly />
+            <label for="">Дата рождения</label>
+            <input type="text" th:value="${guest.birthday}" readonly/>
         </div>
         <div>
-          <label for="">Адрес проживания</label>
-          <input type="text" th:value="${residenceAddress}" readonly />
+            <label for="">Адрес проживания</label>
+            <input type="text" th:value="${residenceAddress}" readonly/>
         </div>
         <div>
-          <label for="">Адрес прописки</label>
-          <input type="text" th:value="${registeredAddress}" readonly />
+            <label for="">Адрес прописки</label>
+            <input type="text" th:value="${registeredAddress}" readonly/>
         </div>
         <div>
-          <label for="">Документ, удостоверяющий личность</label>
-          <!-- Серия и номер -->
-          <input type="text" th:value="${guest.docNumber}" readonly />
-          <!-- Тип дул -->
-          <input type="text" th:value="${guest.documentType.name}" readonly />
+            <label for="">Документ, удостоверяющий личность</label>
+            <!-- Серия и номер -->
+            <input type="text" th:value="${guest.docNumber}" readonly/>
+            <!-- Тип дул -->
+            <input type="text" th:value="${guest.documentType.name}" readonly/>
         </div>
         <div>
-          <label for="">Телефон</label>
-          <input type="tel" th:value="${guest.phoneNumber}" readonly />
+            <label for="">Телефон</label>
+            <input type="tel" th:value="${guest.phoneNumber}" readonly/>
         </div>
         <div>
-          <label for="">email</label>
-          <input type="email" th:value="${guest.email}" readonly />
+            <label for="">email</label>
+            <input type="email" th:value="${guest.email}" readonly/>
         </div>
         <div>
-          <label for="">VIP-статус</label>
-          <input type="checkbox" th:checked="${status}" readonly />
+            <label for="">VIP-статус</label>
+            <input type="checkbox" th:checked="${status}" readonly/>
         </div>
-      </div>
-
-      <div>
-        <h2>История бронирований и посещений</h2>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>№ п/п</th>
-                <th>№ заявки</th>
-                <th>Статус бронирования</th>
-                <th>Дата заезда</th>
-                <th>Дата выезда</th>
-                <th>Тип номера</th>
-                <th>Номер</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="r, i : ${occupiedRooms}">
-                <td th:text="${i.count}"></td>
-                <td th:text="${r.booking.id}"></td>
-                <td th:text="${r.booking.bookingStatus.name}"></td>
-                <td th:text="${r.booking.checkInDate}"></td>
-                <td th:text="${r.booking.checkOutDate}"></td>
-                <td th:text="${r.room.roomType.name}"></td>
-                <td th:text="${r.room.number}"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div>
-        <a th:href="@{/guest}" class="btn btn-secondary">Вернуться</a>
-      </div>
     </div>
 
-    <!-- Подключение скриптов -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    <div>
+        <h2>История бронирований и посещений</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>№ п/п</th>
+                    <th>№ заявки</th>
+                    <th>Статус бронирования</th>
+                    <th>Дата заезда</th>
+                    <th>Дата выезда</th>
+                    <th>Тип номера</th>
+                    <th>Номер</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="r, i : ${occupiedRooms}">
+                    <td th:text="${i.count}"></td>
+                    <td th:text="${r.booking.id}"></td>
+                    <td th:text="${r.booking.bookingStatus.name}"></td>
+                    <td th:text="${r.booking.checkInDate}"></td>
+                    <td th:text="${r.booking.checkOutDate}"></td>
+                    <td th:text="${r.room.roomType.name}"></td>
+                    <td th:text="${r.room.number}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <a th:href="@{/guest}" class="btn btn-secondary">Вернуться</a>
+    </div>
+</div>
+
+<!-- Подключение скриптов -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

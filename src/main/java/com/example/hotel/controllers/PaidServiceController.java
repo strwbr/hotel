@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/paid-service")
+@RequestMapping("/paid_service")
 public class PaidServiceController {
 
     @Autowired

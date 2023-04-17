@@ -16,6 +16,7 @@
     <title>HMS: Booking Info</title>
 </head>
 <body>
+<header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
     <h1>Информация о бронировании</h1>
 
@@ -82,9 +83,9 @@
         <label class="form-label" for="">Платные услуги</label>
         <span th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}">Отсутствуют</span>
         <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}">
-          <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
-              <li class="list-group-item" th:text="${i.paidService.name} + ' | ' + ${i.amount}"></li>
-          </ul>
+            <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
+                <li class="list-group-item" th:text="${i.paidService.name} + ' | ' + ${i.amount}"></li>
+            </ul>
         </div>
     </div>
     <div>

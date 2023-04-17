@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <!-- Подключение thymeleaf и thymeleaf для Spring Security -->
 <html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Подключение Bootstrap -->
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
     />
     <title>HMS: Additional Services Info</title>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Информация о дополнительной услуги</h1>
+</head>
+<body>
+<header th:insert="blocks/navbar :: navbar"></header>
 
-      <div>
+<div class="container">
+    <h1>Информация о дополнительной услуги</h1>
+
+    <div>
         <label class="form-label" for="">Наименование</label>
         <input type="text" th:value="${additionalService.name}" readonly/>
-      </div>
-      <div>
+    </div>
+    <div>
         <label class="form-label" for="">Описание</label>
         <textarea style="height: 50px" th:text="${additionalService.description}" readonly></textarea>
-      </div>
-      <div>
+    </div>
+    <div>
         <!-- checkboxes -->
         <label class="form-label" for="">Типы номеров</label>
         <span th:if="${#lists.isEmpty(additionalService.roomTypeAdditionalServiceList)}">Отсутствуют</span>
         <div th:unless="${#lists.isEmpty(additionalService.roomTypeAdditionalServiceList)}">
-          <ul class="list-group" th:each="i : ${additionalService.roomTypeAdditionalServiceList}">
-            <li class="list-group-item" th:text="${i.roomType.name}"></li>
-          </ul>
+            <ul class="list-group" th:each="i : ${additionalService.roomTypeAdditionalServiceList}">
+                <li class="list-group-item" th:text="${i.roomType.name}"></li>
+            </ul>
         </div>
-      </div>
-      <div class="form-check form-switch">
+    </div>
+    <div class="form-check form-switch">
         <label class="form-check-label" for="">Статус</label>
         <input type="text" th:value="${additionalService.availabilityStatus.name}" readonly/>
 
-      </div>
-      <div>
-        <a th:href="@{/additional_service}" class="btn btn-secondary">Вернуться</a>
-      </div>
     </div>
+    <div>
+        <a th:href="@{/additional_service}" class="btn btn-secondary">Вернуться</a>
+    </div>
+</div>
 
-    <!-- Подключение скриптов -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+<!-- Подключение скриптов -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
