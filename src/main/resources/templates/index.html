@@ -9,9 +9,15 @@
     />
     <title>Main</title>
 </head>
-<body>
-<header th:insert="blocks/navbar :: navbar"></header>
+<body class="text-center">
+<!--<header th:insert="blocks/navbar :: navbar"></header>-->
 <div class="container">
+    <h1>Moonchild Hotel </h1>
+    <h4>Добро пожаловать</h4>
+    <div>
+<!--        Тут переход на dashboard или страницу авторизации-->
+        <a th:href="@{/dashboard}" class="btn btn-dark">Войти в систему</a>
+    </div>
 <!--    <a href="#" class="btn btn-primary" th:href="@{/additional_service}">Additional Service</a>
     <a href="#" class="btn btn-primary" th:href="@{/room_type}">Room Type</a>
     <a href="#" class="btn btn-primary" th:href="@{/booking}">Booking</a>
