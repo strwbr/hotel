@@ -11,4 +11,5 @@ public interface AddressService {
     void deleteAddressById(long id);
 
     String getFullAddressString(long id);
+
 }

@@ -1,9 +1,8 @@
 package com.example.hotel.services.impl;
 
 import com.example.hotel.model.*;
-import com.example.hotel.repos.AddressRepository;
-import com.example.hotel.repos.StreetRepository;
-import com.example.hotel.services.AddressService;
+import com.example.hotel.repos.*;
+import com.example.hotel.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,15 @@ public class AddressServiceImpl implements AddressService {
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
-    private StreetRepository streetRepository;
+    private CountryService countryService;
+    @Autowired
+    private RegionService regionService;
+    @Autowired
+    private CityService cityService;
+    @Autowired
+    private StreetService streetService;
+    @Autowired
+    private StreetTypeService streetTypeService;
 
     @Override
     public List<Address> getAllAddresses() {
@@ -59,4 +66,5 @@ public class AddressServiceImpl implements AddressService {
 
         return fullAddress;
     }
+
 }

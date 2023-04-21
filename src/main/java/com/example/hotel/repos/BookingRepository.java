@@ -14,7 +14,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     // Поиск всех бронирований со статусом/ами statuses и сортировка по убыванию даты оформления
     @Query(value = "SELECT b.* FROM booking b JOIN booking_status bs ON b.booking_status_id = bs.id WHERE bs.name IN (:statuses) ORDER BY b.booking_time DESC",
             nativeQuery = true)
-    List<Booking> findBookingsByStatusesOrderByBookingTimeDesc(@Param("statuses") List<String> statuses);
+    List<Booking> findAllByStatusesOrderByBookingTimeDesc(@Param("statuses") List<String> statuses);
 
     // Поиск всех бронирований и сортировка по убыванию даты оформления
     @Query(value = "SELECT * FROM booking ORDER BY booking_time DESC", nativeQuery = true)

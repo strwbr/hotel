@@ -9,4 +9,7 @@ public interface EmployeeStatusService {
     void saveEmployeeStatus(EmployeeStatus employeeStatus);
     EmployeeStatus getEmployeeStatusById(long id);
     void deleteEmployeeStatusById(long id);
+
+    EmployeeStatus getEmployeeStatusByName(String name);
+    EmployeeStatus getEmployeeStatusForNewEmployee();
 }

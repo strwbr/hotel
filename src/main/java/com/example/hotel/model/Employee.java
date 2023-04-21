@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Employee {
     private String surname;
     private String name;
     private String patronymic;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,7 +53,9 @@ public class Employee {
     private long phoneNumber;
     @Email
     private String email;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date hireDate; // Дата найма
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dismissalDate; // Дата увольнения
 
     @ManyToOne(fetch = FetchType.LAZY)

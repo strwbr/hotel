@@ -45,7 +45,7 @@ public class BookingServiceImpl implements BookingService {
         List<String> statuses = new ArrayList<>();
         statuses.add("Отменено");
         statuses.add("Завершено");
-        return this.repository.findBookingsByStatusesOrderByBookingTimeDesc(statuses);
+        return this.repository.findAllByStatusesOrderByBookingTimeDesc(statuses);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class BookingServiceImpl implements BookingService {
         List<String> statuses = new ArrayList<>();
         statuses.add("Подтверждено");
         statuses.add("Требуется предоплата");
-        return this.repository.findBookingsByStatusesOrderByBookingTimeDesc(statuses);
+        return this.repository.findAllByStatusesOrderByBookingTimeDesc(statuses);
     }
 
     @Override
