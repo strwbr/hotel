@@ -28,6 +28,7 @@ public class RoomType {
     private String description;
     private byte baseCapacity; // Базовая вместимость
     private byte maxCapacity; // Максимальная вместимость (с учетом доп.кровати/ей)
+    // TODO удалить из БД - это поле лишнее
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price; // Цена за сутки проживания
 
@@ -46,6 +47,6 @@ public class RoomType {
     @OneToMany(mappedBy = "roomType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<RoomTypeRoomEquipment> roomTypeRoomEquipmentList;
 
-    @OneToMany(mappedBy = "roomType")
+    @OneToMany(mappedBy = "roomType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<RoomTypeBedType> roomTypeBedTypeList;
 }

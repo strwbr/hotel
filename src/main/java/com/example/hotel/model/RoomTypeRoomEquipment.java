@@ -28,4 +28,10 @@ public class RoomTypeRoomEquipment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
+
+    public RoomTypeRoomEquipment(int amount, RoomEquipment roomEquipment, RoomType roomType) {
+        this.amount = amount;
+        this.roomEquipment = roomEquipment;
+        this.roomType = roomType;
+    }
 }

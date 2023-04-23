@@ -36,6 +36,7 @@ public class RoomController {
 
     @PostMapping("/add")
     private String addRoom(@ModelAttribute("room") Room room) {
+        // TODO проверка на то, что room.number уже есть
         roomService.saveRoom(room);
         return "redirect:/room";
     }

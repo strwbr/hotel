@@ -20,7 +20,7 @@
 <div class="container">
     <h1>Добавление новой дополнительной услуги</h1>
 
-    <form action="#" th:action="@{/additional_service/add}" th:object="${additionalService}"
+    <form th:action="@{/additional_service/add}" th:object="${additionalService}"
           method="post">
         <div>
             <label class="form-label">Наименование</label>
@@ -43,22 +43,24 @@
                     th:field="*{roomTypeAdditionalServiceList}"
             />
         </div>
-        <div class="form-check form-switch">
-            <label class="form-check-label">Статус</label>
-            <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    name="availability"
-            />
+        <div>
+            <label class="form-label">Статус</label>
+            <select th:field="*{availabilityStatus}">
+                <option value="" selected disabled></option>
+                <option th:each="status : ${availabilityStatuses}"
+                        th:value="${status.id}"
+                        th:text="${status.name}">
+                </option>
+            </select>
         </div>
-        <button type="submit" class="btn btn-primary">Подтвердить</button>
+
+        <div class="">
+            <button type="submit" class="btn btn-primary">Подтвердить</button>
+            <button type="reset" class="btn btn-outline-primary">Отмена</button>
+        </div>
     </form>
 
-    <div class="">
 
-        <a class="btn btn-outline-primary">Отмена</a>
-    </div>
 </div>
 
 <!-- Подключение скриптов -->

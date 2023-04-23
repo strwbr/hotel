@@ -1,6 +1,9 @@
 package com.example.hotel.controllers;
 
 import com.example.hotel.model.AdditionalService;
+import com.example.hotel.model.AvailabilityStatus;
+import com.example.hotel.services.AdditionalServiceService;
+import com.example.hotel.services.AvailabilityStatusService;
 import com.example.hotel.services.impl.AdditionalServiceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/additional_service")
 public class AdditionalServiceController {
+
     @Autowired
-    private AdditionalServiceServiceImpl additionalServiceService;
+    private AdditionalServiceService additionalServiceService;
+    @Autowired
+    private AvailabilityStatusService availabilityStatusService;
 
     @GetMapping
     private String viewList(Model model) {
@@ -25,6 +31,20 @@ public class AdditionalServiceController {
         AdditionalService additionalService = additionalServiceService.getAdditionalServiceById(id);
         model.addAttribute("additionalService", additionalService);
         return "additional-services-info";
+    }
+
+    @GetMapping("/add")
+    private String viewAddForm(Model model) {
+        model.addAttribute("additionalService", new AdditionalService());
+        model.addAttribute("availabilityStatuses", availabilityStatusService.getAllAvailabilityStatuses());
+        return "additional-services-add";
+    }
+
+    @PostMapping("/add")
+    private String addAdditionalService(@ModelAttribute("additionalService") AdditionalService additionalService) {
+
+        additionalServiceService.saveAdditionalService(additionalService);
+        return "redirect:/additional_service";
     }
 
    /* @GetMapping("/additional_service/add")

@@ -40,4 +40,24 @@ public class ClientStatusServiceImpl implements ClientStatusService {
     public void deleteClientStatusById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public ClientStatus getClientStatusByName(String name) {
+        Optional<ClientStatus> optional = repository.findByName(name);
+        ClientStatus clientStatus = null;
+        if (optional.isPresent())
+            clientStatus = optional.get();
+        else throw new RuntimeException("ClientStatus NOT found for name : " + name);
+        return clientStatus;
+    }
+
+    @Override
+    public ClientStatus getVipStatus() {
+        return this.getClientStatusByName("VIP");
+    }
+
+    @Override
+    public ClientStatus getDefaultStatus() {
+        return this.getClientStatusByName("default");
+    }
 }

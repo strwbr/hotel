@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,7 @@ public class Client {
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
     private String patronymic;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -9,4 +9,8 @@ public interface ClientStatusService {
     void saveClientStatus(ClientStatus clientStatus);
     ClientStatus getClientStatusById(long id);
     void deleteClientStatusById(long id);
+
+    ClientStatus getClientStatusByName(String name);
+    ClientStatus getVipStatus();
+    ClientStatus getDefaultStatus();
 }

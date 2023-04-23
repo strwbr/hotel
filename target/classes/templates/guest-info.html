@@ -60,9 +60,10 @@
             <label for="">email</label>
             <input type="email" th:value="${guest.email}" readonly/>
         </div>
-        <div>
-            <label for="">VIP-статус</label>
-            <input type="checkbox" th:checked="${status}" readonly/>
+        <div class="form-check form-switch">
+            <label class="form-check-label" for="">VIP-статус</label>
+            <input type="checkbox" th:checked="${status}"
+                   class="form-check-input" role="switch" disabled/>
         </div>
     </div>
 

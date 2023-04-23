@@ -24,6 +24,8 @@ public class BedType {
     private Long id;
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
+//    TODO добавить поле в БД
+//    private byte capacity;
 
     @OneToMany(mappedBy = "bedType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<RoomTypeBedType> roomTypeBedTypeList;

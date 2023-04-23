@@ -37,10 +37,13 @@
         <input type="number" th:value="${roomType.maxCapacity}" readonly/>
     </div>
     <div>
-        <label for="">Тип кровати</label>
-        <ul th:each="b : ${bedTypes}">
-            <li th:text="${b.name}"></li>
-        </ul>
+        <label class="form-label" for="">Тип кровати</label>
+        <span th:if="${#lists.isEmpty(roomType.roomTypeBedTypeList)}">Отсутствуют</span>
+        <div th:unless="${#lists.isEmpty(roomType.roomTypeBedTypeList)}">
+            <ul class="list-group" th:each="i : ${roomType.roomTypeBedTypeList}">
+                <li class="list-group-item" th:text="${i.bedType.name}"></li>
+            </ul>
+        </div>
     </div>
 
     <div>

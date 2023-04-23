@@ -27,4 +27,9 @@ public class RoomTypeAdditionalService {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
+
+    public RoomTypeAdditionalService(AdditionalService additionalService, RoomType roomType) {
+        this.additionalService = additionalService;
+        this.roomType = roomType;
+    }
 }
