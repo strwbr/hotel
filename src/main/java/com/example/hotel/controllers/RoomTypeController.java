@@ -49,6 +49,7 @@ public class RoomTypeController {
     @GetMapping("/add")
     private String viewAddForm(Model model) {
         model.addAttribute("roomType", new RoomType());
+//        TODO выводить только ДОСТУПНЫЕ доп услуги
         model.addAttribute("additionalServices", additionalServiceService.getAllAdditionalServices());
         model.addAttribute("roomEquipments", roomEquipmentService.getAllRoomEquipments());
         model.addAttribute("bedTypes", bedTypeService.getAllBedTypes());
@@ -71,9 +72,6 @@ public class RoomTypeController {
                 RoomTypeRoomEquipment temp = new RoomTypeRoomEquipment(
                         equipmentsAmount.get(i), equipment, roomType
                 );
-                /*temp.setRoomType(roomType);
-                temp.setRoomEquipment(equipment);
-                temp.setAmount(equipmentsAmount.get(i));*/
                 roomTypeRoomEquipmentList.add(temp);
             }
         }

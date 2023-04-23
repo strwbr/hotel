@@ -41,7 +41,7 @@
         <span th:if="${#lists.isEmpty(roomType.roomTypeBedTypeList)}">Отсутствуют</span>
         <div th:unless="${#lists.isEmpty(roomType.roomTypeBedTypeList)}">
             <ul class="list-group" th:each="i : ${roomType.roomTypeBedTypeList}">
-                <li class="list-group-item" th:text="${i.bedType.name}"></li>
+                <li class="list-group-item" th:text="${i.bedType.name} + ' | ' + ${i.bedAmount}"></li>
             </ul>
         </div>
     </div>

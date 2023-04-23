@@ -31,18 +31,14 @@
             <textarea style="height: 50px" placeholder="Описание" name="description"
                       th:field="*{description}"></textarea>
         </div>
-        <div>
-            <!-- checkboxes -->
-            <label class="form-label">Типы номеров</label>
-            <input
-                    type="checkbox"
-                    name="roomTypes"
-                    th:each="roomType : ${allRoomTypes}"
-                    th:text="${roomType.name}"
-                    th:value="${roomType.id}"
-                    th:field="*{roomTypeAdditionalServiceList}"
-            />
+
+        <label class="form-label">Типы номеров</label>
+        <div th:each="roomType : ${roomTypes}">
+            <input type="checkbox" name="selectedRoomTypes"
+                   th:value="${roomType.id}"
+                   th:text="${roomType.name}"/>
         </div>
+
         <div>
             <label class="form-label">Статус</label>
             <select th:field="*{availabilityStatus}">

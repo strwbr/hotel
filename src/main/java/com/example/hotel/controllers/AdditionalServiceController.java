@@ -2,13 +2,20 @@ package com.example.hotel.controllers;
 
 import com.example.hotel.model.AdditionalService;
 import com.example.hotel.model.AvailabilityStatus;
+import com.example.hotel.model.RoomType;
+import com.example.hotel.model.RoomTypeAdditionalService;
+import com.example.hotel.repos.RoomTypeRepository;
 import com.example.hotel.services.AdditionalServiceService;
 import com.example.hotel.services.AvailabilityStatusService;
+import com.example.hotel.services.RoomTypeService;
 import com.example.hotel.services.impl.AdditionalServiceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/additional_service")
@@ -18,6 +25,8 @@ public class AdditionalServiceController {
     private AdditionalServiceService additionalServiceService;
     @Autowired
     private AvailabilityStatusService availabilityStatusService;
+    @Autowired
+    private RoomTypeService roomTypeService;
 
     @GetMapping
     private String viewList(Model model) {
@@ -37,12 +46,26 @@ public class AdditionalServiceController {
     private String viewAddForm(Model model) {
         model.addAttribute("additionalService", new AdditionalService());
         model.addAttribute("availabilityStatuses", availabilityStatusService.getAllAvailabilityStatuses());
+        model.addAttribute("roomTypes", roomTypeService.getAllRoomTypes());
         return "additional-services-add";
     }
 
     @PostMapping("/add")
-    private String addAdditionalService(@ModelAttribute("additionalService") AdditionalService additionalService) {
+    private String addAdditionalService(@ModelAttribute("additionalService") AdditionalService additionalService,
+                                        @RequestParam("selectedRoomTypes") List<Long> selectedRoomTypes) {
+        List<RoomTypeAdditionalService> roomTypeAdditionalServiceList = new ArrayList<>();
+        for(int i = 0; i < selectedRoomTypes.size(); i++) {
+            Long id = selectedRoomTypes.get(i);
+            RoomType roomType = roomTypeService.getRoomTypeById(id);
+            if(roomType!=null) {
+                RoomTypeAdditionalService temp = new RoomTypeAdditionalService(
+                        additionalService, roomType
+                );
+                roomTypeAdditionalServiceList.add(temp);
+            }
+        }
 
+        additionalService.setRoomTypeAdditionalServiceList(roomTypeAdditionalServiceList);
         additionalServiceService.saveAdditionalService(additionalService);
         return "redirect:/additional_service";
     }
