@@ -9,4 +9,6 @@ public interface RoomTypeService {
     void saveRoomType(RoomType roomType);
     RoomType getRoomTypeById(long id);
     void deleteRoomTypeById(long id);
+
+//    boolean setActualStatus(RoomType roomType);
 }

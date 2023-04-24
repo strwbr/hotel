@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface ClientStatusRepository extends JpaRepository<ClientStatus, Long> {
 
-    @Query(value = "", nativeQuery = true)
+    // TODO проверить запрос!!!!!!
+    @Query(value = "SELECT * FROM client_status cls WHERE cls.name = :name", nativeQuery = true)
     Optional<ClientStatus> findByName(@Param("name") String name);
 }

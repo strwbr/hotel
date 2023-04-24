@@ -32,7 +32,7 @@
     </div>
 
     <div>
-        <a class="btn btn-success" href="">+ Добавить</a>
+        <a class="btn btn-success" th:href="@{/price_manager/add}">Добавить</a>
     </div>
 
     <div class="table-responsive">
@@ -50,11 +50,14 @@
             <tbody>
             <tr th:each="p, i : ${roomPrices}">
                 <td th:text="${i.count}"></td>
-                <td th:text="${p.roomType} ? ${p.roomType.name} : '-'"></td>
+                <td th:text="${p.roomType.name}"></td>
                 <td th:text="${p.startDate}"></td>
                 <td th:text="${p.endDate}"></td>
                 <td th:text="${p.price}"></td>
-                <td th:text="${p.status} ? ${p.status.name} : '-'"></td>
+                <td>
+                    <span th:text="${p.status.name}"></span>
+                    <a class="btn btn-success"  th:if="${p.status.name == 'В ожидании'}" th:href="@{/price_manager/setup_status/{id}(id=${p.id})}">Установить</a>
+                </td>
             </tr>
             </tbody>
         </table>

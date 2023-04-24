@@ -1,7 +1,7 @@
 package com.example.hotel.services.impl;
 
-import com.example.hotel.model.RoomEquipment;
 import com.example.hotel.model.RoomPrice;
+import com.example.hotel.model.RoomType;
 import com.example.hotel.repos.RoomPriceRepository;
 import com.example.hotel.services.RoomPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +40,15 @@ public class RoomPriceServiceImpl implements RoomPriceService {
     public void deleteRoomPriceById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public RoomPrice getActualRoomPrice(RoomType roomType) {
+        Optional<RoomPrice> optional = repository.getRoomPriceByRoomTypeIdAndStatusName(roomType.getId(), "Актуально");
+        RoomPrice roomPrice = null;
+        if (optional.isPresent())
+            roomPrice = optional.get();
+        else throw new RuntimeException("Actual RoomPrice for RoomType NOT found for id : " + roomType.getId());
+        return roomPrice;
+    }
+
 }

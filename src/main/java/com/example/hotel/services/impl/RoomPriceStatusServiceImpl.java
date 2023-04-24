@@ -40,4 +40,29 @@ public class RoomPriceStatusServiceImpl implements RoomPriceStatusService {
     public void deleteRoomPriceStatusById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public RoomPriceStatus getRoomPriceStatusByName(String name) {
+        Optional<RoomPriceStatus> optional = repository.findByName(name);
+        RoomPriceStatus roomPriceStatus = null;
+        if (optional.isPresent())
+            roomPriceStatus = optional.get();
+        else throw new RuntimeException("RoomPriceStatus NOT found for name : " + name);
+        return roomPriceStatus;
+    }
+
+    @Override
+    public RoomPriceStatus getActualStatus() {
+        return this.getRoomPriceStatusByName("Актуально");
+    }
+
+    @Override
+    public RoomPriceStatus getAwaitingStatus() {
+        return this.getRoomPriceStatusByName("В ожидании");
+    }
+
+    @Override
+    public RoomPriceStatus getExpiredStatus() {
+        return this.getRoomPriceStatusByName("Истек");
+    }
 }

@@ -9,4 +9,9 @@ public interface RoomPriceStatusService {
     void saveRoomPriceStatus(RoomPriceStatus roomPriceStatus);
     RoomPriceStatus getRoomPriceStatusById(long id);
     void deleteRoomPriceStatusById(long id);
+
+    RoomPriceStatus getRoomPriceStatusByName(String name);
+    RoomPriceStatus getActualStatus(); // Актуально
+    RoomPriceStatus getAwaitingStatus(); // В ожидании
+    RoomPriceStatus getExpiredStatus(); // Истек
 }
