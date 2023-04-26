@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -38,8 +39,11 @@ public class Booking {
 
     @Min(value = 0, message = "Число должно быть больше 0")
     private byte roomsAmount; // Кол-во номеров
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDateTime bookingTime; // Дата и время оформления бронирования TODO
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date checkInDate; // Дата заезда
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date checkOutDate; // Дата выезда
     @Min(value = 0, message = "Число должно быть больше 0")
     private byte adultsAmount; // Кол-во взрослых
