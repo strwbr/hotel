@@ -20,27 +20,6 @@
     <h1>Добавление нового бронирования</h1>
 
     <form th:action="@{/booking/add}" th:object="${booking}" method="post">
-        <!--        <div>
-                  <label class="form-label" for="clientLastName">Фамилия</label>
-                  <input type="text" name="" id="clientLastName" />
-                </div>
-                <div>
-                  <label class="form-label" for="clientName">Имя</label>
-                  <input type="text" name="" id="clientName" />
-                </div>
-                <div>
-                  <label class="form-label" for="">Отчество</label>
-                  <input type="text" name="" id="" />
-                </div>
-
-                <div>
-                  <label class="form-label" for="">Телефон</label>
-                  <input type="tel" th:filed="*{}" />
-                </div>
-                <div>
-                  <label class="form-label" for="">email</label>
-                  <input type="email" name="" id="" pattern="" />
-                </div>-->
         <div>
             <label class="form-label" for="">Клиент</label>
             <select th:field="*{client}">
@@ -150,6 +129,7 @@ selectRoomType.addEventListener('change', function() {
     amountRooms.min = 1;
     amountRooms.value = 1;
 });
+
 
 
 </script>

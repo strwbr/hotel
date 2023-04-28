@@ -92,7 +92,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public double countPrepaymentCost(Booking booking) {
         // Предоплата = стоимость одного дня проживания
-        double cost = roomPriceService.getActualRoomPrice(booking.getRoomType()).getPrice();
+        double cost = roomPriceService.getActualRoomPrice(booking.getRoomType()).getPrice() * booking.getRoomsAmount();
         return cost;
     }
 

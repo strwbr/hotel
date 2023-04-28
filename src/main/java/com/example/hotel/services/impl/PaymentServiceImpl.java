@@ -39,4 +39,14 @@ public class PaymentServiceImpl implements PaymentService {
     public void deletePaymentById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public Payment getPaymentByBookingIdAndPurposeName(long bookingId, String purposeName) {
+        Optional<Payment> optional = repository.findByBookingIdAndPaymentPurposeName(bookingId, purposeName);
+        Payment payment = null;
+        if (optional.isPresent())
+            payment = optional.get();
+        else throw new RuntimeException("Payment NOT found for bookingId : " + bookingId + " и purposeName : " + purposeName);
+        return payment;
+    }
 }

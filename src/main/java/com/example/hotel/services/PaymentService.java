@@ -9,4 +9,6 @@ public interface PaymentService {
     void savePayment(Payment payment);
     Payment getPaymentById(long id);
     void deletePaymentById(long id);
+
+    Payment getPaymentByBookingIdAndPurposeName(long bookingId, String purposeName);
 }

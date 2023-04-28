@@ -67,7 +67,7 @@ public class PrepaymentController {
                               @RequestParam("bookingId") Long bookingId) {
         Booking booking = bookingService.getBookingById(bookingId);
 
-        Payment prepayment = booking.getPaymentList().get(0); // По названию "Предоплата"
+        Payment prepayment = paymentService.getPaymentByBookingIdAndPurposeName(bookingId, "Предоплата"); //booking.getPaymentList().get(0); // По цели "Предоплата"
         prepayment.setPaymentDate(new Date());
         prepayment.setEmployee(payment.getEmployee());
         prepayment.setPaymentType(payment.getPaymentType());

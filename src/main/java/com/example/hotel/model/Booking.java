@@ -39,11 +39,11 @@ public class Booking {
 
     @Min(value = 0, message = "Число должно быть больше 0")
     private byte roomsAmount; // Кол-во номеров
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date bookingTime; // Дата и время оформления бронирования TODO
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date checkInDate; // Дата заезда
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date checkOutDate; // Дата выезда
     @Min(value = 0, message = "Число должно быть больше 0")
     private byte adultsAmount; // Кол-во взрослых
