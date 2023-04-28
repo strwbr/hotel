@@ -105,7 +105,7 @@
         <span th:if="${#lists.isEmpty(booking.paymentList)}">Отсутствуют</span>
         <div th:unless="${#lists.isEmpty(booking.paymentList)}">
             <ul class="list-group" th:each="i : ${booking.paymentList}">
-                <li class="list-group-item" th:text="${i.paymentDate} + ' | ' + ${i.amount}"></li>
+                <li class="list-group-item" th:text="${i.paymentDate} + ' | ' + ${i.purpose.name} + ' | ' + ${i.amount}"></li>
             </ul>
         </div>
     </div>

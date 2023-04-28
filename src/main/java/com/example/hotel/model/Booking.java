@@ -40,7 +40,7 @@ public class Booking {
     @Min(value = 0, message = "Число должно быть больше 0")
     private byte roomsAmount; // Кол-во номеров
     @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private LocalDateTime bookingTime; // Дата и время оформления бронирования TODO
+    private Date bookingTime; // Дата и время оформления бронирования TODO
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date checkInDate; // Дата заезда
     @DateTimeFormat(pattern = "yyyy-mm-dd")
@@ -68,4 +68,5 @@ public class Booking {
 
     @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<BookingPaidService> bookingPaidServiceList;
+
 }

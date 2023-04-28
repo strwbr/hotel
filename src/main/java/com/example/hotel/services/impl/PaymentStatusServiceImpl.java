@@ -40,4 +40,19 @@ public class PaymentStatusServiceImpl implements PaymentStatusService {
     public void deletePaymentStatusById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public PaymentStatus getPaymentStatusByName(String name) {
+        Optional<PaymentStatus> optional = repository.findByName(name);
+        PaymentStatus paymentStatus = null;
+        if (optional.isPresent())
+            paymentStatus = optional.get();
+        else throw new RuntimeException("PaymentStatus NOT found for name : " + name);
+        return paymentStatus;
+    }
+
+    @Override
+    public PaymentStatus getSuccessfulStatus() {
+        return this.getPaymentStatusByName("Успешно");
+    }
 }

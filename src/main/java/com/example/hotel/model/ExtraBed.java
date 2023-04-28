@@ -33,4 +33,9 @@ public class ExtraBed {
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
+    public ExtraBed(BedType bedType, Booking booking) {
+        this.price = 1800;
+        this.bedType = bedType;
+        this.booking = booking;
+    }
 }

@@ -33,6 +33,7 @@ public class PaidService {
     @Min(value = 0, message = "Число должно быть больше 0")
     private double price;
 
+    // TODO удалить таблицу Unit
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_id")
     private Unit unit;

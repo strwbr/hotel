@@ -87,7 +87,7 @@ public class RoomTypeController {
         }
 
         List<RoomTypeAdditionalService> roomTypeAdditionalServiceList = new ArrayList<>();
-        if (selectedAdditionalServices.size() != 0) {
+        if (selectedAdditionalServices != null) {
             for (int i = 0; i < selectedAdditionalServices.size(); i++) {
                 Long id = selectedAdditionalServices.get(i);
                 AdditionalService additionalService = additionalServiceService.getAdditionalServiceById(id);

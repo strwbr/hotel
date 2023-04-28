@@ -63,7 +63,7 @@
     </div>
 
     <div>
-        <a class="btn btn-success" th:href="@{/booking/add}">+Добавить</a>
+        <a class="btn btn-success" th:href="@{/booking/add}">Добавить</a>
     </div>
 
     <div class="table-responsive">
@@ -86,12 +86,12 @@
             <tr th:each="b, i : ${bookings}">
                 <td th:text="${i.count}"></td>
                 <td th:text="${b.id}"></td>
-                <td th:text="${b.client.name}"></td>
+                <td th:text="${b.client.surname} + ' ' + ${b.client.name} + ' ' + ${b.client.patronymic}"></td>
                 <td th:text="${b.checkInDate}"></td>
                 <td th:text="${b.checkOutDate}"></td>
                 <td th:text="${b.bookingTime}"></td>
                 <td th:text="${b.roomType.name}"></td>
-                <td th:text="${b.extraBed} ? ${b.extraBed.name} : '-'"></td>
+                <td th:text="${b.extraBed} ? ${b.extraBed.bedType.name} : '-'"></td>
                 <td th:text="${b.bookingStatus.name}"></td>
                 <td>
                     <a class="btn btn-primary" th:href="@{/booking/info/{id}(id=${b.id})}">Подробнее</a>

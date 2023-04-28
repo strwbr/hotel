@@ -17,6 +17,8 @@ public class BookingPaidService {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    // TODO удалить это поле
     private int amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,4 +28,10 @@ public class BookingPaidService {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paid_service_id")
     private PaidService paidService;
+
+    public BookingPaidService(Booking booking, PaidService paidService) {
+        this.amount = 1;
+        this.booking = booking;
+        this.paidService = paidService;
+    }
 }

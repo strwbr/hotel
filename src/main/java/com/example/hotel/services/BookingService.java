@@ -16,4 +16,10 @@ public interface BookingService {
     List<Booking> getNewBookings();
     // Получение всех бронирований, отсортированных по убыванию даты оформления
     List<Booking> getAllBookingOrderByBookingTimeDesc();
+
+    double countHotelPrice(Booking booking);
+    double countPrepaymentCost(Booking booking);
+    double countTotalCost(Booking booking);
+
+    long countOccupationPeriod(Booking booking);
 }

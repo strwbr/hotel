@@ -73,7 +73,7 @@ public class ClientController {
 
     @PostMapping("/add")
     private String addGuest(@ModelAttribute("guest") Client client,
-                            @RequestParam("isVipClient") boolean isVipClient) {
+                            @RequestParam(value = "isVipClient", required = false) boolean isVipClient) {
         // TODO временная заглушка адреса
         Address address = addressService.getAddressById(2);
         client.setResidenceAddress(address);

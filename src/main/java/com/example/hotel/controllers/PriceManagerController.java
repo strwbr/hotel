@@ -57,12 +57,12 @@ public class PriceManagerController {
             } else {
                 // TODO compareDate == 0 нужно обработать как-то (по идее должно выдаваться предупреждение юзеру)
             }
+            roomPriceService.saveRoomPrice(actualPrice);
         } else {
             newPrice.setStatus(actualStatus);
         }
 
         roomPriceService.saveRoomPrice(newPrice);
-        roomPriceService.saveRoomPrice(actualPrice);
         return "redirect:/price_manager";
     }
 

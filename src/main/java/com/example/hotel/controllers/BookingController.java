@@ -1,16 +1,19 @@
 package com.example.hotel.controllers;
 
-import com.example.hotel.model.AdditionalService;
 import com.example.hotel.model.Booking;
-import com.example.hotel.model.RoomType;
-import com.example.hotel.services.AdditionalServiceService;
-import com.example.hotel.services.BookingService;
-import com.example.hotel.services.ClientService;
-import com.example.hotel.services.RoomTypeService;
+import com.example.hotel.model.BookingPaidService;
+import com.example.hotel.model.ExtraBed;
+import com.example.hotel.model.PaidService;
+import com.example.hotel.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/booking")
@@ -23,7 +26,11 @@ public class BookingController {
     @Autowired
     private RoomTypeService roomTypeService;
     @Autowired
-    private AdditionalServiceService additionalServiceService;
+    private PaidServiceService paidServiceService;
+    @Autowired
+    private BedTypeService bedTypeService;
+    @Autowired
+    private BookingStatusService bookingStatusService;
 
     @GetMapping
     private String viewList(Model model) {
@@ -43,14 +50,49 @@ public class BookingController {
     private String viewAddForm(Model model) {
         model.addAttribute("booking", new Booking());
         model.addAttribute("clients", clientService.getAllClients());
+        // TODO выводить ТОЛЬКО типы номеров, у к-ых ЕСТЬ актуальная цена
         model.addAttribute("roomTypes", roomTypeService.getAllRoomTypes());
-        model.addAttribute("additionalServices", additionalServiceService.getAllAdditionalServices());
+        model.addAttribute("paidServices", paidServiceService.getAllPaidServices());
+        model.addAttribute("bedTypes", bedTypeService.getAllBedTypes());
         return "booking-add";
     }
 
     @PostMapping("/add")
-    private String addBooking(@ModelAttribute("booking") Booking booking) {
+    private String addBooking(@ModelAttribute("booking") Booking booking,
+                              @RequestParam(value = "selectedPaidServices", required = false) List<Long> selectedPaidServices,
+                              @RequestParam(value = "selectedExtraBed", required = false) Long selectedExtraBed,
+                              RedirectAttributes redirectAttributes) {
 
-        return "redirect:/booking";
+        if (selectedPaidServices != null) {
+            List<BookingPaidService> bookingPaidServiceList = new ArrayList<>();
+            for (int i = 0; i < selectedPaidServices.size(); i++) {
+                Long id = selectedPaidServices.get(i);
+                PaidService paidService = paidServiceService.getPaidServiceById(id);
+                if (paidService != null) {
+                    BookingPaidService temp = new BookingPaidService(
+                            booking, paidService
+                    );
+                    bookingPaidServiceList.add(temp);
+                }
+            }
+            booking.setBookingPaidServiceList(bookingPaidServiceList);
+        }
+
+        if (selectedExtraBed != null) {
+            ExtraBed extraBed = new ExtraBed(
+                    bedTypeService.getBedTypeById(selectedExtraBed), booking
+            );
+            booking.setExtraBed(extraBed);
+        }
+
+        booking.setTotalCost(bookingService.countHotelPrice(booking));
+        booking.setBookingTime(new Date());
+        booking.setBookingStatus(bookingStatusService.getBookingStatusForNewBooking());
+
+        bookingService.saveBooking(booking);
+        redirectAttributes.addAttribute("id", booking.getId());
+        return "redirect:/booking/prepayment";
     }
+
+
 }

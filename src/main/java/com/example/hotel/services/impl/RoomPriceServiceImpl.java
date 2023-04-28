@@ -47,7 +47,10 @@ public class RoomPriceServiceImpl implements RoomPriceService {
         RoomPrice roomPrice = null;
         if (optional.isPresent())
             roomPrice = optional.get();
-        else throw new RuntimeException("Actual RoomPrice for RoomType NOT found for id : " + roomType.getId());
+        else  {
+            roomPrice = null;
+//            throw new RuntimeException("Actual RoomPrice for RoomType NOT found for id : " + roomType.getId());
+        }
         return roomPrice;
     }
 

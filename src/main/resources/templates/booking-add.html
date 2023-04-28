@@ -88,17 +88,28 @@
             <input type="number" min="0" th:field="*{childrenAmount}"/>
         </div>
 
-        <label class="form-label" for="">Дополнительные услуги</label>
-        <div th:each="service : ${additionalServices}">
-            <input type="checkbox" name="selectedAdditionalServices"
+        <label class="form-label" for="">Платные услуги</label>
+        <div th:each="service : ${paidServices}">
+            <input type="checkbox" name="selectedPaidServices"
                    th:value="${service.id}"
                    th:text="${service.name}"/>
         </div>
 
-        <div>
-            <label class="form-label" for="">Дата оформления бронирования</label>
-            <input type="datetime-local" id="booking_time" th:field="*{bookingTime}" readonly/>
+        <label>Дополнительное спальное место</label>
+        <input type="checkbox" id="needExtraBed" onclick="showExtraBedBlock()">
+        <div id="extraBedBlock" style="display: none;">
+            <select name="selectedExtraBed">
+                <option value="" selected hidden>Выберите...</option>
+                <option th:each="type : ${bedTypes}"
+                        th:value="${type.id}"
+                        th:text="${type.name}">
+                </option>
+            </select>
         </div>
+<!--        <div>-->
+<!--            <label class="form-label" for="">Дата оформления бронирования</label>-->
+<!--            <input type="datetime-local" id="booking_time" th:field="*{bookingTime}" readonly/>-->
+<!--        </div>-->
         <!--<div>
             <label class="form-label" for="">Стоимость за время проживания</label>
             <input type="text" name="" id="" pattern=""/>
@@ -109,7 +120,7 @@
         </div>-->
 
         <div>
-            <button type="submit" class="btn btn-primary">Внести предоплату</button>
+            <button type="submit" class="btn btn-primary">Продолжить</button>
             <button type="reset" class="btn btn-outline-primary">Отмена</button>
         </div>
     </form>
@@ -124,7 +135,7 @@ var today = new Date().toISOString().split('T')[0];
 document.getElementById('check_in_date').setAttribute('min', today);
 document.getElementById('check_out_date').setAttribute('min', today);
 
-document.getElementById('booking_time').value = new Date();
+//document.getElementById('booking_time').value = new Date();
 
 function calculateDaysAndNights() {
   var startDate = new Date(document.getElementById("check_in_date").value);
@@ -144,9 +155,18 @@ function calculateDaysAndNights() {
 
   // Обновляем значения полей с количеством дней и ночей
   document.getElementById("days").setAttribute('value', days);
-  document.getElementById("nights").setAttribute('value', nights);;
+  document.getElementById("nights").setAttribute('value', nights);
 }
 
+needExtraBed.addEventListener('change', () => {
+    const extra_bed_cb = document.getElementById('needExtraBed');
+    const extra_bed_div = document.getElementById('extraBedBlock');
+    if (extra_bed_cb.checked) {
+        extra_bed_div.style.display = 'block';
+    } else {
+        extra_bed_div.style.display = 'none';
+    }
+    });
 
 </script>
 </body>

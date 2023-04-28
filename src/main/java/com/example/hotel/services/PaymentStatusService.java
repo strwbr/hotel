@@ -9,4 +9,7 @@ public interface PaymentStatusService {
     void savePaymentStatus(PaymentStatus paymentStatus);
     PaymentStatus getPaymentStatusById(long id);
     void deletePaymentStatusById(long id);
+
+    PaymentStatus getPaymentStatusByName(String name);
+    PaymentStatus getSuccessfulStatus();
 }

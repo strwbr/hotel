@@ -26,11 +26,8 @@ public class RoomType {
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
     private String description;
-    private byte baseCapacity; // Базовая вместимость
-    private byte maxCapacity; // Максимальная вместимость (с учетом доп.кровати/ей)
-    // TODO удалить из БД - это поле лишнее
-    @Min(value = 0, message = "Число должно быть больше 0")
-    private double price; // Цена за сутки проживания
+/*    private byte baseCapacity; // Базовая вместимость
+    private byte maxCapacity; // Максимальная вместимость (с учетом доп.кровати/ей)*/
 
     @OneToMany(mappedBy = "roomType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Booking> bookingList;

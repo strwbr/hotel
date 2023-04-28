@@ -9,4 +9,7 @@ public interface BookingStatusService {
     void saveBookingStatus(BookingStatus bookingStatus);
     BookingStatus getBookingStatusById(long id);
     void deleteBookingStatusById(long id);
+
+    BookingStatus getBookingStatusByName(String name);
+    BookingStatus getBookingStatusForNewBooking();
 }

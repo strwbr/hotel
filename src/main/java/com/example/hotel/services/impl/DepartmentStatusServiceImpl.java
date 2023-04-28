@@ -32,12 +32,22 @@ public class DepartmentStatusServiceImpl implements DepartmentStatusService {
         DepartmentStatus departmentStatus = null;
         if (optional.isPresent())
             departmentStatus = optional.get();
-        else throw new RuntimeException("DepartmentStatus NOT found for id : \" + id");
+        else throw new RuntimeException("DepartmentStatus NOT found for id : " + id);
         return departmentStatus;
     }
 
     @Override
     public void deleteDepartmentStatusById(long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    public DepartmentStatus getDepartmentStatusByName(String name) {
+        Optional<DepartmentStatus> optional = repository.findByName(name);
+        DepartmentStatus departmentStatus = null;
+        if (optional.isPresent())
+            departmentStatus = optional.get();
+        else throw new RuntimeException("DepartmentStatus NOT found for name : " + name);
+        return departmentStatus;
     }
 }

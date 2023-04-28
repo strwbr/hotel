@@ -41,4 +41,21 @@ public class BookingStatusServiceImpl implements BookingStatusService {
     public void deleteBookingStatusById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public BookingStatus getBookingStatusByName(String name) {
+        Optional<BookingStatus> optional = this.repository.findByName(name);
+        BookingStatus bookingStatus = null;
+        if(optional.isPresent())
+            bookingStatus = optional.get();
+        else
+            throw new RuntimeException("BookingStatus NOT found for name : " + name);
+
+        return bookingStatus;
+    }
+
+    @Override
+    public BookingStatus getBookingStatusForNewBooking() {
+        return this.getBookingStatusByName("Требуется предоплата");
+    }
 }

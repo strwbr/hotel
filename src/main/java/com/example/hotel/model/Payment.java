@@ -41,4 +41,24 @@ public class Payment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_status_id")
     private PaymentStatus paymentStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_purpose_id")
+    private PaymentPurpose purpose;
+
+    public Payment(double amount, Date paymentDate, Booking booking, Employee employee, PaymentType paymentType, PaymentStatus paymentStatus, PaymentPurpose purpose) {
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.booking = booking;
+        this.employee = employee;
+        this.paymentType = paymentType;
+        this.paymentStatus = paymentStatus;
+        this.purpose = purpose;
+    }
+
+    public Payment(double amount, Booking booking, PaymentPurpose purpose) {
+        this.amount = amount;
+        this.booking = booking;
+        this.purpose = purpose;
+    }
 }
