@@ -61,23 +61,15 @@
             <input type="date" id="check_out_date" th:field="*{checkOutDate}"/>
         </div>
         <div>
-            <label class="form-label" for="">Количество дней</label>
-            <input type="text" id="days" readonly oninput="calculateDaysAndNights()"/>
-        </div>
-        <div>
-            <label class="form-label" for="">Количество ночей</label>
-            <input type="text" id="nights" readonly oninput="calculateDaysAndNights()"/>
-        </div>
-        <div>
             <label class="form-label" for="">Тип номера</label>
-            <select th:field="*{roomType}">
+            <select th:field="*{roomType}" id="selectRoomType">
                 <option value="" selected hidden>Выберите...</option>
                 <option th:each="type : ${roomTypes}"
                         th:value="${type.id}"
                         th:text="${type.name}">
                 </option>
             </select>
-            <input type="number" min="0" th:field="*{roomsAmount}" placeholder="Количество"/>
+            <input type="number" min="0" th:field="*{roomsAmount}" placeholder="Количество" id="amountRooms" disabled/>
         </div>
         <div>
             <label class="form-label" for="">Количество взрослых</label>
@@ -96,7 +88,7 @@
         </div>
 
         <label>Дополнительное спальное место</label>
-        <input type="checkbox" id="needExtraBed" onclick="showExtraBedBlock()">
+        <input type="checkbox" id="needExtraBed">
         <div id="extraBedBlock" style="display: none;">
             <select name="selectedExtraBed">
                 <option value="" selected hidden>Выберите...</option>
@@ -106,10 +98,10 @@
                 </option>
             </select>
         </div>
-<!--        <div>-->
-<!--            <label class="form-label" for="">Дата оформления бронирования</label>-->
-<!--            <input type="datetime-local" id="booking_time" th:field="*{bookingTime}" readonly/>-->
-<!--        </div>-->
+        <!--        <div>-->
+        <!--            <label class="form-label" for="">Дата оформления бронирования</label>-->
+        <!--            <input type="datetime-local" id="booking_time" th:field="*{bookingTime}" readonly/>-->
+        <!--        </div>-->
         <!--<div>
             <label class="form-label" for="">Стоимость за время проживания</label>
             <input type="text" name="" id="" pattern=""/>
@@ -131,32 +123,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-var today = new Date().toISOString().split('T')[0];
-document.getElementById('check_in_date').setAttribute('min', today);
-document.getElementById('check_out_date').setAttribute('min', today);
+const checkInDate = document.getElementById("check_in_date");
+const checkOutDate = document.getElementById("check_out_date");
 
-//document.getElementById('booking_time').value = new Date();
+checkInDate.min = new Date().toISOString().split("T")[0];
 
-function calculateDaysAndNights() {
-  var startDate = new Date(document.getElementById("check_in_date").value);
-  var endDate = new Date(document.getElementById("check_out_date").value);
-
-  if (isNaN(startDate) || isNaN(endDate)) {
-    // Проверяем, что введены корректные даты
-    return;
-  }
-
-  // Вычисляем разницу между датами в миллисекундах
-  var timeDifference = endDate - startDate;
-
-  // Вычисляем количество дней и ночей
-  var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  var nights = days - 1;
-
-  // Обновляем значения полей с количеством дней и ночей
-  document.getElementById("days").setAttribute('value', days);
-  document.getElementById("nights").setAttribute('value', nights);
-}
+checkInDate.addEventListener("input", function() {
+    const nextDay = new Date(this.value);
+    nextDay.setDate(nextDay.getDate() + 1);
+    checkOutDate.min = nextDay.toISOString().split("T")[0];
+});
 
 needExtraBed.addEventListener('change', () => {
     const extra_bed_cb = document.getElementById('needExtraBed');
@@ -166,7 +142,15 @@ needExtraBed.addEventListener('change', () => {
     } else {
         extra_bed_div.style.display = 'none';
     }
-    });
+});
+
+selectRoomType.addEventListener('change', function() {
+    const amountRooms = document.getElementById("amountRooms");
+    amountRooms.disabled = false;
+    amountRooms.min = 1;
+    amountRooms.value = 1;
+});
+
 
 </script>
 </body>
