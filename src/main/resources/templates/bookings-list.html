@@ -87,16 +87,16 @@
                 <td th:text="${i.count}"></td>
                 <td th:text="${b.id}"></td>
                 <td th:text="${b.client.surname} + ' ' + ${b.client.name} + ' ' + ${b.client.patronymic}"></td>
-                <td th:text="${b.checkInDate}"></td>
-                <td th:text="${b.checkOutDate}"></td>
-                <td th:text="${b.bookingTime}"></td>
+                <td th:text="${#dates.format(b.checkInDate, 'dd.MM.yyyy')}"></td>
+                <td th:text="${#dates.format(b.checkOutDate, 'dd.MM.yyyy')}"></td>
+                <td th:text="${#dates.format(b.bookingTime, 'dd.MM.yyyy HH:mm')}"></td>
                 <td th:text="${b.roomType.name}"></td>
-                <td th:text="${b.extraBed} ? ${b.extraBed.bedType.name} : '-'"></td>
+                <td th:text="${b.extraBed} ? ${b.extraBed.bedType.name} : 'Отсутствует'"></td>
                 <td th:text="${b.bookingStatus.name}"></td>
                 <td>
                     <a class="btn btn-primary" th:href="@{/booking/info/{id}(id=${b.id})}">Подробнее</a>
                     <a class="btn btn-secondary" th:href="@{/booking/edit/{id}(id=${b.id})}">Редактировать</a>
-                    <a class="btn btn-danger" th:href="@{/booking/delete/{id}(id=${b.id})}">Удалить</a>
+                    <a class="btn btn-danger" th:href="@{/booking/delete/{id}(id=${b.id})}">Отменить</a>
                 </td>
             </tr>
             </tbody>

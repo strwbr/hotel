@@ -1,5 +1,6 @@
 package com.example.hotel.services.impl;
 
+import com.example.hotel.model.Booking;
 import com.example.hotel.model.Room;
 import com.example.hotel.model.RoomPriceStatus;
 import com.example.hotel.repos.RoomRepository;
@@ -7,6 +8,7 @@ import com.example.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,5 +41,16 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void deleteRoomById(long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    public List<Room> getAllRoomsByRoomTypeId(long roomTypeId) {
+        return this.repository.findAllByRoomTypeId(roomTypeId);
+    }
+
+    @Override
+    public List<Room> getAvailableRoomsForBooking(Booking booking) {
+        return this.repository.findAvailableRoomsByRoomTypeId(booking.getRoomType().getId(),
+                booking.getCheckInDate(), booking.getCheckOutDate());
     }
 }

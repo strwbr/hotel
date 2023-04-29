@@ -48,4 +48,9 @@ public class AdditionalServiceServiceImpl implements AdditionalServiceService {
     public Collection<String> getAllAdditionalServiceNames() {
         return this.repository.findAllNames();
     }
+
+    @Override
+    public List<AdditionalService> getAllAvailableAdditionalServices() {
+        return this.repository.findAllByAvailabilityStatusName("Доступно");
+    }
 }

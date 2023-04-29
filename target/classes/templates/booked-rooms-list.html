@@ -59,12 +59,11 @@
                         <li class="list-group-item" th:text="${c.client} ? ${c.client.surname} : '-'"></li>
                     </ul>
                 </td>
-                <td th:text="${r.booking} ? ${r.booking.checkInDate} : '-'"></td>
-                <td th:text="${r.booking} ? ${r.booking.checkOutDate} : '-'"></td>
+                <td th:text="${#dates.format(r.booking.checkInDate, 'dd.MM.yyyy')}"></td>
+                <td th:text="${#dates.format(r.booking.checkOutDate, 'dd.MM.yyyy')}"></td>
                 <td>
                     <!-- <a class="btn btn-primary" th:href="#">Подробнее</a> -->
-                    <a class="btn btn-secondary" th:href="@{/booked-room/add-paid-services/{id}(id=${r.id})}">+
-                        Платные
+                    <a class="btn btn-secondary" th:href="@{/booked-room/add-paid-services/{id}(id=${r.id})}"> Платные
                         услуги</a>
                     <a class="btn btn-secondary" th:href="@{/booked-room/extension/{id}(id=${r.id})}">Продлить</a>
                     <a class="btn btn-primary" th:href="@{/booked-room/checkout/{id}(id=${r.id})}">Выселение</a>

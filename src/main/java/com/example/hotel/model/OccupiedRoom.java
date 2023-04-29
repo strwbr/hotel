@@ -22,10 +22,6 @@ public class OccupiedRoom {
 //    @NotNull
     private Long id;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
-    private Client client;*/
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
@@ -42,4 +38,9 @@ public class OccupiedRoom {
 
     @OneToMany(mappedBy = "occupiedRoom", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<OccupiedRoomClient> occupiedRoomClientList;
+
+    public OccupiedRoom(Room room, Booking booking) {
+        this.room = room;
+        this.booking = booking;
+    }
 }

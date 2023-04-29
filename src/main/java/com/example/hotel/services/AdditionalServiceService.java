@@ -12,4 +12,5 @@ public interface AdditionalServiceService {
     void deleteAdditionalServiceById(long id);
 
     Collection<String> getAllAdditionalServiceNames();
+    List<AdditionalService> getAllAvailableAdditionalServices();
 }

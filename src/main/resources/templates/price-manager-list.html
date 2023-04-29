@@ -51,8 +51,8 @@
             <tr th:each="p, i : ${roomPrices}">
                 <td th:text="${i.count}"></td>
                 <td th:text="${p.roomType.name}"></td>
-                <td th:text="${p.startDate}"></td>
-                <td th:text="${p.endDate}"></td>
+                <td th:text="${#dates.format(p.startDate, 'dd.MM.yyyy')}"></td>
+                <td th:text="${#dates.format(p.endDate, 'dd.MM.yyyy')}"></td>
                 <td th:text="${p.price}"></td>
                 <td>
                     <span th:text="${p.status.name}"></span>

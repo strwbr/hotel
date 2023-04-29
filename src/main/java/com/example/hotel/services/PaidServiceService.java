@@ -9,4 +9,6 @@ public interface PaidServiceService {
     void savePaidService(PaidService paidService);
     PaidService getPaidServiceById(long id);
     void deletePaidServiceById(long id);
+
+    List<PaidService> getAllAvailablePaidServices();
 }

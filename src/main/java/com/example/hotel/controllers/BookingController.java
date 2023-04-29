@@ -28,6 +28,8 @@ public class BookingController {
     private BedTypeService bedTypeService;
     @Autowired
     private BookingStatusService bookingStatusService;
+    @Autowired
+    private RoomService roomService;
 
     @GetMapping
     private String viewList(Model model) {
@@ -49,7 +51,7 @@ public class BookingController {
         model.addAttribute("clients", clientService.getAllClients());
         // TODO выводить ТОЛЬКО типы номеров, у к-ых ЕСТЬ актуальная цена
         model.addAttribute("roomTypes", roomTypeService.getAllRoomTypes());
-        model.addAttribute("paidServices", paidServiceService.getAllPaidServices());
+        model.addAttribute("paidServices", paidServiceService.getAllAvailablePaidServices());
         model.addAttribute("bedTypes", bedTypeService.getAllBedTypes());
         return "booking-add";
     }
@@ -86,7 +88,15 @@ public class BookingController {
         booking.setBookingTime(new Date());
         booking.setBookingStatus(bookingStatusService.getBookingStatusForNewBooking());
 
-        // TODO сюда добавление OccupiedRoom - автоматическое присваивание номера (из числа свободных в нужную дату)
+        // TODO проверка на null (нет свободных) и на availableRooms.size __ booking.roomsAmount
+        List<OccupiedRoom> occupiedRooms = new ArrayList<>();
+        for (int i = 0; i < booking.getRoomsAmount(); i++) {
+            OccupiedRoom occupiedRoom = new OccupiedRoom(
+                    roomService.getAvailableRoomsForBooking(booking).get(i), booking
+            );
+            occupiedRooms.add(occupiedRoom);
+        }
+        booking.setOccupiedRoomList(occupiedRooms);
 
         bookingService.saveBooking(booking);
         redirectAttributes.addAttribute("id", booking.getId());

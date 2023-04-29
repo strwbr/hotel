@@ -26,7 +26,8 @@
             <input type="text" th:value="${booking.id}" name="bookingId" readonly>
             <div>
                 <p th:text="${payment.booking.client.surname} + ' ' + ${payment.booking.client.name} + ' ' + ${payment.booking.client.patronymic}"></p>
-                <p th:text="${payment.booking.checkInDate} + ' - ' + ${payment.booking.checkOutDate}"></p>
+                <p th:text="${#dates.format(payment.booking.checkInDate, 'dd.MM.yyyy')}
+                + ' - ' + ${#dates.format(payment.booking.checkOutDate, 'dd.MM.yyyy')}"></p>
                 <p th:text="'Взрослых: ' + ${payment.booking.adultsAmount}"></p>
                 <p th:text="'Детей: ' + ${payment.booking.childrenAmount}"></p>
                 <p th:text="${payment.booking.roomType.name} + ' - ' + ${payment.booking.roomsAmount}"></p>

@@ -46,11 +46,11 @@
     </div>
     <div>
         <label class="form-label" for="">Дата заезда</label>
-        <input type="text" th:value="${booking.checkInDate}" readonly/>
+        <input type="text" th:value="${#dates.format(booking.checkInDate, 'dd.MM.yyyy')}" readonly/>
     </div>
     <div>
         <label class="form-label" for="">Дата выезда</label>
-        <input type="text" th:value="${booking.checkOutDate}" readonly/>
+        <input type="text" th:value="${#dates.format(booking.checkOutDate, 'dd.MM.yyyy')}" readonly/>
     </div>
     <!--      <div>-->
     <!--        <label class="form-label" for="">Количество дней</label>-->
@@ -90,7 +90,7 @@
     </div>
     <div>
         <label class="form-label" for="">Дата оформления бронирования</label>
-        <input type="datetime-local" th:value="${booking.bookingTime}" readonly/>
+        <input type="datetime-local" th:value="${#dates.format(booking.bookingTime, 'dd.MM.yyyy HH:mm')}" readonly/>
     </div>
     <div>
         <label class="form-label" for="">Стоимость за время проживания</label>
@@ -100,6 +100,7 @@
         <label class="form-label" for="">Статус бронирования</label>
         <input type="text" th:value="${booking.bookingStatus.name}" readonly/>
     </div>
+
     <div>
         <label class="form-label" for="">Оплаты</label>
         <span th:if="${#lists.isEmpty(booking.paymentList)}">Отсутствуют</span>

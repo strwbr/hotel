@@ -35,7 +35,7 @@
         </div>
         <div>
             <label for="">Дата рождения</label>
-            <input type="text" th:value="${guest.birthday}" readonly/>
+            <input type="text" th:value="${#dates.format(guest.birthday, 'dd.MM.yyyy')}" readonly/>
         </div>
         <div>
             <label for="">Адрес проживания</label>
@@ -87,8 +87,8 @@
                     <td th:text="${i.count}"></td>
                     <td th:text="${r.booking.id}"></td>
                     <td th:text="${r.booking.bookingStatus.name}"></td>
-                    <td th:text="${r.booking.checkInDate}"></td>
-                    <td th:text="${r.booking.checkOutDate}"></td>
+                    <td th:text="${#dates.format(r.booking.checkInDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${#dates.format(r.booking.checkOutDate, 'dd.MM.yyyy')}"></td>
                     <td th:text="${r.room.roomType.name}"></td>
                     <td th:text="${r.room.number}"></td>
                 </tr>

@@ -40,4 +40,9 @@ public class PaidServiceServiceImpl implements PaidServiceService {
     public void deletePaidServiceById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public List<PaidService> getAllAvailablePaidServices() {
+        return this.repository.findAllByAvailabilityStatusName("Доступно");
+    }
 }

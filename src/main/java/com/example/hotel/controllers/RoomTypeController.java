@@ -47,8 +47,7 @@ public class RoomTypeController {
     @GetMapping("/add")
     private String viewAddForm(Model model) {
         model.addAttribute("roomType", new RoomType());
-//        TODO выводить только ДОСТУПНЫЕ доп услуги
-        model.addAttribute("additionalServices", additionalServiceService.getAllAdditionalServices());
+        model.addAttribute("additionalServices", additionalServiceService.getAllAvailableAdditionalServices());
         model.addAttribute("roomEquipments", roomEquipmentService.getAllRoomEquipments());
         model.addAttribute("bedTypes", bedTypeService.getAllBedTypes());
         return "room-type-add";

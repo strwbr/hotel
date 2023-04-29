@@ -47,13 +47,6 @@ public class PrepaymentController {
         booking.setPaymentList(paymentList);
         bookingService.saveBooking(booking);
 
-
-//        Payment payment = new Payment(
-//                cost, booking, paymentPurposeService.getPaymentPurposeForPrepayment()
-//        );
-
-
-
         model.addAttribute("payment", payment);
         model.addAttribute("booking", booking);
         model.addAttribute("cost", cost);
