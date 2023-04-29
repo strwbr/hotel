@@ -1,6 +1,5 @@
 package com.example.hotel.services.impl;
 
-import com.example.hotel.model.RoomStatus;
 import com.example.hotel.model.RoomTypeBedType;
 import com.example.hotel.repos.RoomTypeBedTypeRepository;
 import com.example.hotel.services.RoomTypeBedTypeService;

@@ -29,14 +29,6 @@ public class Room {
     private List<OccupiedRoom> occupiedRoomList;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_status_id")
-    private RoomStatus roomStatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cleaning_status_id")
-    private CleaningStatus cleaningStatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 

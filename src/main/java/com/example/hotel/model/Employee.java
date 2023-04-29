@@ -48,8 +48,6 @@ public class Employee {
     private Address registeredAddress;
 
     @Min(value = 0, message = "Число должно быть больше 0")
-    private long docNumber;
-    @Min(value = 0, message = "Число должно быть больше 0")
     private long phoneNumber;
     @Email
     private String email;
@@ -57,10 +55,6 @@ public class Employee {
     private Date hireDate; // Дата найма
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dismissalDate; // Дата увольнения
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_status_id")
-    private EmployeeStatus employeeStatus;
 
     @OneToOne(mappedBy = "employee", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private User user;

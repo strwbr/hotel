@@ -1,9 +1,6 @@
 package com.example.hotel.controllers;
 
-import com.example.hotel.model.Booking;
-import com.example.hotel.model.BookingPaidService;
-import com.example.hotel.model.ExtraBed;
-import com.example.hotel.model.PaidService;
+import com.example.hotel.model.*;
 import com.example.hotel.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,6 +85,8 @@ public class BookingController {
         booking.setTotalCost(bookingService.countHotelPrice(booking));
         booking.setBookingTime(new Date());
         booking.setBookingStatus(bookingStatusService.getBookingStatusForNewBooking());
+
+        // TODO сюда добавление OccupiedRoom - автоматическое присваивание номера (из числа свободных в нужную дату)
 
         bookingService.saveBooking(booking);
         redirectAttributes.addAttribute("id", booking.getId());

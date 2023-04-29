@@ -38,10 +38,6 @@
         <input type="search" placeholder="-- Наименование --"/>
     </div>
 
-    <div>
-        <a class="btn btn-success" th:href="@{/additional_service/add}">Добавить</a>
-    </div>
-
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -65,9 +61,6 @@
                 <td th:text="${a.availabilityStatus.name}"></td>
                 <td>
                     <a class="btn btn-primary" th:href="@{/additional_service/info/{id}(id=${a.id})}">Подробнее</a>
-                    <a class="btn btn-secondary"
-                       th:href="@{/additional_service/update/{id}(id=${a.id})}">Редактировать</a>
-                    <a class="btn btn-danger" th:href="@{/additional_service/delete/{id}(id=${a.id})}">Удалить</a>
                 </td>
             </tr>
             </tbody>

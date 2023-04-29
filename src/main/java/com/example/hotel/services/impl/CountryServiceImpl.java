@@ -1,6 +1,5 @@
 package com.example.hotel.services.impl;
 
-import com.example.hotel.model.CleaningStatus;
 import com.example.hotel.model.Country;
 import com.example.hotel.repos.CountryRepository;
 import com.example.hotel.services.CountryService;

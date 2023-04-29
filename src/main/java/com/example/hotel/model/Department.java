@@ -25,10 +25,6 @@ public class Department {
     private String name;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_status_id")
-    private DepartmentStatus departmentStatus;
-
     @OneToMany(mappedBy = "department", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Employee> employeeList;
 }

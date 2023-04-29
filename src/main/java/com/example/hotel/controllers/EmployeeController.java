@@ -31,8 +31,6 @@ public class EmployeeController {
     private StreetService streetService;
     @Autowired
     private StreetTypeService streetTypeService;
-    @Autowired
-    private EmployeeStatusService employeeStatusService;
 
     @GetMapping
     private String viewList(Model model) {
@@ -52,33 +50,5 @@ public class EmployeeController {
                 addressService.getFullAddressString(employee.getRegisteredAddress().getId()));
 
         return "employees-info";
-    }
-
-    @GetMapping("/add")
-    private String viewAddForm(Model model) {
-        model.addAttribute("jobPositions", jobPositionService.getAllJobPositions());
-        model.addAttribute("departments", departmentService.getAllDepartments());
-        model.addAttribute("countries", countryService.getAllCountries());
-        model.addAttribute("regions", regionService.getAllRegions());
-        model.addAttribute("cities", cityService.getAllCities());
-        model.addAttribute("streets", streetService.getAllStreets());
-        model.addAttribute("streetTypes", streetTypeService.getAllStreetTypes());
-        model.addAttribute("employeeStatuses", employeeStatusService.getAllEmployeeStatuses());
-
-        model.addAttribute("employee", new Employee());
-
-        return "employees-add";
-    }
-
-    @PostMapping("/add")
-    private String addEmployee(@ModelAttribute("employee") Employee employee) {
-        // TODO временная заглушка адреса
-        Address address = addressService.getAddressById(1);
-        employee.setRegisteredAddress(address);
-        employee.setResidenceAddress(address);
-
-        employee.setEmployeeStatus(employeeStatusService.getEmployeeStatusForNewEmployee());
-        employeeService.saveEmployee(employee);
-        return "redirect:/employee";
     }
 }
