@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/booking")
@@ -30,6 +33,8 @@ public class BookingController {
     private BookingStatusService bookingStatusService;
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private OccupiedRoomService occupiedRoomService;
 
     @GetMapping
     private String viewList(Model model) {
@@ -103,5 +108,54 @@ public class BookingController {
         return "redirect:/booking/prepayment";
     }
 
+    @GetMapping("/{id}/check-in")
+    private String viewCheckInForm(@PathVariable(value = "id") long bookingId, Model model) {
+        Booking booking = bookingService.getBookingById(bookingId);
 
+        model.addAttribute("booking", booking);
+        model.addAttribute("checkInTime", new Date());
+        model.addAttribute("capacity", roomTypeService.countCapacity(booking.getRoomType()));
+        model.addAttribute("clients", clientService.getAllClients());
+        model.addAttribute("occupiedRooms", booking.getOccupiedRoomList());
+        model.addAttribute("clientsAmount", booking.getAdultsAmount() + booking.getChildrenAmount());
+        return "check-in";
+    }
+
+    @PostMapping("/{id}/check-in")
+    private String checkInClients(@PathVariable(value = "id") long bookingId,
+                                  @RequestParam Map<String, String> formData) {
+        Booking booking = bookingService.getBookingById(bookingId);
+        booking.setBookingStatus(bookingStatusService.getBookingStatusByName("В процессе"));
+
+        for (int i = 1; i <= booking.getAdultsAmount() + booking.getChildrenAmount(); i++) {
+            Long clientId = Long.valueOf(formData.get("clientId" + i));
+            Long occupiedRoomId = Long.valueOf(formData.get("occupiedRoomId" + i));
+            Client client = clientService.getClientById(clientId);
+            OccupiedRoom occupiedRoom = occupiedRoomService.getOccupiedRoomById(occupiedRoomId);
+//            Arrival arrival = new Arrival(
+//                    LocalDate.now(), LocalTime.now(), occupiedRoom
+//            );
+//            occupiedRoom.setArrival(arrival);
+
+            OccupiedRoomClient occupiedRoomClient = new OccupiedRoomClient(
+                    client, occupiedRoom
+            );
+            List<OccupiedRoomClient> temp = client.getOccupiedRoomClientList();
+            temp.add(occupiedRoomClient);
+            client.setOccupiedRoomClientList(temp);
+
+            clientService.saveClient(client);
+//            occupiedRoomService.saveOccupiedRoom(occupiedRoom);
+        }
+
+        for (OccupiedRoom i : booking.getOccupiedRoomList()) {
+            Arrival arrival = new Arrival(LocalDate.now(), LocalTime.now(), i);
+            i.setArrival(arrival);
+            occupiedRoomService.saveOccupiedRoom(i);
+        }
+
+        bookingService.saveBooking(booking);
+
+        return "redirect:/booking";
+    }
 }

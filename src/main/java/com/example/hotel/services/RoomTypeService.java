@@ -10,5 +10,5 @@ public interface RoomTypeService {
     RoomType getRoomTypeById(long id);
     void deleteRoomTypeById(long id);
 
-//    boolean setActualStatus(RoomType roomType);
+    int countCapacity(RoomType roomType);
 }

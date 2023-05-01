@@ -1,9 +1,6 @@
 package com.example.hotel.services.impl;
 
-import com.example.hotel.model.Booking;
-import com.example.hotel.model.BookingPaidService;
-import com.example.hotel.model.PaidService;
-import com.example.hotel.model.RoomPrice;
+import com.example.hotel.model.*;
 import com.example.hotel.repos.BookingRepository;
 import com.example.hotel.repos.RegionRepository;
 import com.example.hotel.services.BookingService;
@@ -12,6 +9,7 @@ import com.example.hotel.services.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,6 +64,7 @@ public class BookingServiceImpl implements BookingService {
         List<String> statuses = new ArrayList<>();
         statuses.add("Подтверждено");
         statuses.add("Требуется предоплата");
+        statuses.add("В процессе");
         return this.repository.findAllByStatusesOrderByBookingTimeDesc(statuses);
     }
 
@@ -97,15 +96,40 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public double countTotalCost(Booking booking) {
-        // Полная стоимость проживания = общ ст-ть проживания в номере/ах - преодплата + общ ст-ть платных услуг
-        double cost = booking.getTotalCost() - this.countPrepaymentCost(booking);
+    public double countPaidServicesCost(Booking booking) {
+        double cost = 0;
         List<BookingPaidService> paidServices = booking.getBookingPaidServiceList();
         if (paidServices != null) {
             for (BookingPaidService ps : paidServices) {
                 cost += ps.getPaidService().getPrice();
             }
         }
+        return cost;
+    }
+
+    @Override
+    public double countCheckInCost(Booking booking) {
+        // Стоимость при заселении = общ ст-ть проживания в номере(-ах) - предоплата
+        double cost = booking.getTotalCost() - this.countPrepaymentCost(booking);
+
+        List<OccupiedRoom> occupiedRoomList = booking.getOccupiedRoomList();
+        for (OccupiedRoom i : occupiedRoomList) {
+            cost += (isEarlyCheckIn(i.getArrival().getRealArrivalTime()))
+                    ? roomPriceService.getActualRoomPrice(i.getRoom().getRoomType()).getPrice()
+                    : 0;
+        }
+        return cost;
+    }
+
+    private boolean isEarlyCheckIn(LocalTime realTime) {
+        LocalTime checkInTime = LocalTime.of(12,0);
+        return realTime.isBefore(checkInTime);
+    }
+
+    @Override
+    public double countCheckOutCost(Booking booking) {
+        double cost = this.countPaidServicesCost(booking);
+
         return cost;
     }
 

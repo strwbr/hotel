@@ -28,4 +28,10 @@ public class Arrival {
     @OneToOne
     @JoinColumn(name = "occupied_rom_id")
     private OccupiedRoom occupiedRoom;
+
+    public Arrival(LocalDate realArrivalDate, LocalTime realArrivalTime, OccupiedRoom occupiedRoom) {
+        this.realArrivalDate = realArrivalDate;
+        this.realArrivalTime = realArrivalTime;
+        this.occupiedRoom = occupiedRoom;
+    }
 }

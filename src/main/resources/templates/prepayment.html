@@ -32,6 +32,7 @@
                 <p th:text="'Детей: ' + ${payment.booking.childrenAmount}"></p>
                 <p th:text="${payment.booking.roomType.name} + ' - ' + ${payment.booking.roomsAmount}"></p>
             </div>
+                        
             <label class="form-label" for="">Добавленные платные услуги</label>
             <span th:if="${#lists.isEmpty(payment.booking.bookingPaidServiceList)}">Отсутствуют</span>
             <div th:unless="${#lists.isEmpty(payment.booking.bookingPaidServiceList)}">

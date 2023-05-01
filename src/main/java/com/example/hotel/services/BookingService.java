@@ -19,7 +19,9 @@ public interface BookingService {
 
     double countHotelPrice(Booking booking);
     double countPrepaymentCost(Booking booking);
-    double countTotalCost(Booking booking);
+    double countPaidServicesCost(Booking booking);
+    double countCheckInCost(Booking booking);
+    double countCheckOutCost(Booking booking);
 
     long countOccupationPeriod(Booking booking);
 }

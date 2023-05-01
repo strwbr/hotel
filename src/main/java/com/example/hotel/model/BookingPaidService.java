@@ -30,7 +30,7 @@ public class BookingPaidService {
     private PaidService paidService;
 
     public BookingPaidService(Booking booking, PaidService paidService) {
-        this.amount = 1;
+        this.amount = 1; // TODO заглушка!!!!
         this.booking = booking;
         this.paidService = paidService;
     }

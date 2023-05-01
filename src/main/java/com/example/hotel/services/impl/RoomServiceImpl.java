@@ -3,11 +3,13 @@ package com.example.hotel.services.impl;
 import com.example.hotel.model.Booking;
 import com.example.hotel.model.Room;
 import com.example.hotel.model.RoomPriceStatus;
+import com.example.hotel.repos.BookingRepository;
 import com.example.hotel.repos.RoomRepository;
 import com.example.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +19,8 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomRepository repository;
+    @Autowired
+    private BookingRepository bookingRepository;
 
     @Override
     public List<Room> getAllRooms() {
@@ -50,7 +54,11 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> getAvailableRoomsForBooking(Booking booking) {
+        List<Long> bookingStatusesId = new ArrayList<>();
+        bookingStatusesId.add(1L); // "Подтверждено"
+        bookingStatusesId.add(3L); // "Требуется предоплата"
+        bookingStatusesId.add(5L); // "В процессе"
         return this.repository.findAvailableRoomsByRoomTypeId(booking.getRoomType().getId(),
-                booking.getCheckInDate(), booking.getCheckOutDate());
+                booking.getCheckInDate(), booking.getCheckOutDate(), bookingStatusesId);
     }
 }

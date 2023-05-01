@@ -95,7 +95,9 @@
                 <td th:text="${b.bookingStatus.name}"></td>
                 <td>
                     <a class="btn btn-primary" th:href="@{/booking/info/{id}(id=${b.id})}">Подробнее</a>
-                    <a class="btn btn-secondary" th:href="@{/booking/edit/{id}(id=${b.id})}">Редактировать</a>
+                    <a class="btn btn-success" th:if="${b.bookingStatus.name == 'Подтверждено'}"
+                       th:href="@{/booking/{id}/check-in(id=${b.id})}">Заселение</a>
+<!--                    <a class="btn btn-secondary" th:href="@{/booking/edit/{id}(id=${b.id})}">Редактировать</a>-->
                     <a class="btn btn-danger" th:href="@{/booking/delete/{id}(id=${b.id})}">Отменить</a>
                 </td>
             </tr>

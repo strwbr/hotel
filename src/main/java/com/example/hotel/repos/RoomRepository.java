@@ -28,11 +28,12 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             ") OR (\n" +
             ":checkInDate <= b.check_in_date\n" +
             "AND :checkOutDate >= b.check_out_date\n" +
-            ")\n" +
+            ") AND b.booking_status_id IN (:bookingStatusesId)" +
             ")", nativeQuery = true)
     List<Room> findAvailableRoomsByRoomTypeId(@Param("roomTypeId") Long roomTypeId,
                                               @Param("checkInDate") Date checkIndate,
-                                              @Param("checkOutDate") Date checkOutDate);
+                                              @Param("checkOutDate") Date checkOutDate,
+                                              @Param("bookingStatusesId") List<Long> bookingStatusesId);
 
     @Query(value = "SELECT r.* FROM room r WHERE r.room_type_id = :roomTypeId", nativeQuery = true)
     List<Room> findAllByRoomTypeId(@Param("roomTypeId") Long roomTypeId);

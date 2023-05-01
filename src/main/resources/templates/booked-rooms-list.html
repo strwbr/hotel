@@ -52,21 +52,24 @@
             <tbody>
             <tr th:each="r, i : ${occupiedRooms}">
                 <td th:text="${i.count}"></td>
-                <td th:text="${r.room} ? ${r.room.number} : '-'"></td>
-                <td th:text="${r.room.roomType} ? ${r.room.roomType.name} : '-'"></td>
+                <td th:text="${r.room.number}"></td>
+                <td th:text="${r.room.roomType.name}"></td>
                 <td>
                     <ul class="list-group list-group-flush" th:each="c : ${r.occupiedRoomClientList}">
-                        <li class="list-group-item" th:text="${c.client} ? ${c.client.surname} : '-'"></li>
+                        <li class="list-group-item" th:text="${c.client?.surname}"></li>
                     </ul>
                 </td>
                 <td th:text="${#dates.format(r.booking.checkInDate, 'dd.MM.yyyy')}"></td>
                 <td th:text="${#dates.format(r.booking.checkOutDate, 'dd.MM.yyyy')}"></td>
                 <td>
-                    <!-- <a class="btn btn-primary" th:href="#">Подробнее</a> -->
-                    <a class="btn btn-secondary" th:href="@{/booked-room/add-paid-services/{id}(id=${r.id})}"> Платные
+<!--                    <a class="btn btn-success" th:if="${r.booking.bookingStatus.name == 'Подтверждено'}"-->
+<!--                       th:href="@{/booked_room/{id}(id=${r.id})/check-in}">Заселение</a>-->
+                    <a class="btn btn-secondary" th:href="@{/booked_room/add-paid-services/{id}(id=${r.id})}"> Платные
                         услуги</a>
-                    <a class="btn btn-secondary" th:href="@{/booked-room/extension/{id}(id=${r.id})}">Продлить</a>
-                    <a class="btn btn-primary" th:href="@{/booked-room/checkout/{id}(id=${r.id})}">Выселение</a>
+                    <div th:if="${r.booking.bookingStatus.name == 'В процессе'}">
+                        <a class="btn btn-secondary" th:href="@{/booked_room/extension/{id}(id=${r.id})}">Продлить</a>
+                        <a class="btn btn-primary" th:href="@{/booked_room/checkout/{id}(id=${r.id})}">Выселение</a>
+                    </div>
                 </td>
             </tr>
             </tbody>

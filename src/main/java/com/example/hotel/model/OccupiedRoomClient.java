@@ -26,4 +26,8 @@ public class OccupiedRoomClient {
     @JoinColumn(name = "occupied_room_id")
     private OccupiedRoom occupiedRoom;
 
+    public OccupiedRoomClient(Client client, OccupiedRoom occupiedRoom) {
+        this.client = client;
+        this.occupiedRoom = occupiedRoom;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.hotel.services.impl;
 
 import com.example.hotel.model.RoomType;
+import com.example.hotel.model.RoomTypeBedType;
 import com.example.hotel.repos.RoomPriceStatusRepository;
 import com.example.hotel.repos.RoomTypeRepository;
 import com.example.hotel.services.RoomTypeService;
@@ -34,12 +35,22 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         RoomType roomType = null;
         if (optional.isPresent())
             roomType = optional.get();
-        else throw new RuntimeException("RoomType NOT found for id : \" + id");
+        else throw new RuntimeException("RoomType NOT found for id : " + id);
         return roomType;
     }
 
     @Override
     public void deleteRoomTypeById(long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    public int countCapacity(RoomType roomType) {
+        int capacity = 0;
+        List<RoomTypeBedType> roomTypeBedTypeList = roomType.getRoomTypeBedTypeList();
+        for (RoomTypeBedType i : roomTypeBedTypeList) {
+            capacity += i.getBedType().getCapacity() * i.getBedAmount();
+        }
+        return capacity;
     }
 }
