@@ -123,9 +123,9 @@ public class BookingController {
 
     @PostMapping("/{id}/check-in")
     private String checkInClients(@PathVariable(value = "id") long bookingId,
-                                  @RequestParam Map<String, String> formData) {
+                                  @RequestParam Map<String, String> formData,
+                                  RedirectAttributes redirectAttributes) {
         Booking booking = bookingService.getBookingById(bookingId);
-        booking.setBookingStatus(bookingStatusService.getBookingStatusByName("В процессе"));
 
         for (int i = 1; i <= booking.getAdultsAmount() + booking.getChildrenAmount(); i++) {
             Long clientId = Long.valueOf(formData.get("clientId" + i));
@@ -155,7 +155,7 @@ public class BookingController {
         }
 
         bookingService.saveBooking(booking);
-
-        return "redirect:/booking";
+        redirectAttributes.addAttribute("id", bookingId);
+        return "redirect:/booking/check-in/payment";
     }
 }

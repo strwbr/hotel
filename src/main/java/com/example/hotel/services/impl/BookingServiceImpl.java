@@ -122,14 +122,25 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private boolean isEarlyCheckIn(LocalTime realTime) {
-        LocalTime checkInTime = LocalTime.of(12,0);
+        LocalTime checkInTime = LocalTime.of(12, 0);
         return realTime.isBefore(checkInTime);
+    }
+
+    private boolean isLateCheckOut(LocalTime realTime) {
+        LocalTime checkOutTime = LocalTime.of(12, 0);
+        return realTime.isAfter(checkOutTime);
     }
 
     @Override
     public double countCheckOutCost(Booking booking) {
+        // Платные услуги + поздний выезд (=50% от цены номера)
         double cost = this.countPaidServicesCost(booking);
-
+        List<OccupiedRoom> occupiedRoomList = booking.getOccupiedRoomList();
+        for (OccupiedRoom i : occupiedRoomList) {
+            cost += (isLateCheckOut(i.getDeparture().getRealDepartureTime()))
+                    ? roomPriceService.getActualRoomPrice(i.getRoom().getRoomType()).getPrice() / 2
+                    : 0;
+        }
         return cost;
     }
 
