@@ -35,6 +35,12 @@ public class BookingController {
     private RoomService roomService;
     @Autowired
     private OccupiedRoomService occupiedRoomService;
+    @Autowired
+    private PaymentPurposeService paymentPurposeService;
+    @Autowired
+    private PaymentTypeService paymentTypeService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping
     private String viewList(Model model) {
@@ -53,7 +59,7 @@ public class BookingController {
     @GetMapping("/add")
     private String viewAddForm(Model model) {
         model.addAttribute("booking", new Booking());
-        model.addAttribute("clients", clientService.getAllClients());
+        model.addAttribute("clients", clientService.getAllOrderedClients());
         // TODO выводить ТОЛЬКО типы номеров, у к-ых ЕСТЬ актуальная цена
         model.addAttribute("roomTypes", roomTypeService.getAllRoomTypes());
         model.addAttribute("paidServices", paidServiceService.getAllAvailablePaidServices());
@@ -114,8 +120,9 @@ public class BookingController {
 
         model.addAttribute("booking", booking);
         model.addAttribute("checkInTime", new Date());
+        model.addAttribute("prepayment", booking.getPaymentList().get(0));
         model.addAttribute("capacity", roomTypeService.countCapacity(booking.getRoomType()));
-        model.addAttribute("clients", clientService.getAllClients());
+        model.addAttribute("clients", clientService.getAllOrderedClients());
         model.addAttribute("occupiedRooms", booking.getOccupiedRoomList());
         model.addAttribute("clientsAmount", booking.getAdultsAmount() + booking.getChildrenAmount());
         return "check-in";
@@ -158,4 +165,29 @@ public class BookingController {
         redirectAttributes.addAttribute("id", bookingId);
         return "redirect:/booking/check-in/payment";
     }
+
+    @GetMapping("/{id}/check-out")
+    private String viewCheckOutForm(@PathVariable("id") long bookingId, Model model) {
+        Booking booking = bookingService.getBookingById(bookingId);
+
+        model.addAttribute("booking", booking);
+        model.addAttribute("checkOutTime", new Date());
+        return "check-out";
+    }
+
+    @PostMapping("/{id}/check-out")
+    private String checkOutClients(@PathVariable(value = "id") long bookingId,
+                                   RedirectAttributes redirectAttributes) {
+        Booking booking = bookingService.getBookingById(bookingId);
+
+        for (OccupiedRoom i : booking.getOccupiedRoomList()) {
+            Departure departure = new Departure(i, LocalDate.now(), LocalTime.now());
+            i.setDeparture(departure);
+            occupiedRoomService.saveOccupiedRoom(i);
+        }
+
+        redirectAttributes.addAttribute("id", bookingId);
+        return "redirect:/booking/check-out/payment";
+    }
+
 }

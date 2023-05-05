@@ -41,6 +41,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public List<Client> getAllOrderedClients() {
+        return this.repository.findAllOrderBySurnameNamePatronymic();
+    }
+
+    @Override
     public boolean isVIPClient(Client client) {
         return client.getClientStatus().getName().equals("VIP");
     }

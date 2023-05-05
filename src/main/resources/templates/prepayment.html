@@ -22,27 +22,27 @@
     <form th:action="@{/booking/prepayment}" th:object="${payment}" method="post">
 
         <div>
-            <label class="form-label">Информация по бронированию №</label>
+            <h4>Информация по бронированию №</h4>
             <input type="text" th:value="${booking.id}" name="bookingId" readonly>
             <div>
-                <p th:text="${payment.booking.client.surname} + ' ' + ${payment.booking.client.name} + ' ' + ${payment.booking.client.patronymic}"></p>
-                <p th:text="${#dates.format(payment.booking.checkInDate, 'dd.MM.yyyy')}
-                + ' - ' + ${#dates.format(payment.booking.checkOutDate, 'dd.MM.yyyy')}"></p>
-                <p th:text="'Взрослых: ' + ${payment.booking.adultsAmount}"></p>
-                <p th:text="'Детей: ' + ${payment.booking.childrenAmount}"></p>
-                <p th:text="${payment.booking.roomType.name} + ' - ' + ${payment.booking.roomsAmount}"></p>
+                <p th:text="${booking.client.surname} + ' ' + ${booking.client.name} + ' ' + ${booking.client.patronymic}"></p>
+                <p th:text="${#dates.format(booking.checkInDate, 'dd.MM.yyyy')}
+                + ' - ' + ${#dates.format(booking.checkOutDate, 'dd.MM.yyyy')}"></p>
+                <p th:text="'Взрослых: ' + ${booking.adultsAmount}"></p>
+                <p th:text="'Детей: ' + ${booking.childrenAmount}"></p>
+                <p th:text="${booking.roomType.name} + ' - ' + ${booking.roomsAmount}"></p>
             </div>
                         
-            <label class="form-label" for="">Добавленные платные услуги</label>
-            <span th:if="${#lists.isEmpty(payment.booking.bookingPaidServiceList)}">Отсутствуют</span>
-            <div th:unless="${#lists.isEmpty(payment.booking.bookingPaidServiceList)}">
-                <ul class="list-group" th:each="i : ${payment.booking.bookingPaidServiceList}">
+            <h4>Добавленные платные услуги</h4>
+            <span th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}">Отсутствуют</span>
+            <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}">
+                <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
                     <li class="list-group-item" th:text="${i.paidService.name}"></li>
                 </ul>
             </div>
         </div>
 
-        <p th:text="'Назначение платежа ' + ${payment.purpose.name}" th:value="${payment.purpose.id}"></p>
+        <p th:text="'Назначение платежа ' + ${purpose}"></p>
         <!--            <input type="text" th:value="${payment.purpose.name}" th:field="*{purpose}" readonly/>-->
 
         <div>
@@ -75,7 +75,6 @@
 
         <div>
             <button type="submit" class="btn btn-primary">Оплатить</button>
-            <button type="reset" class="btn btn-outline-primary">Вернуться</button>
         </div>
     </form>
 

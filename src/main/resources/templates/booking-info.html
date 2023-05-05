@@ -90,7 +90,7 @@
     </div>
     <div>
         <label class="form-label" for="">Дата оформления бронирования</label>
-        <input type="datetime-local" th:value="${#dates.format(booking.bookingTime, 'dd.MM.yyyy HH:mm')}" readonly/>
+        <input type="text" th:value="${#dates.format(booking.bookingTime, 'dd.MM.yyyy HH:mm')}" readonly/>
     </div>
     <div>
         <label class="form-label" for="">Стоимость за время проживания</label>

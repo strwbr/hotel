@@ -19,7 +19,7 @@
 <div class="container">
     <h1>Заселение</h1>
     <div>
-        <label class="form-label">Информация по бронированию №</label>
+        <h4>Информация по бронированию №</h4>
         <input type="text" th:value="${booking.id}" name="bookingId" readonly>
         <div>
             <p th:text="${booking.client.surname} + ' ' + ${booking.client.name} + ' ' + ${booking.client.patronymic}"></p>
@@ -30,25 +30,31 @@
             <p th:text="${booking.roomType.name} + ' - ' + ${booking.roomsAmount}"></p>
         </div>
 
-        <label class="form-label" for="">Добавленные платные услуги</label>
+        <h4>Добавленные платные услуги</h4>
         <span th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}">Отсутствуют</span>
         <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}">
             <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
-                <li class="list-group-item" th:text="${i.paidService.name}"></li>
+                <li class="list-group-item" th:text="${i.paidService.name} - ${i.paidService.price}"></li>
             </ul>
         </div>
-    </div>
 
-    <form th:action="@{/booking/{id}/check-in(id=${booking.id})}" method="post">
+        <h4>Предоплата</h4>
+        <div>
+            <p th:text="'Сумма: ' + ${prepayment.amount}"></p>
+            <p th:text="'Дата и время: ' + ${#dates.format(prepayment.paymentDate, 'dd.MM.yyyy HH:mm')}"></p>
+        </div>
+
         <div>
             <label for="">Дата и время фактического заезда</label>
             <input type="text" th:value="${#dates.format(checkInTime, 'dd.MM.yyyy HH:mm')}" readonly/>
         </div>
+    </div>
 
+    <form th:action="@{/booking/{id}/check-in(id=${booking.id})}" method="post">
         <div th:each="i : ${#numbers.sequence(1, clientsAmount)}">
             <div>
                 <label>Гость [[${i}]]</label>
-<!--                <select name="clientId[[${i}]]">-->
+                <!--                <select name="clientId[[${i}]]">-->
                 <select th:name="'clientId'+${i}">
                     <option value="" selected hidden>Выберите...</option>
                     <option th:each="client : ${clients}"
@@ -59,7 +65,7 @@
             </div>
             <div>
                 <label>Номер для гостя [[${i}]]</label>
-<!--                <select name="occupiedRoomId[[${i}]]">-->
+                <!--                <select name="occupiedRoomId[[${i}]]">-->
                 <select th:name="'occupiedRoomId'+${i}">
                     <option value="" selected hidden>Выберите...</option>
                     <option th:each="room : ${occupiedRooms}"
@@ -72,7 +78,7 @@
 
         <div>
             <button type="submit" class="btn btn-primary">Оплатить</button>
-            <button type="reset" class="btn btn-outline-primary">Отмена</button>
+            <button th:href="@{/booking}" class="btn btn-outline-primary">Отмена</button>
         </div>
     </form>
 

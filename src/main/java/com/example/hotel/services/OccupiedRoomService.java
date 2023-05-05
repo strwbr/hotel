@@ -12,4 +12,7 @@ public interface OccupiedRoomService {
 
     List<OccupiedRoom> getAllOccupiedRoomsByClientId(long id);
 
+    boolean isEarlyCheckIn(OccupiedRoom occupiedRoom);
+    boolean isLateCheckOut(OccupiedRoom occupiedRoom);
+
 }

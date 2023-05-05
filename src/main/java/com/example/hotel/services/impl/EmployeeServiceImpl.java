@@ -40,4 +40,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteEmployeeById(long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public List<Employee> getAllOrderedEmployees() {
+        return this.repository.findAllOrderBySurnameNamePatronymic();
+    }
 }

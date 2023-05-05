@@ -28,4 +28,10 @@ public class Departure {
     private OccupiedRoom occupiedRoom;
     private LocalDate realDepartureDate; // Фактическая дата выезда
     private LocalTime realDepartureTime; // Фактическое время выезда
+
+    public Departure(OccupiedRoom occupiedRoom, LocalDate realDepartureDate, LocalTime realDepartureTime) {
+        this.occupiedRoom = occupiedRoom;
+        this.realDepartureDate = realDepartureDate;
+        this.realDepartureTime = realDepartureTime;
+    }
 }

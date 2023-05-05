@@ -4,6 +4,7 @@ import com.example.hotel.model.*;
 import com.example.hotel.repos.BookingRepository;
 import com.example.hotel.repos.RegionRepository;
 import com.example.hotel.services.BookingService;
+import com.example.hotel.services.OccupiedRoomService;
 import com.example.hotel.services.RoomPriceService;
 import com.example.hotel.services.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class BookingServiceImpl implements BookingService {
     private RoomPriceService roomPriceService;
     @Autowired
     private RegionRepository regionRepository;
+
+    @Autowired
+    private OccupiedRoomService occupiedRoomService;
 
     @Override
     public List<Booking> getAllBookings() {
@@ -113,22 +117,17 @@ public class BookingServiceImpl implements BookingService {
         double cost = booking.getTotalCost() - this.countPrepaymentCost(booking);
 
         List<OccupiedRoom> occupiedRoomList = booking.getOccupiedRoomList();
-        for (OccupiedRoom i : occupiedRoomList) {
+        /*for (OccupiedRoom i : occupiedRoomList) {
             cost += (isEarlyCheckIn(i.getArrival().getRealArrivalTime()))
+                    ? roomPriceService.getActualRoomPrice(i.getRoom().getRoomType()).getPrice()
+                    : 0;
+        }*/
+        for (OccupiedRoom i : occupiedRoomList) {
+            cost += (occupiedRoomService.isEarlyCheckIn(i))
                     ? roomPriceService.getActualRoomPrice(i.getRoom().getRoomType()).getPrice()
                     : 0;
         }
         return cost;
-    }
-
-    private boolean isEarlyCheckIn(LocalTime realTime) {
-        LocalTime checkInTime = LocalTime.of(12, 0);
-        return realTime.isBefore(checkInTime);
-    }
-
-    private boolean isLateCheckOut(LocalTime realTime) {
-        LocalTime checkOutTime = LocalTime.of(12, 0);
-        return realTime.isAfter(checkOutTime);
     }
 
     @Override
@@ -136,13 +135,28 @@ public class BookingServiceImpl implements BookingService {
         // Платные услуги + поздний выезд (=50% от цены номера)
         double cost = this.countPaidServicesCost(booking);
         List<OccupiedRoom> occupiedRoomList = booking.getOccupiedRoomList();
-        for (OccupiedRoom i : occupiedRoomList) {
+        /*for (OccupiedRoom i : occupiedRoomList) {
             cost += (isLateCheckOut(i.getDeparture().getRealDepartureTime()))
+                    ? roomPriceService.getActualRoomPrice(i.getRoom().getRoomType()).getPrice() / 2
+                    : 0;
+        }*/
+        for (OccupiedRoom i : occupiedRoomList) {
+            cost += (occupiedRoomService.isLateCheckOut(i))
                     ? roomPriceService.getActualRoomPrice(i.getRoom().getRoomType()).getPrice() / 2
                     : 0;
         }
         return cost;
     }
+
+   /* private boolean isEarlyCheckIn(LocalTime realTime) {
+        LocalTime checkInTime = LocalTime.of(12, 0);
+        return realTime.isBefore(checkInTime);
+    }
+
+    private boolean isLateCheckOut(LocalTime realTime) {
+        LocalTime checkOutTime = LocalTime.of(12, 0);
+        return realTime.isAfter(checkOutTime);
+    }*/
 
     @Override
     public long countOccupationPeriod(Booking booking) {

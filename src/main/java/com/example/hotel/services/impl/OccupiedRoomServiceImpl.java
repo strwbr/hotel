@@ -7,6 +7,7 @@ import com.example.hotel.services.OccupiedRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,5 +45,25 @@ public class OccupiedRoomServiceImpl implements OccupiedRoomService {
     @Override
     public List<OccupiedRoom> getAllOccupiedRoomsByClientId(long id) {
         return this.repository.findAllOccupiedRoomsByClientId(id);
+    }
+
+    @Override
+    public boolean isEarlyCheckIn(OccupiedRoom occupiedRoom) {
+        return isEarlyCheckIn(occupiedRoom.getArrival().getRealArrivalTime());
+    }
+
+    @Override
+    public boolean isLateCheckOut(OccupiedRoom occupiedRoom) {
+        return isLateCheckOut(occupiedRoom.getDeparture().getRealDepartureTime());
+    }
+
+    private boolean isEarlyCheckIn(LocalTime realTime) {
+        LocalTime checkInTime = LocalTime.of(12, 0);
+        return realTime.isBefore(checkInTime);
+    }
+
+    private boolean isLateCheckOut(LocalTime realTime) {
+        LocalTime checkOutTime = LocalTime.of(12, 0);
+        return realTime.isAfter(checkOutTime);
     }
 }
