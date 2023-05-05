@@ -51,14 +51,14 @@ public class Booking {
     private byte childrenAmount; // Кол-во детей
     private double totalCost; // Общая стоимость
 
-    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<BookingCancellation> bookingCancellationList;
+    @OneToOne(mappedBy = "booking", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private BookingCancellation bookingCancellation;
 
     @OneToMany(mappedBy = "booking",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<OccupiedRoom> occupiedRoomList;
 
-    @OneToMany(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<BookingExtension> bookingExtensionList;
+    @OneToOne(mappedBy = "booking", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private BookingExtension bookingExtension;
 
     @OneToOne(mappedBy = "booking", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private ExtraBed extraBed;

@@ -20,7 +20,7 @@ public class BookingCancellation {
 //    @NotNull
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
 

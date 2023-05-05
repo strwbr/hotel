@@ -36,17 +36,31 @@ public class BookingController {
     @Autowired
     private OccupiedRoomService occupiedRoomService;
     @Autowired
-    private PaymentPurposeService paymentPurposeService;
-    @Autowired
-    private PaymentTypeService paymentTypeService;
-    @Autowired
-    private EmployeeService employeeService;
+    private BookingCancellationReasonService bookingCancellationReasonService;
 
     @GetMapping
     private String viewList(Model model) {
         Iterable<Booking> bookings = bookingService.getNewBookings();
         model.addAttribute("bookings", bookings);
         return "bookings-list";
+    }
+
+    @GetMapping("/{id}/cancellation")
+    private String viewBookingCancellationForm(@PathVariable("id") long id, Model model) {
+        Booking booking = bookingService.getBookingById(id);
+        model.addAttribute("bookingCancellation", new BookingCancellation());
+        model.addAttribute("booking", booking);
+        model.addAttribute("reasons", bookingCancellationReasonService.getAllBookingCancellationReasons());
+        return "booking-cancellation";
+    }
+
+    @PostMapping("/{id}/cancellation")
+    private String cancelBooking(@ModelAttribute("bookingCancellation") BookingCancellation bookingCancellation, @PathVariable("id") long id) {
+        Booking booking = bookingService.getBookingById(id);
+        booking.setBookingCancellation(bookingCancellation);
+        booking.setBookingStatus(bookingStatusService.getBookingStatusByName("Отменено"));
+        bookingService.saveBooking(booking);
+        return "redirect:/booking";
     }
 
     @GetMapping("/info/{id}")

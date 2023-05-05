@@ -18,9 +18,6 @@ public class BookingPaidService {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    // TODO удалить это поле
-    private int amount;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     private Booking booking;
@@ -30,7 +27,6 @@ public class BookingPaidService {
     private PaidService paidService;
 
     public BookingPaidService(Booking booking, PaidService paidService) {
-        this.amount = 1; // TODO заглушка!!!!
         this.booking = booking;
         this.paidService = paidService;
     }
