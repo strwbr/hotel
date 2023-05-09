@@ -42,7 +42,7 @@
 
         <div>
             <label class="form-label" for="">Причина</label>
-            <select th:field="*{reason}">
+            <select th:field="*{reason}" required>
                 <option value="" selected hidden>Выберите...</option>
                 <option th:each="reason : ${reasons}"
                         th:value="${reason.id}"

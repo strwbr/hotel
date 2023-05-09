@@ -1,18 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <!-- Подключение Bootstrap -->
-  <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-  />
-  <title>HMS: Dashboard</title>
+    <meta charset="UTF-8">
+    <!-- Подключение Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
+    <title>HMS: Dashboard</title>
 </head>
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
+    <h1>Dashboard</h1>
 
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100 text-bg-light">
+                <div class="card-header">
+                    <h5 class="card-title">Занятые номера</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-text" th:text="${bookedRooms}"></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title">Свободные номера</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-text" th:text="${availableRooms}"></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title">Постояльцы</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-text" th:text="${clients}"></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title">Новые бронирования</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-text" th:text="${newBookings}"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

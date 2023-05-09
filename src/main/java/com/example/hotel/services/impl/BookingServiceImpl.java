@@ -78,6 +78,15 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<Booking> getNewBookingsById(long id) {
+        List<String> statuses = new ArrayList<>();
+        statuses.add("Подтверждено");
+        statuses.add("Требуется предоплата");
+        statuses.add("В процессе");
+        return this.repository.findAllByStatusesAndIdOrderByBookingTimeDesc(statuses, id);
+    }
+
+    @Override
     public double countHotelPrice(Booking booking) {
         double cost = 0.0;
 

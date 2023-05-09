@@ -52,7 +52,7 @@
 
         <div>
             <label class="form-label" for="">Сотрудник</label>
-            <select th:field="*{employee}">
+            <select th:field="*{employee}" required>
                 <option value="" selected hidden>Выберите...</option>
                 <option th:each="employee : ${employees}"
                         th:value="${employee.id}"
@@ -64,7 +64,7 @@
 
         <div>
             <label class="form-label" for="">Вид оплаты</label>
-            <select th:field="*{paymentType}">
+            <select th:field="*{paymentType}" required>
                 <option value="" selected hidden>Выберите...</option>
                 <option th:each="type : ${paymentTypes}"
                         th:value="${type.id}"

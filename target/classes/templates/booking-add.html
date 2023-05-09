@@ -22,7 +22,7 @@
     <form th:action="@{/booking/add}" th:object="${booking}" method="post">
         <div>
             <label class="form-label" for="">Клиент</label>
-            <select th:field="*{client}">
+            <select th:field="*{client}" required>
                 <option value="" selected hidden>Выберите...</option>
                 <option th:each="client : ${clients}"
                         th:value="${client.id}"
@@ -33,26 +33,26 @@
         </div>
         <div>
             <label class="form-label" for="">Дата заезда</label>
-            <input type="date" id="check_in_date" th:field="*{checkInDate}"/>
+            <input type="date" id="check_in_date" th:field="*{checkInDate}" required/>
         </div>
         <div>
             <label class="form-label" for="">Дата выезда</label>
-            <input type="date" id="check_out_date" th:field="*{checkOutDate}"/>
+            <input type="date" id="check_out_date" th:field="*{checkOutDate}" required/>
         </div>
         <div>
             <label class="form-label" for="">Тип номера</label>
-            <select th:field="*{roomType}" id="selectRoomType">
+            <select th:field="*{roomType}" id="selectRoomType" required>
                 <option value="" selected hidden>Выберите...</option>
                 <option th:each="type : ${roomTypes}"
                         th:value="${type.id}"
                         th:text="${type.name}">
                 </option>
             </select>
-            <input type="number" min="0" th:field="*{roomsAmount}" placeholder="Количество" id="amountRooms" disabled/>
+            <input type="number" min="0" th:field="*{roomsAmount}" placeholder="Количество" id="amountRooms" required disabled/>
         </div>
         <div>
             <label class="form-label" for="">Количество взрослых</label>
-            <input type="number" min="0" th:field="*{adultsAmount}"/>
+            <input type="number" min="0" th:field="*{adultsAmount}" id="adults" required/>
         </div>
         <div>
             <label class="form-label" for="">Количество детей</label>
@@ -92,7 +92,7 @@
 
         <div>
             <button type="submit" class="btn btn-primary">Продолжить</button>
-            <button type="reset" class="btn btn-outline-primary">Отмена</button>
+            <button th:href="@{/booking}" class="btn btn-outline-primary">Отмена</button>
         </div>
     </form>
 
@@ -125,9 +125,12 @@ needExtraBed.addEventListener('change', () => {
 
 selectRoomType.addEventListener('change', function() {
     const amountRooms = document.getElementById("amountRooms");
+    const adults = document.getElementById("adults")
     amountRooms.disabled = false;
     amountRooms.min = 1;
     amountRooms.value = 1;
+    adults.min = 1;
+    adults.value = 1;
 });
 
 

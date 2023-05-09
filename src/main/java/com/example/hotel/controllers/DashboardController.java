@@ -11,6 +11,16 @@ public class DashboardController {
 
     @GetMapping
     private String viewPage(Model model) {
+
+        int bookedRooms = 0;
+        int availableRooms = 0;
+        int clients = 0;
+        int newBookings = 0;
+
+        model.addAttribute("bookedRooms", bookedRooms);
+        model.addAttribute("availableRooms", availableRooms);
+        model.addAttribute("clients", clients);
+        model.addAttribute("newBookings", newBookings);
         return "dashboard";
     }
 }

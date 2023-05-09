@@ -37,7 +37,7 @@ public class ClientController {
 
     @GetMapping
     private String viewList(Model model) {
-        Iterable<Client> clients = clientService.getAllClients();
+        Iterable<Client> clients = clientService.getAllOrderedClients();
         model.addAttribute("guests", clients);
         return "guests-list";
     }
@@ -83,6 +83,7 @@ public class ClientController {
                         ? clientStatusService.getVipStatus()
                         : clientStatusService.getDefaultStatus()
         );
+
         clientService.saveClient(client);
         return "redirect:/guest";
     }

@@ -39,9 +39,15 @@ public class BookingController {
     private BookingCancellationReasonService bookingCancellationReasonService;
 
     @GetMapping
-    private String viewList(Model model) {
-        Iterable<Booking> bookings = bookingService.getNewBookings();
+    private String viewList(@RequestParam(value = "bookingNumber", required = false) String bookingNumber, Model model) {
+        Iterable<Booking> bookings = null;
+        if (bookingNumber != null) {
+            bookings = bookingService.getNewBookingsById(Long.parseLong(bookingNumber));
+        } else {
+            bookings = bookingService.getNewBookings();
+        }
         model.addAttribute("bookings", bookings);
+
         return "bookings-list";
     }
 

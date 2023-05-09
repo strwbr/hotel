@@ -55,12 +55,11 @@
         </div>
     </div>
 
-    <div>
-        <label>
-            Поиск:
-            <input type="search" placeholder="-- № бронирования --"/>
-        </label>
-    </div>
+    <form th:action="@{/booking}" method="get">
+        <label class="form-label">Номер бронирования </label>
+        <input type="number" name="bookingNumber" placeholder="Введите номер бронирования" required/>
+        <button class="btn btn-primary" type="submit">Поиск</button>
+    </form>
 
     <div>
         <a class="btn btn-success" th:href="@{/booking/add}">Добавить</a>
@@ -99,8 +98,9 @@
                        th:href="@{/booking/{id}/check-in(id=${b.id})}">Заселение</a>
                     <a class="btn btn-outline-danger" th:if="${b.bookingStatus.name == 'В процессе'}"
                        th:href="@{/booking/{id}/check-out(id=${b.id})}">Выселение</a>
-<!--                    <a class="btn btn-secondary" th:href="@{/booking/edit/{id}(id=${b.id})}">Редактировать</a>-->
-                    <a class="btn btn-danger" th:if="${b.bookingStatus.name == 'Подтверждено'}" th:href="@{/booking/{id}/cancellation(id=${b.id})}">Отменить</a>
+                    <!--                    <a class="btn btn-secondary" th:href="@{/booking/edit/{id}(id=${b.id})}">Редактировать</a>-->
+                    <a class="btn btn-danger" th:if="${b.bookingStatus.name == 'Подтверждено'}"
+                       th:href="@{/booking/{id}/cancellation(id=${b.id})}">Отменить</a>
                 </td>
             </tr>
             </tbody>
