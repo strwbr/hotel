@@ -26,8 +26,6 @@ public class RoomType {
     @NotBlank(message = "Строка должна быть не пустая!")
     private String name;
     private String description;
-/*    private byte baseCapacity; // Базовая вместимость
-    private byte maxCapacity; // Максимальная вместимость (с учетом доп.кровати/ей)*/
 
     @OneToMany(mappedBy = "roomType", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Booking> bookingList;
