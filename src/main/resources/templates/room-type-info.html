@@ -18,51 +18,74 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Информация о типе номера</h1>
+    <h1 class="mb-4">Информация о типе номера</h1>
 
-    <div>
-        <label for="">Наименование</label>
-        <input type="text" th:value="${roomType.name}" readonly/>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="name">Наименование</label>
+        <div class="col-sm-10">
+            <input type="text" th:value="${roomType.name}" class="form-control" id="name" readonly/>
+        </div>
     </div>
-    <div>
-        <label for="">Описание</label>
-        <textarea style="height: 50px" th:text="${roomType.description}" readonly></textarea>
-    </div>
-<!--    TODO Вместимость в info-->
-<!--    <div>-->
-<!--        <label for="">Вместимость (базовая)</label>-->
-<!--        <input type="number" th:value="${roomType.baseCapacity}" readonly/>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label for="">Вместимость (максимальная)</label>-->
-<!--        <input type="number" th:value="${roomType.maxCapacity}" readonly/>-->
-<!--    </div>-->
-    <div>
-        <label class="form-label" for="">Тип кровати</label>
-        <span th:if="${#lists.isEmpty(roomType.roomTypeBedTypeList)}">Отсутствуют</span>
-        <div th:unless="${#lists.isEmpty(roomType.roomTypeBedTypeList)}">
-            <ul class="list-group" th:each="i : ${roomType.roomTypeBedTypeList}">
-                <li class="list-group-item" th:text="${i.bedType.name} + ' | ' + ${i.bedAmount}"></li>
-            </ul>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="desc">Описание</label>
+        <div class="col-sm-10">
+            <textarea style="height: 50px" th:text="${roomType.description}" class="form-control" id="desc"
+                      readonly></textarea>
         </div>
     </div>
 
-    <div>
-        <label class="form-label" for="">Дополнительные услуги</label>
-        <span th:if="${#lists.isEmpty(roomType.roomTypeAdditionalServiceList)}">Отсутствуют</span>
-        <div th:unless="${#lists.isEmpty(roomType.roomTypeAdditionalServiceList)}">
-            <ul class="list-group" th:each="i : ${roomType.roomTypeAdditionalServiceList}">
-                <li class="list-group-item" th:text="${i.additionalService.name}"></li>
-            </ul>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label pt-0">Типы кроватей</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:if="${#lists.isEmpty(roomType.roomTypeBedTypeList)}" value="Отсутствуют"/>
+            <div class="form-check disabled"
+                 th:unless="${#lists.isEmpty(roomType.roomTypeBedTypeList)}"
+                 th:each="i : ${roomType.roomTypeBedTypeList}">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-check-input" type="checkbox" th:text="${i.bedType.name}" disabled checked>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" th:value="${i.bedAmount}" readonly>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        <label class="form-label" for="">Оснащение</label>
-        <span th:if="${#lists.isEmpty(roomType.roomTypeRoomEquipmentList)}">Отсутствуют</span>
-        <div th:unless="${#lists.isEmpty(roomType.roomTypeRoomEquipmentList)}">
-            <ul class="list-group" th:each="i : ${roomType.roomTypeRoomEquipmentList}">
-                <li class="list-group-item" th:text="${i.roomEquipment.name} + ' | ' + ${i.amount}"></li>
-            </ul>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label pt-0">Дополнительные услуги</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:if="${#lists.isEmpty(roomType.roomTypeAdditionalServiceList)}" value="Отсутствуют"/>
+            <div class="form-check disabled"
+                 th:unless="${#lists.isEmpty(roomType.roomTypeAdditionalServiceList)}"
+                 th:each="i : ${roomType.roomTypeAdditionalServiceList}">
+                <input class="form-check-input" type="checkbox" th:text="${i.additionalService.name}" disabled checked>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label pt-0">Оснащение</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:if="${#lists.isEmpty(roomType.roomTypeRoomEquipmentList)}" value="Отсутствуют"/>
+            <div class="form-check disabled"
+                 th:unless="${#lists.isEmpty(roomType.roomTypeRoomEquipmentList)}"
+                 th:each="i : ${roomType.roomTypeRoomEquipmentList}">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-check-input" type="checkbox" th:text="${i.roomEquipment.name}" disabled checked>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" th:value="${i.amount}" readonly>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

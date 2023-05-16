@@ -20,7 +20,7 @@
 <div class="container">
     <h1 class="mb-4">Список бронирований</h1>
 
-    <p class="fw-medium mb-1">Фильтры</p>
+    <p class="fw-medium mb-1 fs-5">Фильтры</p>
     <form action="#" method="get" class="mb-4">
         <div class="row mb-2">
             <div class="col">
@@ -66,13 +66,13 @@
         </div>
     </form>
 
-    <div class="d-flex justify-content-md-end mb-3  ">
+    <div class="d-flex justify-content-md-end mb-3">
         <a class="btn btn-success" th:href="@{/booking/add}">Добавить</a>
     </div>
 
     <div class="table-responsive">
         <table class="table table-bordered">
-            <thead>
+            <thead class="table-light">
             <tr>
                 <th>№ п/п</th>
                 <th>№ заявки</th>
@@ -100,16 +100,16 @@
                 <td th:text="${b.bookingStatus.name}"></td>
                 <td>
                     <div class="d-grid gap-2 d-md-block">
-                        <a class="btn btn-secondary" th:href="@{/booking/info/{id}(id=${b.id})}">Подробнее</a>
+                        <a class="btn btn-secondary mb-1" th:href="@{/booking/info/{id}(id=${b.id})}">Подробнее</a>
                         <a class="btn btn-danger" th:if="${b.bookingStatus.name == 'Подтверждено'}"
                            th:href="@{/booking/{id}/cancellation(id=${b.id})}">Отменить</a>
                     </div>
                 </td>
                 <td>
                     <div class="d-grid gap-2 d-md-block">
-                        <a class="btn bg-success-subtle" th:if="${b.bookingStatus.name == 'Подтверждено'}"
+                        <a class="btn bg-success-subtle mb-1" th:if="${b.bookingStatus.name == 'Подтверждено'}"
                            th:href="@{/booking/{id}/check-in(id=${b.id})}">Заселение</a>
-                        <a class="btn bg-warning-subtle" th:if="${b.bookingStatus.name == 'В процессе'}"
+                        <a class="btn bg-warning-subtle mb-1" th:if="${b.bookingStatus.name == 'В процессе'}"
                            th:href="@{/booking/{id}/check-out(id=${b.id})}">Выселение</a>
                         <a class="btn bg-dark-subtle" th:if="${b.bookingStatus.name == 'В процессе'}"
                             href="#">Платные услуги</a>

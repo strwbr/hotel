@@ -18,16 +18,18 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Список платных услуг</h1>
+    <h1 class="mb-4">Список платных услуг</h1>
 
-    <div>
-        <label for="">Поиск</label>
-        <input type="search" placeholder="-- Наименование --"/>
-    </div>
+    <form action="#" method="get">
+        <div class="input-group mb-4">
+            <input type="text" class="form-control" placeholder="Наименование" required/>
+            <button class="btn btn-primary" type="submit">Поиск</button>
+        </div>
+    </form>
 
     <div class="table-responsive">
         <table class="table table-bordered">
-            <thead>
+            <thead class="table-light">
             <tr>
                 <th>№ п/п</th>
                 <th>Наименование</th>
@@ -45,7 +47,7 @@
                 <td th:text="${p.unit.name}"></td>
                 <td th:text="${p.availabilityStatus} ? ${p.availabilityStatus.name} : '-'"></td>
                 <td>
-                    <a class="btn btn-primary" th:href="@{/paid_service/info/{id}(id=${p.id})}">Подробнее</a>
+                    <a class="btn btn-secondary" th:href="@{/paid_service/info/{id}(id=${p.id})}">Подробнее</a>
                 </td>
             </tr>
             </tbody>

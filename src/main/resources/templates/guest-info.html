@@ -18,60 +18,94 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <div>
-        <h1>Информация о клиенте</h1>
-        <h2>Персональная информация</h2>
-        <div>
-            <label for="">Фамилия</label>
-            <input type="text" th:value="${guest.surname}" readonly/>
+    <h1 class="mb-4">Информация о клиенте</h1>
+    <div class="mb-4">
+        <h3 class="mb-2">Персональная информация</h3>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="surname">Фамилия</label>
+            <div class="col-sm-10">
+                <input type="text" th:value="${guest.surname}" class="form-control" id="surname" readonly
+                       value="test">
+            </div>
         </div>
-        <div>
-            <label for="">Имя</label>
-            <input type="text" th:value="${guest.name}" readonly/>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="">Имя</label>
+            <div class="col-sm-10">
+                <input type="text" th:value="${guest.name}" class="form-control" id="" readonly
+                       value="test"/>
+            </div>
         </div>
-        <div>
-            <label for="">Отчество</label>
-            <input type="text" th:value="${guest.patronymic}" readonly/>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="">Отчество</label>
+            <div class="col-sm-10">
+                <input type="text" th:value="${guest.patronymic}" class="form-control" id="" readonly
+                       value="test"/>
+            </div>
         </div>
-        <div>
-            <label for="">Дата рождения</label>
-            <input type="text" th:value="${#dates.format(guest.birthday, 'dd.MM.yyyy')}" readonly/>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="">Дата рождения</label>
+            <div class="col-sm-10">
+                <input type="text" th:value="${#dates.format(guest.birthday, 'dd.MM.yyyy')}" class="form-control" id=""
+                       readonly
+                       value="test"/>
+            </div>
         </div>
-        <div>
-            <label for="">Адрес проживания</label>
-            <input type="text" th:value="${residenceAddress}" readonly/>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="">Адрес проживания</label>
+            <div class="col-sm-10">
+                <input type="text" th:value="${residenceAddress}" class="form-control" id="" readonly
+                       value="test"/>
+            </div>
         </div>
-        <div>
-            <label for="">Адрес прописки</label>
-            <input type="text" th:value="${registeredAddress}" readonly/>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="">Адрес прописки</label>
+            <div class="col-sm-10">
+                <input type="text" th:value="${registeredAddress}" class="form-control" id="" readonly
+                       value="test"/>
+            </div>
         </div>
-        <div>
-            <label for="">Документ, удостоверяющий личность</label>
-            <!-- Серия и номер -->
-            <input type="text" th:value="${guest.docNumber}" readonly/>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="">Документ, удостоверяющий личность</label>
             <!-- Тип дул -->
-            <input type="text" th:value="${guest.documentType.name}" readonly/>
+            <div class="col-sm-10">
+                <input type="text" th:value="${guest.documentType.name}" class="form-control" id="" readonly
+                       value="test"/>
+                <input type="text" th:value="${guest.docNumber}" class="form-control" id="" readonly
+                       value="test"/>
+            </div>
         </div>
-        <div>
-            <label for="">Телефон</label>
-            <input type="tel" th:value="${guest.phoneNumber}" readonly/>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="">Телефон</label>
+            <div class="col-sm-10">
+                <input type="tel" th:value="${guest.phoneNumber}" class="form-control" id="" readonly
+                       value="test"/>
+            </div>
         </div>
-        <div>
-            <label for="">email</label>
-            <input type="email" th:value="${guest.email}" readonly/>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="">email</label>
+            <div class="col-sm-10">
+                <input type="email" th:value="${guest.email}" class="form-control" id="" readonly
+                       value="test"/>
+            </div>
         </div>
-        <div class="form-check form-switch">
-            <label class="form-check-label" for="">VIP-статус</label>
-            <input type="checkbox" th:checked="${status}"
-                   class="form-check-input" role="switch" disabled/>
+
+        <div class="mb-3 row">
+            <div class="col-sm-10 offset-sm-2">
+                <div class="form-check">
+                    <input type="checkbox" th:checked="${status}" id="vipCb"
+                           class="form-check-input" value="VIP" disabled/>
+                    <label class="form-check-label" for="vipCb">VIP</label>
+                </div>
+            </div>
         </div>
     </div>
 
     <div>
-        <h2>История бронирований и посещений</h2>
+        <h3 class="mb-2">История бронирований и посещений</h3>
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead>
+                <thead class="table-light">
                 <tr>
                     <th>№ п/п</th>
                     <th>№ заявки</th>
@@ -84,7 +118,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="r, i : ${occupiedRooms}">
-                    <td th:text="${i.count}"></td>
+                    <th scope="row" th:text="${i.count}"></th>
                     <td th:text="${r.booking.id}"></td>
                     <td th:text="${r.booking.bookingStatus.name}"></td>
                     <td th:text="${#dates.format(r.booking.checkInDate, 'dd.MM.yyyy')}"></td>

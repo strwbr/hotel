@@ -18,43 +18,37 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Список номеров</h1>
-    <p>Фильтры</p>
+    <h1 class="mb-4">Список номеров</h1>
+    <p class="fw-medium mb-1 fs-5">Фильтры</p>
 
-    <div>
-        <select>
-            <option selected disabled>-- Тип номера --</option>
-            <!-- option'ы для каждого элемента выпадающего списка -->
-        </select>
-    </div>
+    <form action="#" method="get" class="mb-4 row">
+        <div class="col">
+            <label class="mb-1 form-label" for="roomTypeFilter">Тип номера</label>
+            <select id="roomTypeFilter" class="form-select">
+                <option selected disabled>Выберите</option>
+            </select>
+        </div>
+    </form>
 
-    <div>
-        <label for="">Поиск</label>
-        <input type="search" placeholder="-- Номер --"/>
-    </div>
-
-    <div>
-        <a class="btn btn-success" th:href="@{/room/add}">Добавить</a>
-    </div>
+    <form action="#" method="get">
+        <div class="input-group mb-4">
+            <input type="number" class="form-control"placeholder="Номер" required/>
+            <button class="btn btn-primary" type="submit">Поиск</button>
+        </div>
+    </form>
 
     <div class="table-responsive">
         <table class="table table-bordered">
-            <thead>
+            <thead class="table-light">
             <tr>
                 <th>Номер</th>
                 <th>Тип номера</th>
-                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="r : ${rooms}">
                 <td th:text="${r.number}"></td>
                 <td th:text="${r.roomType.name}"></td>
-                <td>
-                    <!-- <a class="btn btn-primary" th:href="#">Подробнее</a> -->
-                    <a class="btn btn-secondary" th:href="@{/room/edit/{id}(id=${r.id})}">Редактировать</a>
-                    <a class="btn btn-danger" th:href="@{/room/delete/{id}(id=${r.id})}">Удалить</a>
-                </td>
             </tr>
             </tbody>
         </table>

@@ -18,26 +18,27 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Стоимость номеров</h1>
-    <p>Фильтры</p>
-    <div class="mr-5">
-        <select>
-            <option selected disabled>-- Тип номера --</option>
-            <!-- option'ы для каждого элемента выпадающего списка -->
-        </select>
-        <select>
-            <option selected disabled>-- Статус --</option>
-            <!-- option'ы для каждого элемента выпадающего списка -->
-        </select>
-    </div>
+    <h1 class="mb-4">Стоимость номеров</h1>
+    <p class="fw-medium mb-1 fs-5">Фильтры</p>
 
-    <div>
-        <a class="btn btn-success" th:href="@{/price_manager/add}">Добавить</a>
-    </div>
+    <form action="#" method="get" class="mb-4 row">
+        <div class="col">
+            <label class="mb-1 form-label" for="roomTypeFilter">Тип номера</label>
+            <select id="roomTypeFilter" class="form-select">
+                <option selected disabled>Выберите</option>
+            </select>
+        </div>
+        <div class="col form-check">
+            <label class="mb-1 form-check-label" for="vipFilter">Статус клиента</label>
+            <select id="vipFilter" class="form-select">
+                <option selected disabled>Выберите</option>
+            </select>
+        </div>
+    </form>
 
     <div class="table-responsive">
         <table class="table table-bordered">
-            <thead>
+            <thead class="table-light">
             <tr>
                 <th>№ п/п</th>
                 <th>Тип номера</th>
@@ -49,15 +50,12 @@
             </thead>
             <tbody>
             <tr th:each="p, i : ${roomPrices}">
-                <td th:text="${i.count}"></td>
+                <th scope="row" th:text="${i.count}"></th>
                 <td th:text="${p.roomType.name}"></td>
                 <td th:text="${#dates.format(p.startDate, 'dd.MM.yyyy')}"></td>
                 <td th:text="${#dates.format(p.endDate, 'dd.MM.yyyy')}"></td>
                 <td th:text="${p.price}"></td>
-                <td>
-                    <span th:text="${p.status.name}"></span>
-                    <a class="btn btn-success"  th:if="${p.status.name == 'В ожидании'}" th:href="@{/price_manager/setup_status/{id}(id=${p.id})}">Установить</a>
-                </td>
+                <td th:text="${p.status.name}"></td>
             </tr>
             </tbody>
         </table>

@@ -18,21 +18,22 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Список гостей</h1>
+    <h1 class="mb-4">Список гостей</h1>
 
-    <div>
-        <label for="">Поиск:</label>
+    <form action="#" method="get">
+        <div class="input-group mb-4">
+            <input type="text" class="form-control" name="" placeholder="ФИО клиента" required/>
+            <button class="btn btn-primary" type="submit">Поиск</button>
+        </div>
+    </form>
 
-        <input type="search" placeholder="-- ФИО клиента --"/>
-    </div>
-
-    <div>
+    <div class="d-flex justify-content-md-end mb-3">
         <a class="btn btn-success" th:href="@{/guest/add}">Добавить</a>
     </div>
 
     <div class="table-responsive">
         <table class="table table-bordered">
-            <thead>
+            <thead class="table-light">
             <tr>
                 <th>№ п/п</th>
                 <th>ФИО</th>
@@ -45,15 +46,15 @@
             </thead>
             <tbody>
             <tr th:each="g, i : ${guests}">
-                <td th:text="${i.count}"></td>
+                <th scope="row" th:text="${i.count}"></th>
                 <td th:text="${g.surname} + ' ' + ${g.name} + ' ' + ${g.patronymic}"></td>
                 <td th:text="${g.registeredAddress.street.city.region.country} ? ${g.registeredAddress.street.city.region.country.name} : '-'"></td>
                 <td th:text="${g.registeredAddress.street.city} ? ${g.registeredAddress.street.city.name} : '-'"></td>
                 <td th:text="${g.phoneNumber}"></td>
                 <td th:text="${g.email}"></td>
                 <td>
-                    <a class="btn btn-primary" th:href="@{/guest/info/{id}(id=${g.id})}">Подробнее</a>
-                    <a class="btn btn-secondary" th:href="@{/guest/edit/{id}(id=${g.id})}">Редактировать</a>
+                    <a class="btn btn-secondary" th:href="@{/guest/info/{id}(id=${g.id})}">Подробнее</a>
+                    <a class="btn bg-primary-subtle" th:href="@{/guest/edit/{id}(id=${g.id})}">Редактировать</a>
                     <a class="btn btn-danger" th:href="@{/guest/delete/{id}(id=${g.id})}">Удалить</a>
                 </td>
             </tr>

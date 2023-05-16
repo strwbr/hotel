@@ -19,33 +19,45 @@
 <header th:insert="blocks/navbar :: navbar"></header>
 
 <div class="container">
-    <h1>Информация о дополнительной услуги</h1>
+    <h1 class="mb-4">Информация о дополнительной услуги</h1>
 
-    <div>
-        <label class="form-label" for="">Наименование</label>
-        <input type="text" th:value="${additionalService.name}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Описание</label>
-        <textarea style="height: 50px" th:text="${additionalService.description}" readonly></textarea>
-    </div>
-    <div>
-        <!-- checkboxes -->
-        <label class="form-label" for="">Типы номеров</label>
-        <span th:if="${#lists.isEmpty(additionalService.roomTypeAdditionalServiceList)}">Отсутствуют</span>
-        <div th:unless="${#lists.isEmpty(additionalService.roomTypeAdditionalServiceList)}">
-            <ul class="list-group" th:each="i : ${additionalService.roomTypeAdditionalServiceList}">
-                <li class="list-group-item" th:text="${i.roomType.name}"></li>
-            </ul>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="name">Наименование</label>
+        <div class="col-sm-10">
+            <input type="text" th:value="${additionalService.name}" class="form-control" id="name" readonly
+                   value="test">
         </div>
     </div>
-    <div class="form-check form-switch">
-        <label class="form-check-label" for="">Статус</label>
-        <input type="text" th:value="${additionalService.availabilityStatus.name}" readonly/>
-
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="desc">Описание</label>
+        <div class="col-sm-10">
+            <textarea th:value="${additionalService.description}" class="form-control" id="desc" readonly
+                      value="test"></textarea>
+        </div>
     </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label pt-0">Типы номеров</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:if="${#lists.isEmpty(additionalService.roomTypeAdditionalServiceList)}" value="Отсутствуют"/>
+            <div class="form-check disabled"
+                 th:unless="${#lists.isEmpty(additionalService.roomTypeAdditionalServiceList)}"
+                 th:each="i : ${additionalService.roomTypeAdditionalServiceList}">
+                <input class="form-check-input" type="checkbox" th:text="${i.roomType.name}" disabled checked>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="status">Статус</label>
+        <div class="col-sm-10">
+            <input type="text" th:value="${additionalService.availabilityStatus.name}" class="form-control" id="status"
+                   readonly value="test">
+        </div>
+    </div>
+
     <div>
-        <a th:href="@{/additional_service}" class="btn">Вернуться</a>
+        <a th:href="@{/additional_service}" class="btn btn-secondary">Вернуться</a>
     </div>
 </div>
 
