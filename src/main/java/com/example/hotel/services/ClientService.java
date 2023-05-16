@@ -7,11 +7,11 @@ import com.example.hotel.model.OccupiedRoom;
 import java.util.List;
 
 public interface ClientService {
-    List<Client> getAllClients();
-    void saveClient(Client client);
-    Client getClientById(long id);
-    void deleteClientById(long id);
+    List<Client> getAllClients(); // получение списка всех клиентов
+    void saveClient(Client client); // сохранение клиента
+    Client getClientById(long id); // получение клиента по ID
+    void deleteClientById(long id); // удаление клиента по ID
 
-    List<Client> getAllOrderedClients();
-    boolean isVIPClient(Client client);
+    List<Client> getAllOrderedClients(); // получение списка всех клиентов, отсортированных по алфавиту
+    boolean isVIPClient(Client client); // проверка, вляется ли клиент ВИП-клиентом
 }

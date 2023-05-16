@@ -18,25 +18,30 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Список дополнительных услуг</h1>
-    <p>Фильтры</p>
-    <div>
-        <select>
-            <option selected disabled>-- Тип номера --</option>
-            <!-- option'ы для каждого элемента выпадающего списка -->
-        </select>
-    </div>
-    <div>
-        <select>
-            <option selected disabled>-- Статус --</option>
-            <!-- option'ы для каждого элемента выпадающего списка -->
-        </select>
-    </div>
+    <h1 class="mb-4">Дополнительные услуги</h1>
 
-    <div>
-        <label>Поиск</label>
-        <input type="search" placeholder="-- Наименование --"/>
-    </div>
+    <p class="fw-medium mb-1">Фильтры</p>
+    <form action="#" method="get" class="row mb-4">
+        <div class="col">
+            <label class="mb-1 form-label" for="roomTypeFilter">Тип номера</label>
+            <select id="roomTypeFilter" class="form-select">
+                <option selected disabled>Выберите</option>
+            </select>
+        </div>
+        <div class="col">
+            <label class="mb-1 form-label" for="statusFilter">Статус</label>
+            <select id="statusFilter" class="form-select" aria-label="Floating label select example">
+                <option selected disabled>Выберите</option>
+            </select>
+        </div>
+    </form>
+
+    <form action="#" method="get">
+        <div class="input-group mb-4">
+            <input type="text" placeholder="Наименование" class="form-control" required/>
+            <button class="btn btn-primary" type="submit">Поиск</button>
+        </div>
+    </form>
 
     <div class="table-responsive">
         <table class="table table-bordered">
@@ -51,7 +56,7 @@
             </thead>
             <tbody>
             <tr th:each="a, i : ${additionalServices}">
-                <td th:text="${i.count}"></td>
+                <th scope="row" th:text="${i.count}"></th>
                 <td th:text="${a.name}"></td>
                 <td>
                     <ul class="list-group list-group-flush" th:each="r : ${a.roomTypeAdditionalServiceList}">
@@ -60,7 +65,7 @@
                 </td>
                 <td th:text="${a.availabilityStatus.name}"></td>
                 <td>
-                    <a class="btn btn-primary" th:href="@{/additional_service/info/{id}(id=${a.id})}">Подробнее</a>
+                    <a class="btn btn-secondary" th:href="@{/additional_service/info/{id}(id=${a.id})}">Подробнее</a>
                 </td>
             </tr>
             </tbody>
