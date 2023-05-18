@@ -17,78 +17,94 @@
 </head>
 <body>
 <div class="container">
-    <h1>Добавление нового бронирования</h1>
+    <h1 class="mb-4">Добавление нового бронирования</h1>
 
-    <form th:action="@{/booking/add}" th:object="${booking}" method="post">
-        <div>
-            <label class="form-label" for="">Клиент</label>
-            <select th:field="*{client}" required>
-                <option value="" selected hidden>Выберите...</option>
-                <option th:each="client : ${clients}"
-                        th:value="${client.id}"
-                        th:text="${client.surname} + ' ' + ${client.name} + ' ' + ${client.patronymic}
-                     + '(' + '+' + ${client.phoneNumber} + ')'">
-                </option>
-            </select>
+    <form th:action="@{/booking/add}" th:object="${booking}" method="post" class="mb-4">
+
+        <div class="row mb-2">
+            <div class="col">
+                <label class="mb-1 form-label" for="client">Клиент</label>
+                <select class="form-select" id="client" th:field="*{client}" required>
+                    <option value="" selected hidden>Выберите</option>
+                    <option th:each="client : ${clients}"
+                            th:value="${client.id}"
+                            th:text="${client.surname} + ' ' + ${client.name} + ' ' + ${client.patronymic}
+                     + ' (' + '+' + ${client.phoneNumber} + ')'">
+                    </option>
+                </select>
+            </div>
         </div>
-        <div>
-            <label class="form-label" for="">Дата заезда</label>
-            <input type="date" id="check_in_date" th:field="*{checkInDate}" required/>
+
+        <div class="row mb-2">
+            <div class="col">
+                <label class="mb-1 form-label" for="">Дата заезда</label>
+                <input type="date" class="form-control" id="check_in_date" th:field="*{checkInDate}" required/>
+            </div>
+            <div class="col">
+                <label class="mb-1 form-label" for="">Дата выезда</label>
+                <input type="date" class="form-control" id="check_out_date" th:field="*{checkOutDate}" required/>
+            </div>
         </div>
-        <div>
-            <label class="form-label" for="">Дата выезда</label>
-            <input type="date" id="check_out_date" th:field="*{checkOutDate}" required/>
-        </div>
-        <div>
+
+
+        <div class="row mb-2">
             <label class="form-label" for="">Тип номера</label>
-            <select th:field="*{roomType}" id="selectRoomType" required>
-                <option value="" selected hidden>Выберите...</option>
-                <option th:each="type : ${roomTypes}"
-                        th:value="${type.id}"
-                        th:text="${type.name}">
-                </option>
-            </select>
-            <input type="number" min="0" th:field="*{roomsAmount}" placeholder="Количество" id="amountRooms" required disabled/>
-        </div>
-        <div>
-            <label class="form-label" for="">Количество взрослых</label>
-            <input type="number" min="0" th:field="*{adultsAmount}" id="adults" required/>
-        </div>
-        <div>
-            <label class="form-label" for="">Количество детей</label>
-            <input type="number" min="0" th:field="*{childrenAmount}"/>
+
+            <div class="input-group">
+                <select class="form-select" th:field="*{roomType}" id="selectRoomType" required>
+                    <option value="" selected hidden>Выберите</option>
+                    <option th:each="type : ${roomTypes}"
+                            th:value="${type.id}"
+                            th:text="${type.name}">
+                    </option>
+                </select>
+                <input type="number" class="form-control" min="0" th:field="*{roomsAmount}" placeholder="Количество"
+                       id="amountRooms"
+                       required disabled/>
+            </div>
+
         </div>
 
-        <label class="form-label" for="">Платные услуги</label>
-        <div th:each="service : ${paidServices}">
-            <input type="checkbox" name="selectedPaidServices"
-                   th:value="${service.id}"
-                   th:text="${service.name}"/>
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="">Количество взрослых</label>
+                <input type="number" class="form-control" min="0" th:field="*{adultsAmount}" id="adults" required/>
+            </div>
+            <div class="col">
+                <label class="form-label" for="">Количество детей</label>
+                <input type="number" class="form-control" min="0" th:field="*{childrenAmount}"/>
+            </div>
         </div>
 
-        <label>Дополнительное спальное место</label>
-        <input type="checkbox" id="needExtraBed">
-        <div id="extraBedBlock" style="display: none;">
-            <select name="selectedExtraBed">
-                <option value="" selected hidden>Выберите...</option>
-                <option th:each="type : ${bedTypes}"
-                        th:value="${type.id}"
-                        th:text="${type.name}">
-                </option>
-            </select>
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="">Платные услуги</label>
+                <div class="form-check" th:each="service : ${paidServices}">
+                    <input class="form-check-input" type="checkbox" name="selectedPaidServices"
+                           th:value="${service.id}"
+                           th:text="${service.name}"/>
+                </div>
+            </div>
         </div>
-        <!--        <div>-->
-        <!--            <label class="form-label" for="">Дата оформления бронирования</label>-->
-        <!--            <input type="datetime-local" id="booking_time" th:field="*{bookingTime}" readonly/>-->
-        <!--        </div>-->
-        <!--<div>
-            <label class="form-label" for="">Стоимость за время проживания</label>
-            <input type="text" name="" id="" pattern=""/>
+
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="needExtraBed">Дополнительное спальное место</label>
+                <input class="form-check-input" type="checkbox" id="needExtraBed">
+            </div>
+            <div class="col">
+                <div id="extraBedBlock" style="display: none;">
+                    <select class="form-select" name="selectedExtraBed">
+                        <option value="" selected hidden>Выберите</option>
+                        <option th:each="type : ${bedTypes}"
+                                th:value="${type.id}"
+                                th:text="${type.name}">
+                        </option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div>
-            <label class="form-label" for="">Статус предоплаты</label>
-            <input type="text" name="" id="" readonly/>
-        </div>-->
+
 
         <div>
             <button type="submit" class="btn btn-primary">Продолжить</button>
@@ -132,6 +148,10 @@ selectRoomType.addEventListener('change', function() {
     adults.min = 1;
     adults.value = 1;
 });
+
+
+
+
 
 
 

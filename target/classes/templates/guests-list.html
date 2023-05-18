@@ -53,9 +53,11 @@
                 <td th:text="${g.phoneNumber}"></td>
                 <td th:text="${g.email}"></td>
                 <td>
-                    <a class="btn btn-secondary" th:href="@{/guest/info/{id}(id=${g.id})}">Подробнее</a>
-                    <a class="btn bg-primary-subtle" th:href="@{/guest/edit/{id}(id=${g.id})}">Редактировать</a>
-                    <a class="btn btn-danger" th:href="@{/guest/delete/{id}(id=${g.id})}">Удалить</a>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a class="btn btn-secondary mb-1" th:href="@{/guest/info/{id}(id=${g.id})}">Подробнее</a>
+                        <a class="btn bg-primary-subtle mb-1" th:href="@{/guest/edit/{id}(id=${g.id})}">Редактировать</a>
+                        <a class="btn btn-danger" th:href="@{/guest/delete/{id}(id=${g.id})}">Удалить</a>
+                    </div>
                 </td>
             </tr>
             </tbody>

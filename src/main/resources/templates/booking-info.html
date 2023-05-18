@@ -18,96 +18,165 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Информация о бронировании</h1>
+    <h1 class="mb-4">Информация о бронировании</h1>
 
-    <div>
-        <label class="form-label" for="">№ бронирования</label>
-        <input type="number" th:value="${booking.id}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Фамилия</label>
-        <input type="text" th:value="${booking.client.surname}" readonly/>
-    </div>
-    <div>
-        <label class="form-label">Имя</label>
-        <input type="text" th:value="${booking.client.name}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Отчество</label>
-        <input type="text" th:value="${booking.client.patronymic}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Телефон</label>
-        <input type="tel" pattern="" th:value="${booking.client.phoneNumber}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">email</label>
-        <input type="email" pattern="" th:value="${booking.client.email}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Дата заезда</label>
-        <input type="text" th:value="${#dates.format(booking.checkInDate, 'dd.MM.yyyy')}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Дата выезда</label>
-        <input type="text" th:value="${#dates.format(booking.checkOutDate, 'dd.MM.yyyy')}" readonly/>
-    </div>
-    <!--      <div>-->
-    <!--        <label class="form-label" for="">Количество дней</label>-->
-    <!--        <input type="number" readonly />-->
-    <!--      </div>-->
-    <!--      <div>-->
-    <!--        <label class="form-label" for="">Количество ночей</label>-->
-    <!--        <input type="number" readonly />-->
-    <!--      </div>-->
-    <div>
-        <label class="form-label" for="">Тип номера</label>
-        <input type="text" th:value="${booking.roomType.name} + ' | ' + ${booking.roomsAmount}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Количество взрослых</label>
-        <input type="number" th:value="${booking.adultsAmount}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Количество детей</label>
-        <input type="number" th:value="${booking.childrenAmount}" readonly/>
-    </div>
-    <div>
-        <label class="form-label" for="">Доп. спальное место</label>
-        <div th:if="${booking.extraBed != null}">
-            <input type="text" th:value="${booking.extraBed.bedType.name} + ' | ' + ${booking.extraBed.price}">
-        </div>
-        <span th:unless="${booking.extraBed != null}">Отсутствуют</span>
-    </div>
-    <div>
-        <label class="form-label" for="">Платные услуги</label>
-        <span th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}">Отсутствуют</span>
-        <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}">
-            <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
-                <li class="list-group-item" th:text="${i.paidService.name} + ' | ' + ${i.amount}"></li>
-            </ul>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">№ бронирования</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" th:value="${booking.id}" readonly/>
         </div>
     </div>
-    <div>
-        <label class="form-label" for="">Дата оформления бронирования</label>
-        <input type="text" th:value="${#dates.format(booking.bookingTime, 'dd.MM.yyyy HH:mm')}" readonly/>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Фамилия</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${booking.client.surname}" readonly/>
+        </div>
     </div>
-    <div>
-        <label class="form-label" for="">Стоимость за время проживания</label>
-        <input type="text" th:value="${booking.totalCost}" readonly/>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Имя</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${booking.client.name}" readonly/>
+        </div>
     </div>
-    <div>
-        <label class="form-label" for="">Статус бронирования</label>
-        <input type="text" th:value="${booking.bookingStatus.name}" readonly/>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Отчество</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${booking.client.patronymic}" readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Телефон</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${booking.client.phoneNumber}" readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" th:value="${booking.client.email}" readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Дата заезда</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${#dates.format(booking.checkInDate, 'dd.MM.yyyy')}"
+                   readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Дата выезда</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${#dates.format(booking.checkOutDate, 'dd.MM.yyyy')}"
+                   readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Тип номера</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${booking.roomType.name} + ' | ' + ${booking.roomsAmount}"
+                   readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Количество взрослых</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" th:value="${booking.adultsAmount}" readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Количество детей</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" th:value="${booking.childrenAmount}" readonly/>
+        </div>
     </div>
 
-    <div>
-        <label class="form-label" for="">Оплаты</label>
-        <span th:if="${#lists.isEmpty(booking.paymentList)}">Отсутствуют</span>
-        <div th:unless="${#lists.isEmpty(booking.paymentList)}">
-            <ul class="list-group" th:each="i : ${booking.paymentList}">
-                <li class="list-group-item" th:text="${i.paymentDate} + ' | ' + ${i.purpose.name} + ' | ' + ${i.amount}"></li>
-            </ul>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label pt-0">Дополнительное спальное место</label>
+        <div class="col-sm-10">
+            <div th:if="${booking.extraBed != null}">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="extraBedType" class="mb-1 form-label">Тип кровати:</label>
+                        <input class="form-control" type="text" th:value="${booking.extraBed.bedType.name}" id="extraBedType"
+                               readonly>
+                    </div>
+                    <div class="col-auto">
+                        <label for="extraBedPrice" class="mb-1 form-label">Цена:</label>
+                        <input type="text" class="form-control" th:value="${booking.extraBed.price}" id="extraBedPrice" readonly>
+                    </div>
+                </div>
+            </div>
+            <input type="text" class="form-control-plaintext"
+                   th:unless="${booking.extraBed != null}" value="Отсутствуют"/>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label pt-0">Платные услуги</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}" value="Отсутствуют"/>
+            <div class="form-check disabled"
+                 th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}"
+                 th:each="i : ${booking.bookingPaidServiceList}">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <input class="form-check-input" type="checkbox" th:text="${i.paidService.name}" disabled
+                               checked>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" th:value="${i.amount}" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Дата оформления бронирования</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${#dates.format(booking.bookingTime, 'dd.MM.yyyy HH:mm')}"
+                   readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Стоимость за время проживания</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${booking.totalCost}" readonly/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" for="">Статус бронирования</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:value="${booking.bookingStatus.name}" readonly/>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label pt-0">Оплаты</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:if="${#lists.isEmpty(booking.paymentList)}" value="Отсутствуют"/>
+            <div th:unless="${#lists.isEmpty(booking.paymentList)}"
+                 th:each="i : ${booking.paymentList}">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="paymentDate" class="mb-1 form-label">Дата:</label>
+                        <input class="form-control" type="text"
+                               th:value="${#dates.format(i.paymentDate, 'dd.MM.yyyy HH:mm')}" id="paymentDate"
+                               readonly>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="paymentPurpose" class="mb-1 form-label">Назначение:</label>
+                        <input type="text" class="form-control" th:value="${i.purpose.name}" id="paymentPurpose"
+                               readonly>
+                    </div>
+                    <div class="col-auto">
+                        <label for="paymentCost" class="mb-1 form-label">Сумма:</label>
+                        <input type="text" class="form-control" th:value="${i.amount}" id="paymentCost" readonly>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

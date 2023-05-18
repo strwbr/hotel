@@ -19,94 +19,136 @@
 <div class="container">
     <h1>Добавление нового клиента</h1>
 
-    <form th:action="@{/guest/add}" th:object="${guest}" method="post">
-        <div>
-            <label for="">Фамилия</label>
-            <input type="text" th:field="*{surname}" required/>
+    <form th:action="@{/guest/add}" th:object="${guest}" method="post" class="mb-4">
+
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="surname">Фамилия</label>
+                <input type="text" class="form-control" id="surname" th:field="*{surname}" required/>
+            </div>
+            <div class="col">
+                <label class="form-label" for="name">Имя</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" required/>
+            </div>
+            <div class="col">
+                <label class="form-label" for="patronymic">Отчество</label>
+                <input type="text" class="form-control" id="patronymic" th:field="*{patronymic}" required/>
+            </div>
         </div>
-        <div>
-            <label for="">Имя</label>
-            <input type="text" th:field="*{name}" required/>
+
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="docType">Документ, удостоверяющий личность</label>
+                <select class="form-select" id="docType" th:field="*{documentType}" required>
+                    <option value="" selected hidden>Выберите</option>
+                    <option th:each="type : ${docTypes}"
+                            th:value="${type.id}"
+                            th:text="${type.name}"></option>
+                </select>
+
+            </div>
+            <div class="col">
+                <label class="form-label" for="docNum">Серия и номер</label>
+                <input type="text" class="form-control" th:field="*{docNumber}" id="docNum"
+                       required/>
+            </div>
         </div>
-        <div>
-            <label for="">Отчество</label>
-            <input type="text" th:field="*{patronymic}" required/>
+
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="birthday">Дата рождения</label>
+                <input type="date" class="form-control" id="birthday" th:field="*{birthday}" required/>
+            </div>
+            <div class="col">
+                <label class="form-label" for="phone">Телефон</label>
+                <input type="tel" class="form-control" pattern="^\7[0-9]{10}$" id="phone" th:field="*{phoneNumber}"
+                       required/>
+            </div>
+            <div class="col">
+                <label class="form-label" for="email">Электронная почта</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required/>
+            </div>
         </div>
-        <div>
-            <label for="">Дата рождения</label>
-            <input type="date" th:field="*{birthday}" required/>
+
+        <div class="row mb-1">
+            <label class="form-label">Адрес проживания</label>
         </div>
-        <div>
-            <label for="">Адрес проживания</label>
-            <select id="countryId">
-                <option value="" selected hidden>Страна</option>
-                <option th:each="country : ${countries}"
-                        th:value="${country.id}"
-                        th:text="${country.name}">
-                </option>
-            </select>
-            <select id="regionId">
-                <option value="" selected hidden>Регион</option>
-                <option th:each="region : ${regions}"
-                        th:value="${region.id}"
-                        th:text="${region.name}">
-                </option>
-            </select>
-            <select id="cityId">
-                <option value="" selected hidden>Город</option>
-                <option th:each="city : ${cities}"
-                        th:value="${city.id}"
-                        th:text="${city.name}">
-                </option>
-            </select>
-            <select id="streetId">
-                <option value="" selected hidden>Улица</option>
-                <option th:each="street : ${streets}"
-                        th:value="${street.id}"
-                        th:text="${street.name}">
-                </option>
-            </select>
-            <select id="streetTypeId">
-                <option value="" selected hidden>Тип улицы</option>
-                <option th:each="type : ${streetTypes}"
-                        th:value="${type.id}"
-                        th:text="${type.name}">
-                </option>
-            </select>
-            <input type="number" id="house" placeholder="Дом">
-            <input type="number" id="building" placeholder="Строение">
-            <input type="number" id="apartment" placeholder="Квартира">
+
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="countryId">Страна</label>
+                <select class="form-select" id="countryId">
+                    <option value="" selected hidden>Выберите</option>
+                    <option th:each="country : ${countries}"
+                            th:value="${country.id}"
+                            th:text="${country.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label" for="regionId">Регион</label>
+                <select class="form-select" id="regionId">
+                    <option value="" selected hidden>Выберите</option>
+                    <option th:each="region : ${regions}"
+                            th:value="${region.id}"
+                            th:text="${region.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label" for="cityId">Город</label>
+                <select class="form-select" id="cityId">
+                    <option value="" selected hidden>Выберите</option>
+                    <option th:each="city : ${cities}"
+                            th:value="${city.id}"
+                            th:text="${city.name}">
+                    </option>
+                </select>
+            </div>
         </div>
-        <!--<div>
-          <label for="">Адрес прописки</label>
-          <input type="text" name="" id="" />
-        </div>-->
-        <div>
-            <label for="">Документ, удостоверяющий личность</label>
-            <select th:field="*{documentType}" required>
-                <option value="" selected hidden>Выберите...</option>
-                <option th:each="type : ${docTypes}"
-                        th:value="${type.id}"
-                        th:text="${type.name}"></option>
-            </select>
-            <input type="text" th:field="*{docNumber}" placeholder="Серия и номер" required/>
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="streetTypeId">Тип улицы</label>
+                <select class="form-select" id="streetTypeId">
+                    <option value="" selected hidden>Выберите</option>
+                    <option th:each="type : ${streetTypes}"
+                            th:value="${type.id}"
+                            th:text="${type.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label" for="streetId">Улица</label>
+                <select class="form-select" id="streetId">
+                    <option value="" selected hidden>Выберите</option>
+                    <option th:each="street : ${streets}"
+                            th:value="${street.id}"
+                            th:text="${street.name}">
+                    </option>
+                </select>
+            </div>
         </div>
-        <div>
-            <label for="">Телефон</label>
-            <input type="tel" pattern="^\7[0-9]{10}$" th:field="*{phoneNumber}" required/>
+
+        <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="house">Дом</label>
+                <input type="number" class="form-control" id="house">
+            </div>
+            <div class="col">
+                <label class="form-label" for="building">Строение</label>
+                <input type="number" class="form-control" id="building">
+            </div>
+            <div class="col">
+                <label class="form-label" for="apartment">Квартира</label>
+                <input type="number" class="form-control" id="apartment">
+            </div>
         </div>
-        <div>
-            <label for="">email</label>
-            <input type="email" th:field="*{email}" required/>
-        </div>
-        <div class="form-check form-switch">
-            <label class="form-check-label" for="">VIP-статус</label>
-            <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    name="isVipClient"
-                    id="isVipClient"
+
+        <div class="form-check form-switch mb-2">
+            <label class="form-check-label" for="isVipClient">VIP-статус</label>
+            <input class="form-check-input" type="checkbox" role="switch"
+                   name="isVipClient"
+                   id="isVipClient"
             />
         </div>
 
@@ -129,7 +171,6 @@
             inputField.value = inputField.value.trim();
         });
     });
-
 </script>
 </body>
 </html>

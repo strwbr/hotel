@@ -17,60 +17,116 @@
 </head>
 <body>
 <div class="container">
-    <h1>Оплата</h1>
+    <h1 class="mb-4">Оплата</h1>
 
     <form th:action="@{/booking/prepayment}" th:object="${payment}" method="post">
 
-        <div>
-            <h4>Информация по бронированию №</h4>
-            <input type="text" th:value="${booking.id}" name="bookingId" readonly>
-            <div>
-                <p th:text="${booking.client.surname} + ' ' + ${booking.client.name} + ' ' + ${booking.client.patronymic}"></p>
-                <p th:text="${#dates.format(booking.checkInDate, 'dd.MM.yyyy')}
-                + ' - ' + ${#dates.format(booking.checkOutDate, 'dd.MM.yyyy')}"></p>
-                <p th:text="'Взрослых: ' + ${booking.adultsAmount}"></p>
-                <p th:text="'Детей: ' + ${booking.childrenAmount}"></p>
-                <p th:text="${booking.roomType.name} + ' - ' + ${booking.roomsAmount}"></p>
-            </div>
-                        
-            <h4>Добавленные платные услуги</h4>
-            <span th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}">Отсутствуют</span>
-            <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}">
-                <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
-                    <li class="list-group-item" th:text="${i.paidService.name}"></li>
-                </ul>
+        <div class="mb-2 row">
+            <label for="bookingId" class="col-sm-5 col-form-label fs-4 fw-bold">Информация по бронированию №</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control-plaintext fs-4 fw-bold" th:value="${booking.id}" name="bookingId"
+                       id="bookingId" value="1"
+                       readonly>
             </div>
         </div>
 
-        <p th:text="'Назначение платежа ' + ${purpose}"></p>
-        <!--            <input type="text" th:value="${payment.purpose.name}" th:field="*{purpose}" readonly/>-->
-
-        <div>
-            <h3>Сумма к оплате: </h3>
-            <h3 th:text="${cost}"></h3>
+        <div class="mb-2 row">
+            <label for="client" class="col-sm-2 col-form-label">Клиент</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext"
+                       th:value="${booking.client.surname} + ' ' + ${booking.client.name} + ' ' + ${booking.client.patronymic}"
+                       value="test" id="client" readonly>
+            </div>
+        </div>
+        <div class="mb-2 row">
+            <label for="livingDates" class="col-sm-2 col-form-label">Даты проживания</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext"
+                       th:value="${#dates.format(booking.checkInDate, 'dd.MM.yyyy')}
+                + ' - ' + ${#dates.format(booking.checkOutDate, 'dd.MM.yyyy')}"
+                       id="livingDates" readonly>
+            </div>
+        </div>
+        <div class="mb-2 row">
+            <label for="adultsAmount" class="col-sm-2 col-form-label">Количество взрослых</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext" th:value="${booking.adultsAmount}"
+                       value="test" id="adultsAmount" readonly>
+            </div>
+        </div>
+        <div class="mb-2 row">
+            <label for="childrenAmount" class="col-sm-2 col-form-label">Количество детей</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext" th:value="${booking.childrenAmount}"
+                       value="test" id="childrenAmount" readonly>
+            </div>
+        </div>
+        <div class="mb-2 row">
+            <label for="roomType" class="col-sm-2 col-form-label">Типы номеров</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext"
+                       th:value="${booking.roomType.name} + ' - ' + ${booking.roomsAmount}"
+                       value="test" id="roomType" readonly>
+            </div>
         </div>
 
-        <div>
-            <label class="form-label" for="">Сотрудник</label>
-            <select th:field="*{employee}" required>
-                <option value="" selected hidden>Выберите...</option>
-                <option th:each="employee : ${employees}"
-                        th:value="${employee.id}"
-                        th:text="${employee.surname} + ' ' + ${employee.name} + ' ' + ${employee.patronymic}
+        <div class="mb-2 row">
+            <label class="col-sm-2 col-form-label pt-0">Добавленные платные услуги</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext"
+                       th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}" value="Отсутствуют"/>
+                <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}"
+                     th:each="i : ${booking.bookingPaidServiceList}">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <input class="form-control-plaintext" type="text" th:text="${i.paidService.name}"
+                                   value="fgjpida" readonly>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control-plaintext" th:value="${i.paidService.price}" value="123"
+                                   readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-2 row">
+            <label for="payPurpose" class="col-sm-3 col-form-label fs-5">Назначение платежа</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control fs-5 fw-bold" th:value="${purpose}" id="payPurpose" readonly value="test">
+            </div>
+        </div>
+
+        <div class="mb-2 row">
+            <div class="col-sm-3">
+                <label for="payCost" class="form-label fs-2 fw-bold">К оплате:</label>
+                <input type="text" class="form-control fs-4 fw-bold" th:value="${cost}" id="payCost" value="12345" readonly>
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <div class="col">
+                <label class="form-label" for="empl">Сотрудник</label>
+                <select id="empl" class="form-select" th:field="*{employee}" required>
+                    <option value="" selected hidden>Выберите...</option>
+                    <option th:each="employee : ${employees}"
+                            th:value="${employee.id}"
+                            th:text="${employee.surname} + ' ' + ${employee.name} + ' ' + ${employee.patronymic}
                         + ' (' + ${employee.phoneNumber} + ')'">
-                </option>
-            </select>
-        </div>
-
-        <div>
-            <label class="form-label" for="">Вид оплаты</label>
-            <select th:field="*{paymentType}" required>
-                <option value="" selected hidden>Выберите...</option>
-                <option th:each="type : ${paymentTypes}"
-                        th:value="${type.id}"
-                        th:text="${type.name}">
-                </option>
-            </select>
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label" for="payType">Вид оплаты</label>
+                <select id="payType" class="form-select" th:field="*{paymentType}" required>
+                    <option value="" selected hidden>Выберите...</option>
+                    <option th:each="type : ${paymentTypes}"
+                            th:value="${type.id}"
+                            th:text="${type.name}">
+                    </option>
+                </select>
+            </div>
         </div>
 
         <div>

@@ -18,52 +18,71 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Список архивных бронирований</h1>
-    <p>Фильтры</p>
-    <div class="mr-5">
-        <select>
-            <option selected disabled>-- Тип номера --</option>
-            <option value="standart-double">Стандарт двуместный</option>
-            <!-- option'ы для каждого элемента выпадающего списка -->
-        </select>
-        <select>
-            <option selected disabled>-- Статус брони --</option>
-            <!-- option'ы для каждого элемента выпадающего списка -->
-        </select>
-        <select>
-            <option selected disabled>-- Статус предоплаты --</option>
-            <!-- option'ы для каждого элемента выпадающего списка -->
-        </select>
+    <h1 class="mb-4">Список архивных бронирований</h1>
+    <p class="fw-medium mb-1 fs-5">Фильтры</p>
 
-        <div>
-            <label>
-                Дата оформления бронирования:
-                <input type="date"/>
-            </label>
+    <form action="#" method="get" class="mb-4">
+        <div class="row mb-2">
+            <div class="col">
+                <label class="mb-1 form-label" for="roomTypeFilter">Тип номера</label>
+                <select id="roomTypeFilter" class="form-select">
+                    <option selected disabled>Выберите</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="mb-1 form-label" for="bookingStatusFilter">Статус бронирования</label>
+                <select id="bookingStatusFilter" class="form-select">
+                    <option selected disabled>Выберите</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="mb-1 form-label" for="payStatusFilter">Статус оплаты</label>
+                <select id="payStatusFilter" class="form-select">
+                    <option selected disabled>Статус предоплаты</option>
+                </select>
+            </div>
         </div>
-        <div>
-            <label>
-                Дата заезда:
-                <input type="date"/>
-            </label>
-        </div>
-        <div>
-            <label>
-                Дата выезда:
-                <input type="date"/>
-            </label>
-        </div>
-    </div>
 
-    <div>
-        <label for="">Поиск:</label>
-        <input type="search" placeholder="-- № бронирования --"/>
-        <input type="search" placeholder="-- ФИО клиента --"/>
-    </div>
+        <div class="row">
+            <div class="col">
+                <label class="mb-1 form-label" for="checkInDateFilter">Дата оформления бронирования:</label>
+                <input type="date" class="form-control" id="checkInDateFilter"/>
+            </div>
+            <div class="col">
+                <label class="mb-1 form-label" for="checkOutDateFilter">Дата заезда:</label>
+                <input type="date" class="form-control" id="checkOutDateFilter"/>
+            </div>
+            <div class="col">
+                <label class="mb-1 form-label">Дата выезда:</label>
+                <input type="date" class="form-control"/>
+            </div>
+        </div>
+    </form>
+
+    <form action="#" method="get">
+        <div class="row mb-2">
+            <div class="col">
+                <label class="mb-1 form-label" for="bookingNumber">Дата заезда:</label>
+                <div class="input-group mb-4">
+                    <input type="number" class="form-control" id="bookingNumber" placeholder="Номер бронирования"
+                           required/>
+                    <button class="btn btn-primary" type="submit">Поиск</button>
+                </div>
+            </div>
+            <div class="col">
+                <label class="mb-1 form-label" for="client">ФИО клиента:</label>
+                <div class="input-group mb-4">
+                    <input type="number" class="form-control" id="client" placeholder="ФИО клиента" required/>
+                    <button class="btn btn-primary" type="submit">Поиск</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
 
     <div class="table-responsive">
         <table class="table table-bordered">
-            <thead>
+            <thead class="table-light">
             <tr>
                 <th>№ п/п</th>
                 <th>№ бронирования</th>
@@ -77,7 +96,7 @@
             </thead>
             <tbody>
             <tr th:each="b, i : ${archivedBookings}">
-                <td th:text="${i.count}"></td>
+                <th scope="row" th:text="${i.count}"></th>
                 <td th:text="${b.id}"></td>
                 <td th:text="${b.client.surname} + ' ' + ${b.client.name} + ' ' + ${b.client.patronymic}"></td>
                 <td th:text="${#dates.format(b.checkInDate, 'dd-MM-yyyy')}"></td>

@@ -43,7 +43,7 @@
                  th:unless="${#lists.isEmpty(roomType.roomTypeBedTypeList)}"
                  th:each="i : ${roomType.roomTypeBedTypeList}">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm-3">
                         <input class="form-check-input" type="checkbox" th:text="${i.bedType.name}" disabled checked>
                     </div>
                     <div class="col-auto">
@@ -67,6 +67,8 @@
         </div>
     </div>
 
+
+
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label pt-0">Оснащение</label>
         <div class="col-sm-10">
@@ -76,7 +78,7 @@
                  th:unless="${#lists.isEmpty(roomType.roomTypeRoomEquipmentList)}"
                  th:each="i : ${roomType.roomTypeRoomEquipmentList}">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm-3">
                         <input class="form-check-input" type="checkbox" th:text="${i.roomEquipment.name}" disabled checked>
                     </div>
                     <div class="col-auto">

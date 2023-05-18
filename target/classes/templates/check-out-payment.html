@@ -17,60 +17,151 @@
 </head>
 <body>
 <div class="container">
-    <h1>Оплата</h1>
+    <h1 class="mb-4">Оплата</h1>
     <form th:action="@{/booking/check-out/payment}" th:object="${payment}" method="post">
-        <div>
-            <h4>Бронирование №</h4>
-            <input type="text" th:value="${booking.id}" name="bookingId" readonly>
-            <h4>Информация по выселению</h4>
-            <div th:each="rooms : ${booking.occupiedRoomList}">
-                <p th:text="'Номер: ' + ${rooms.room.number}"></p>
-                <p>Постояльцы:</p>
-                <div th:each="orc, i : ${rooms.occupiedRoomClientList}">
-                    <p th:text="${i.count} + '. ' + ${orc.client.surname} + ' ' + ${orc.client.name} + ' ' + ${orc.client.patronymic}"></p>
-                </div>
-                <p th:text="'Дата и время выселения: ' +
-                 ${#temporals.format(rooms.departure.realDepartureDate, 'dd.MM.yyyy') + ' ' +
-                 #temporals.format(rooms.departure.realDepartureTime, 'HH:mm')}"></p>
-            </div>
 
-            <p th:text="'Назначение платежа: ' + ${purpose}"></p>
-
-            <div>
-                <h3>К оплате: </h3>
-                <p th:text="'Проживание в номере' + ${hotelPrice}"></p>
-                <p th:text="'Платные услуги' + ${paidServicesCost}"></p>
-                <h5>Платежи</h5>
-                <div th:each="payment : ${booking.paymentList}">
-                    <p th:text="'Назначение: ' + ${payment.purpose.name}"></p>
-                    <p th:text="'Сумма: ' + ${payment.amount}"></p>
-                    <p th:text="'Дата и время: ' + ${#dates.format(payment.paymentDate, 'dd.MM.yyyy HH:mm')}"></p>
-                </div>
-                <h3 th:text="'ИТОГО: ' + ${totalCost}"></h3>
+        <div class="mb-2 row">
+            <label for="bookingId" class="col-sm-3 col-form-label fs-4 fw-bold">Бронирование № </label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control-plaintext fs-4 fw-bold" th:value="${booking.id}"
+                       value=" test" id="bookingId" name="bookingId" readonly>
             </div>
         </div>
 
-        <div>
-            <label class="form-label" for="">Сотрудник</label>
-            <select th:field="*{employee}" required>
-                <option value="" selected hidden>Выберите...</option>
-                <option th:each="employee : ${employees}"
-                        th:value="${employee.id}"
-                        th:text="${employee.surname} + ' ' + ${employee.name} + ' ' + ${employee.patronymic}
+        <p class="fw-medium mb-1 fs-5">Информация по выселению</p>
+        <div th:each="rooms : ${booking.occupiedRoomList}">
+            <div class="mb-2 row">
+                <label for="room" class="col-sm-2 col-form-label">Номер</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-plaintext" th:value="${rooms.room.number}" id="room"
+                           readonly>
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="clients" class="col-sm-2 col-form-label">Постояльцы</label>
+                <div class="col-sm-10">
+                    <div th:each="orc, i : ${rooms.occupiedRoomClientList}">
+                        <div class="row">
+                            <input type="text" class="form-control-plaintext" id="clients" readonly
+                                   th:value="${i.count} + '. ' + ${orc.client.surname} + ' ' + ${orc.client.name} + ' ' + ${orc.client.patronymic}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="checkInDate" class="col-sm-2 col-form-label">Время выселения</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-plaintext"
+                           th:value="${#temporals.format(rooms.departure.realDepartureDate, 'dd.MM.yyyy') + ' ' +
+                 #temporals.format(rooms.departure.realDepartureTime, 'HH:mm')}" value="test" id="checkInDate" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-2 row">
+            <label for="payPurpose" class="col-sm-3 col-form-label fs-5">Назначение платежа</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control fs-5 fw-bold" th:value="${purpose}" id="payPurpose" readonly
+                       value="test">
+            </div>
+        </div>
+
+            <!--            <h4>Бронирование №</h4>-->
+            <!--            <input type="text" th:value="${booking.id}" name="bookingId" readonly>-->
+            <!--            <h4>Информация по выселению</h4>-->
+            <!--            <div th:each="rooms : ${booking.occupiedRoomList}">-->
+            <!--                <p th:text="'Номер: ' + ${rooms.room.number}"></p>-->
+            <!--                <p>Постояльцы:</p>-->
+            <!--                <div th:each="orc, i : ${rooms.occupiedRoomClientList}">-->
+            <!--                    <p th:text="${i.count} + '. ' + ${orc.client.surname} + ' ' + ${orc.client.name} + ' ' + ${orc.client.patronymic}"></p>-->
+            <!--                </div>-->
+            <!--                <p th:text="'Дата и время выселения: ' +-->
+            <!--                 ${#temporals.format(rooms.departure.realDepartureDate, 'dd.MM.yyyy') + ' ' +-->
+            <!--                 #temporals.format(rooms.departure.realDepartureTime, 'HH:mm')}"></p>-->
+            <!--            </div>-->
+
+            <!--            <p th:text="'Назначение платежа: ' + ${purpose}"></p>-->
+
+<!--            <div>-->
+<!--                <h3>К оплате: </h3>-->
+<!--                <p th:text="'Проживание в номере' + ${hotelPrice}"></p>-->
+<!--                <p th:text="'Платные услуги' + ${paidServicesCost}"></p>-->
+<!--                <h5>Платежи</h5>-->
+<!--                <div th:each="payment : ${booking.paymentList}">-->
+<!--                    <p th:text="'Назначение: ' + ${payment.purpose.name}"></p>-->
+<!--                    <p th:text="'Сумма: ' + ${payment.amount}"></p>-->
+<!--                    <p th:text="'Дата и время: ' + ${#dates.format(payment.paymentDate, 'dd.MM.yyyy HH:mm')}"></p>-->
+<!--                </div>-->
+<!--                <h3 th:text="'ИТОГО: ' + ${totalCost}"></h3>-->
+<!--            </div>-->
+
+        <div class="mb-2 row">
+            <label class="form-label fs-2 fw-bold">К оплате:</label>
+            <label for="hotelPrice" class="col-sm-2 col-form-label">Проживание в номере: </label>
+            <div class="col-sm-3">
+                <input type="text" id="hotelPrice" class="form-control-plaintext" th:value="${hotelPrice}" value="еуап"
+                       readonly>
+            </div>
+        </div>
+
+        <div class="mb-2 row">
+            <label for="paidServicesCost" class="col-sm-2 col-form-label">Платные услуги: </label>
+            <div class="col-sm-3">
+                <input type="text" id="paidServicesCost" class="form-control-plaintext" th:value="${paidServicesCost}"
+                       value="еуап" readonly>
+            </div>
+        </div>
+
+        <div class="mb-2 row">
+            <label class="col-sm-2 col-form-label">Платежи:</label>
+            <div class="col-sm-10">
+                <div th:each="payment : ${booking.paymentList}" class="row">
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control-plaintext" value="purpose"
+                               th:value="${payment.purpose.name}" readonly>
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="form-control-plaintext" type="text" th:value="${payment.amount}" value="1235"
+                               readonly>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" class="form-control-plaintext" value="12.12.12"
+                               th:value="${#dates.format(payment.paymentDate, 'dd.MM.yyyy HH:mm')}"
+                               readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-2 row">
+            <div class="col-sm-3">
+                <label for="payCost" class="form-label fs-2 fw-bold">ИТОГО</label>
+                <input type="text" class="form-control fs-4 fw-bold" th:value="${totalCost}" id="payCost" value="12345" readonly>
+            </div>
+        </div>
+
+        <div class="mb-4 row">
+            <div class="col">
+                <label class="form-label" for="empl">Сотрудник</label>
+                <select id="empl" class="form-select" th:field="*{employee}" required>
+                    <option value="" selected hidden>Выберите...</option>
+                    <option th:each="employee : ${employees}"
+                            th:value="${employee.id}"
+                            th:text="${employee.surname} + ' ' + ${employee.name} + ' ' + ${employee.patronymic}
                         + ' (' + ${employee.phoneNumber} + ')'">
-                </option>
-            </select>
-        </div>
-
-        <div>
-            <label class="form-label" for="">Вид оплаты</label>
-            <select th:field="*{paymentType}" required>
-                <option value="" selected hidden>Выберите...</option>
-                <option th:each="type : ${paymentTypes}"
-                        th:value="${type.id}"
-                        th:text="${type.name}">
-                </option>
-            </select>
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label" for="payType">Вид оплаты</label>
+                <select id="payType" class="form-select" th:field="*{paymentType}" required>
+                    <option value="" selected hidden>Выберите...</option>
+                    <option th:each="type : ${paymentTypes}"
+                            th:value="${type.id}"
+                            th:text="${type.name}">
+                    </option>
+                </select>
+            </div>
         </div>
 
         <div>

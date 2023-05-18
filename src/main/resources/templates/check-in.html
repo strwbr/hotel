@@ -17,62 +17,131 @@
 </head>
 <body>
 <div class="container">
-    <h1>Заселение</h1>
-    <div>
-        <h4>Информация по бронированию №</h4>
-        <input type="text" th:value="${booking.id}" name="bookingId" readonly>
-        <div>
-            <p th:text="${booking.client.surname} + ' ' + ${booking.client.name} + ' ' + ${booking.client.patronymic}"></p>
-            <p th:text="${#dates.format(booking.checkInDate, 'dd.MM.yyyy')}
-                + ' - ' + ${#dates.format(booking.checkOutDate, 'dd.MM.yyyy')}"></p>
-            <p th:text="'Взрослых: ' + ${booking.adultsAmount}"></p>
-            <p th:text="'Детей: ' + ${booking.childrenAmount}"></p>
-            <p th:text="${booking.roomType.name} + ' - ' + ${booking.roomsAmount}"></p>
-        </div>
+    <h1 class="mb-4">Заселение</h1>
 
-        <h4>Добавленные платные услуги</h4>
-        <span th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}">Отсутствуют</span>
-        <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}">
-            <ul class="list-group" th:each="i : ${booking.bookingPaidServiceList}">
-                <li class="list-group-item" th:text="${i.paidService.name} - ${i.paidService.price}"></li>
-            </ul>
-        </div>
-
-        <h4>Предоплата</h4>
-        <div>
-            <p th:text="'Сумма: ' + ${prepayment.amount}"></p>
-            <p th:text="'Дата и время: ' + ${#dates.format(prepayment.paymentDate, 'dd.MM.yyyy HH:mm')}"></p>
-        </div>
-
-        <div>
-            <label for="">Дата и время фактического заезда</label>
-            <input type="text" th:value="${#dates.format(checkInTime, 'dd.MM.yyyy HH:mm')}" readonly/>
+    <div class="mb-2 row">
+        <label for="bookingId" class="col-sm-5 col-form-label fs-4 fw-bold">Информация по бронированию №</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control-plaintext fs-4 fw-bold" th:value="${booking.id}" name="bookingId"
+                   id="bookingId" value="1"
+                   readonly>
         </div>
     </div>
 
-    <form th:action="@{/booking/{id}/check-in(id=${booking.id})}" method="post">
-        <div th:each="i : ${#numbers.sequence(1, clientsAmount)}">
-            <div>
-                <label>Гость [[${i}]]</label>
-                <!--                <select name="clientId[[${i}]]">-->
-                <select th:name="'clientId'+${i}" required>
-                    <option value="" selected hidden>Выберите...</option>
-                    <option th:each="client : ${clients}"
-                            th:value="${client.id}"
-                            th:text="${client.surname} + ' ' + ${client.name} + ' ' + ${client.patronymic}
-                     + '(' + '+' + ${client.phoneNumber} + ')'"></option>
-                </select>
+    <div class="mb-2 row">
+        <label for="client" class="col-sm-2 col-form-label">Клиент</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:value="${booking.client.surname} + ' ' + ${booking.client.name} + ' ' + ${booking.client.patronymic}"
+                   value="test" id="client" readonly>
+        </div>
+    </div>
+    <div class="mb-2 row">
+        <label for="livingDates" class="col-sm-2 col-form-label">Даты проживания</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:value="${#dates.format(booking.checkInDate, 'dd.MM.yyyy')}
+                + ' - ' + ${#dates.format(booking.checkOutDate, 'dd.MM.yyyy')}"
+                   id="livingDates" readonly>
+        </div>
+    </div>
+    <div class="mb-2 row">
+        <label for="adultsAmount" class="col-sm-2 col-form-label">Количество взрослых</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext" th:value="${booking.adultsAmount}"
+                   value="test" id="adultsAmount" readonly>
+        </div>
+    </div>
+    <div class="mb-2 row">
+        <label for="childrenAmount" class="col-sm-2 col-form-label">Количество детей</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext" th:value="${booking.childrenAmount}"
+                   value="test" id="childrenAmount" readonly>
+        </div>
+    </div>
+    <div class="mb-2 row">
+        <label for="roomType" class="col-sm-2 col-form-label">Типы номеров</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:value="${booking.roomType.name} + ' - ' + ${booking.roomsAmount}"
+                   value="test" id="roomType" readonly>
+        </div>
+    </div>
+
+
+    <div class="mb-2 row">
+        <label class="col-sm-2 col-form-label pt-0">Добавленные платные услуги</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:if="${#lists.isEmpty(booking.bookingPaidServiceList)}" value="Отсутствуют"/>
+            <div th:unless="${#lists.isEmpty(booking.bookingPaidServiceList)}"
+                 th:each="i : ${booking.bookingPaidServiceList}">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <input class="form-control-plaintext" type="text" th:text="${i.paidService.name}"
+                               value="fgjpida" readonly>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" class="form-control-plaintext" th:value="${i.paidService.price}" value="123"
+                               readonly>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label>Номер для гостя [[${i}]]</label>
-                <!--                <select name="occupiedRoomId[[${i}]]">-->
-                <select th:name="'occupiedRoomId'+${i}" required>
-                    <option value="" selected hidden>Выберите...</option>
-                    <option th:each="room : ${occupiedRooms}"
-                            th:value="${room.id}"
-                            th:text="${room.room.number}">
-                    </option>
-                </select>
+        </div>
+    </div>
+
+    <div class="mb-2 row">
+        <label class="col-sm-2 col-form-label">Предоплата</label>
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-3">
+                    <input class="form-control-plaintext" type="text" th:value="${prepayment.amount}"
+                           readonly>
+                </div>
+                <div class="col-auto">
+                    <input type="text" class="form-control-plaintext"
+                           th:value="${#dates.format(prepayment.paymentDate, 'dd.MM.yyyy HH:mm')}"
+                           readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-2 row">
+        <label for="factTime" class="col-sm-2 col-form-label">Время фактического заезда</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control-plaintext"
+                   th:value="${#dates.format(checkInTime, 'dd.MM.yyyy HH:mm')}"
+                   value="test" id="factTime" readonly>
+        </div>
+    </div>
+
+
+    <form th:action="@{/booking/{id}/check-in(id=${booking.id})}" method="post">
+        <p class="fw-medium mb-1 fs-5">Распределение по номерам</p>
+
+        <div th:each="i : ${#numbers.sequence(1, clientsAmount)}">
+            <div class="row mb-2">
+                <div class="col">
+                    <label class="mb-1 form-label">Гость [[${i}]]</label>
+                    <select class="form-select" th:name="'clientId'+${i}" required>
+                        <option value="" selected hidden>Выберите</option>
+                        <option th:each="client : ${clients}"
+                                th:value="${client.id}"
+                                th:text="${client.surname} + ' ' + ${client.name} + ' ' + ${client.patronymic}
+                     + '(' + '+' + ${client.phoneNumber} + ')'"></option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="mb-1 form-label">Номер для гостя [[${i}]]</label>
+                    <select class="form-select" th:name="'occupiedRoomId'+${i}" required>
+                        <option value="" selected hidden>Выберите</option>
+                        <option th:each="room : ${occupiedRooms}"
+                                th:value="${room.id}"
+                                th:text="${room.room.number}">
+                        </option>
+                    </select>
+                </div>
             </div>
         </div>
 

@@ -9,46 +9,46 @@
 <body>
 <header th:insert="blocks/navbar :: navbar"></header>
 <div class="container">
-    <h1>Dashboard</h1>
+    <h1 class="mb-4">Dashboard</h1>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
-            <div class="card h-100 text-bg-light">
-                <div class="card-header">
-                    <h5 class="card-title">Занятые номера</h5>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-text" th:text="${bookedRooms}"></h1>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-header">
-                    <h5 class="card-title">Свободные номера</h5>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-text" th:text="${availableRooms}"></h1>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-header">
-                    <h5 class="card-title">Постояльцы</h5>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-text" th:text="${clients}"></h1>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-header">
+            <div class="card h-100 border-primary-subtle">
+                <div class="card-header bg-primary-subtle">
                     <h5 class="card-title">Новые бронирования</h5>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-text" th:text="${newBookings}"></h1>
+                    <h1 class="card-text" th:text="${newBookings}">5</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 border-primary-subtle">
+                <div class="card-header bg-primary-subtle">
+                    <h5 class="card-title">Постояльцы</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-text" th:text="${clients}">2</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 border-primary-subtle">
+                <div class="card-header bg-primary-subtle">
+                    <h5 class="card-title">Занятые номера</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-text" th:text="${bookedRooms}">9</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 border-primary-subtle">
+                <div class="card-header bg-primary-subtle">
+                    <h5 class="card-title">Свободные номера</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-text" th:text="${availableRooms}">4</h1>
                 </div>
             </div>
         </div>
